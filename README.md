@@ -1,2 +1,2 @@
 # VSCode-Test
-Testing setup of vscode on an iPad 
+This is me trying to setup a website for a class project
