@@ -1,6 +1,6 @@
 body {
   font-family: 'Monaco', monospace; /* This sets the global font for your game */
-  font-size: 480px; /* This sets the text size to three times the typical browser default */
+  font-size: 48px; /* This sets the text size to three times the typical browser default */
   color: #ffffff;
   background-color: #3b3b3b;
   display: flex;
