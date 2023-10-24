@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- ... your head tags (title, meta, etc.) ... -->
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-
 <div id="game-container">
     <p id="scene-text">Your adventure begins now...</p>
-    <img id="scene-image" src="images/test.jpg" alt="Scene image">
     
-    <!-- Assuming you trigger the choice function with buttons -->
-    <button onclick="makeChoice('choiceA')">Choice A</button>
-    <button onclick="makeChoice('choiceB')">Choice B</button>
-</div>
+    <!-- Integrated image map from the tool -->
+    <img src="DALL·E 2023-10-23 23.35.53 - Comic drawing, in a style a highschooler might produce, of Odysseus on his ship with his crew. In the distance, there's a doodled island with a golden.png" usemap="#image-map" id="scene-image">
 
-<script src="script.js"></script>
-</body>
-</html>
+    <map name="image-map">
+        <area target="" alt="Choice A" title="Choice A" href="javascript:void(0);" coords="8,50,261,195" shape="rect" onclick="makeChoice('choiceA')">
+        <area target="" alt="Choice B" title="Choice B" href="javascript:void(0);" coords="761,52,1019,194" shape="rect" onclick="makeChoice('choiceB')">
+    </map>
+</div>
