@@ -18,7 +18,7 @@ function makeChoice(choice) {
 
     default:
       text.innerHTML = "Your adventure begins in a mysterious forest. Which path will you take?";
-      image.src = "images/start-image.jpg";
+      image.src = "images/test.jpg";
   }
 
   // Additional game logic...
