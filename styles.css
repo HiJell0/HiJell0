@@ -27,7 +27,7 @@ body, html {
   left: 50%; /* for demonstration; positions the left edge of the button at the container's halfway point */
   transform: translate(-50%, -50%); /* centers the button; 50% of the button's width and height is moved to the left and up, respectively */
   z-index: 10; /* ensures the button is on top of the image; any positive number works in this context */
-  padding: 10px; /* optional: for better visibility */
+  padding: 20px; /* optional: for better visibility */
   background-color: rgba(255, 0, 0, 0.5); /* semi-transparent red */
   color: white; /* text color, if your buttons have text */
   border: none; /* remove default button styles */
@@ -37,12 +37,12 @@ body, html {
 
 /* Specific positions for each button */
 #buttonA {
-  top: 10%; /* position example */
-  left: 10%;
+  top: 5%; /* position example */
+  left: 5%;
 }
 
 #buttonB {
-  top: 10%;
-  right: 10%;
+  top: 5%;
+  right: 5%;
 }
 
