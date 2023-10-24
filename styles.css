@@ -1,5 +1,5 @@
   font-family: 'Monaco', monospace; /* This sets the global font for your game */
-  font-size: 480px; /* This sets the text size to three times the typical browser default */
+  font-size: 48px; /* This sets the text size to three times the typical browser default */
   color: #ffffff;
   background-color: #242424;
   display: flex;
@@ -26,8 +26,8 @@
 }
 
 #choice-buttons button {
-  background-color: #4CAF50;
-  color: white;
+  background-color: #blue;
+  color: purple;
   padding: 15px 30px; /* You may need to adjust this as your text is now larger */
   border: none;
   border-radius: 5px;
@@ -37,5 +37,5 @@
 }
 
 #choice-buttons button:hover {
-  background-color: #45a049;
+  background-color: #blue;
 }
