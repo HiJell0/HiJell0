@@ -23,13 +23,10 @@ body, html {
 
 .invisible-button {
   position: absolute; /* positioned relative to the nearest positioned ancestor (#game-container) */
-  top: 50%; /* for demonstration; positions the top edge of the button halfway down the container */
-  left: 50%; /* for demonstration; positions the left edge of the button at the container's halfway point */
-  transform: translate(-50%, -50%); /* centers the button; 50% of the button's width and height is moved to the left and up, respectively */
   z-index: 10; /* ensures the button is on top of the image; any positive number works in this context */
-  padding: 20px; /* optional: for better visibility */
+  height: 100px;
+  width: 200px;
   background-color: rgba(255, 0, 0, 0.5); /* semi-transparent red */
-  color: white; /* text color, if your buttons have text */
   border: none; /* remove default button styles */
   cursor: pointer; /* indicate the element is clickable */
   /* Add width and height or padding as necessary if the buttons don't have text content */
