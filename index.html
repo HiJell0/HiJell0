@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Choose Your Own Adventure</title>
-<link rel="stylesheet" href="styles.css">
+    <!-- ... your head tags (title, meta, etc.) ... -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
 <div id="game-container">
-  <img id="scene-image" src="start-image.jpg" alt="Scene Image">
-  <p id="scene-text">Your adventure begins in a mysterious forest. Which path will you take?</p>
-  <div id="choice-buttons">
-    <button onclick="makeChoice('path1')">Take the left path</button>
-    <button onclick="makeChoice('path2')">Take the right path</button>
-  </div>
+    <p id="scene-text">Your adventure begins...</p>
+    <img id="scene-image" src="images/start-image.jpg" alt="Scene image">
+    
+    <!-- Assuming you trigger the choice function with buttons -->
+    <button onclick="makeChoice('choiceA')">Choice A</button>
+    <button onclick="makeChoice('choiceB')">Choice B</button>
 </div>
 
-<script src="game.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
