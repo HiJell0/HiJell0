@@ -1,41 +1,49 @@
-  font-family: 'Monaco', monospace; /* This sets the global font for your game */
-  font-size: 48px; /* This sets the text size to three times the typical browser default */
-  color: #ffffff;
+body, html {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Monaco', monospace;
   background-color: #242424;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
-  overflow: hidden;
 }
 
 #game-container {
+  position: relative;
   width: 100%;
   height: 100vh;
-  background-color: transparent;
-  box-shadow: none;
-  padding: 0;
-  text-align: center;
+  background-color: #000; /* Black background */
+  overflow: hidden;
 }
 
 #scene-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 0;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover; /* Ensure the image covers the whole container without warping */
+  position: relative; /* To make sure it's in the stacking context */
 }
 
-#choice-buttons button {
-  background-color: #blue;
-  color: purple;
-  padding: 15px 30px; /* You may need to adjust this as your text is now larger */
+.invisible-button {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0); /* Transparent background */
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  margin: 5px;
-  font-size: inherit; /* This makes the font size inside the buttons consistent with the global size */
 }
 
-#choice-buttons button:hover {
-  background-color: #blue;
+/* Adjust these values based on your image and where you want the buttons to be */
+#buttonA {
+  top: 10%; /* Example position */
+  left: 10%;
+  width: 15%; /* Example size */
+  height: 15%;
 }
+
+#buttonB {
+  top: 20%;
+  left: 20%;
+  width: 15%;
+  height: 15%;
+}
+
+/* More button positions as needed... */
