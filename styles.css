@@ -1,7 +1,7 @@
   font-family: 'Monaco', monospace; /* This sets the global font for your game */
   font-size: 480px; /* This sets the text size to three times the typical browser default */
   color: #ffffff;
-  background-color: #3b3b3b;
+  background-color: #242424;
   display: flex;
   justify-content: center;
   align-items: center;
