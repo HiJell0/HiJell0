@@ -1,46 +1,48 @@
 body, html {
   height: 100%;
   margin: 0;
-  overflow: hidden;
   font-family: 'Monaco', monospace;
   background-color: #000; /* Entire background black */
   display: flex;
   justify-content: center;
   align-items: center;
+  /* Removed overflow: hidden; to prevent issues with responsiveness */
 }
 
 #game-container {
-  position: relative; /* This is necessary for the absolute positioning of the buttons to work correctly */
-  width: 100%;
-  height: 100vh;
+  position: relative; /* Necessary for the absolute positioning of the buttons */
+  /* width: 100%; Removed to allow for the container to adjust based on image size */
+  /* height: 100vh; Removed to allow for natural image height */
+  display: inline-block; /* Helps contain the size to the image, and not the entire viewport */
   background-color: #000; /* Black background */
-  overflow: hidden;
 }
 
 #scene-image {
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  position: relative;
+  display: block; /* Ensures there's no space below the image */
+  max-width: 100%; /* Ensures image isn't larger than the viewport */
+  height: auto; /* Ensures the image retains its aspect ratio */
+  /* Removed object-fit and position relative as they're not necessary with this setup */
 }
 
 .invisible-button {
-  position: absolute; /* Positioned based on their containing block, which is #game-container */
-  background-color: rgba(128, 0, 128, 0.5); /* Transparent purple */
+  position: absolute; /* Positioned based on their containing block */
+  background-color: rgba(128, 0, 128, 0.5); /* Transparent purple for visibility; can be made invisible as needed */
   border: none;
   cursor: pointer;
+  /* You might want to add some sort of highlight or effect for user interaction feedback */
 }
 
+/* The button coordinates should ideally be in percentages for responsiveness, calculated based on the image's original dimensions. */
 #buttonA {
-  left: 14px; /* X-coordinate of the first area */
-  top: 57px; /* Y-coordinate of the first area */
-  width: 247px; /* width based on X-coordinates provided (261 - 14) */
-  height: 131px; /* height based on Y-coordinates provided (188 - 57) */
+  left: calc(14px / [Original Image Width] * 100%); /* Adjust [Original Image Width] */
+  top: calc(57px / [Original Image Height] * 100%); /* Adjust [Original Image Height] */
+  width: calc(247px / [Original Image Width] * 100%); /* Adjust [Original Image Width] */
+  height: calc(131px / [Original Image Height] * 100%); /* Adjust [Original Image Height] */
 }
 
 #buttonB {
-  left: 765px; /* X-coordinate of the second area */
-  top: 55px; /* Y-coordinate of the second area */
-  width: 254px; /* width based on X-coordinates provided (1019 - 765) */
-  height: 129px; /* height based on Y-coordinates provided (184 - 55) */
+  left: calc(765px / [Original Image Width] * 100%); /* Adjust [Original Image Width] */
+  top: calc(55px / [Original Image Height] * 100%); /* Adjust [Original Image Height] */
+  width: calc(254px / [Original Image Width] * 100%); /* Adjust [Original Image Width] */
+  height: calc(129px / [Original Image Height] * 100%); /* Adjust [Original Image Height] */
 }
