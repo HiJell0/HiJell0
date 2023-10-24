@@ -26,7 +26,7 @@ body, html {
   border: none;
   cursor: pointer;
   /* add padding or height/width if your buttons don't contain text */
-  padding: 10px; /* or you could use height and width */
+  padding: 100px; /* or you could use height and width */
 }
 
 #buttonA {
