@@ -34,15 +34,15 @@ body, html {
 
 /* The button coordinates should ideally be in percentages for responsiveness, calculated based on the image's original dimensions. */
 #buttonA {
-  left: calc(14px / [Original Image Width] * 100%); /* Adjust [Original Image Width] */
-  top: calc(57px / [Original Image Height] * 100%); /* Adjust [Original Image Height] */
-  width: calc(247px / [Original Image Width] * 100%); /* Adjust [Original Image Width] */
-  height: calc(131px / [Original Image Height] * 100%); /* Adjust [Original Image Height] */
+  left: calc(14px / 1024 * 100%);
+  top: calc(57px / 1024 * 100%);
+  width: calc(247px / 1024 * 100%);
+  height: calc(131px / 1024 * 100%);
 }
 
 #buttonB {
-  left: calc(765px / [Original Image Width] * 100%); /* Adjust [Original Image Width] */
-  top: calc(55px / [Original Image Height] * 100%); /* Adjust [Original Image Height] */
-  width: calc(254px / [Original Image Width] * 100%); /* Adjust [Original Image Width] */
-  height: calc(129px / [Original Image Height] * 100%); /* Adjust [Original Image Height] */
+  left: calc(765px / 1024 * 100%);
+  top: calc(55px / 1024 * 100%);
+  width: calc(254px / 1024 * 100%);
+  height: calc(129px / 1024 * 100%);
 }
