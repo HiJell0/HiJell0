@@ -1,6 +1,5 @@
 function makeChoice(choice) {
   var image = document.getElementById('scene-image');
-  var text = document.getElementById('scene-text');
 
   // Logic for handling the game choices and outcomes
   switch (choice) {
