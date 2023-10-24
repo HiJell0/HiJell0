@@ -5,16 +5,16 @@ function makeChoice(choice) {
   // Logic for handling the game choices and outcomes
   switch (choice) {
     case 'choiceA':
-      text.innerHTML = "You made choice A!";
-      image.src = "images/image2.jpg"; // Path should be relative to the location of your HTML file
+      text.innerHTML = "You decided to head to the palace!";
+      image.src = "images/palace.jpg";
       break;
 
     case 'choiceB':
-      text.innerHTML = "You made choice B!";
-      image.src = "images/image3.jpg";
+      text.innerHTML = "You're heading to the dark island!";
+      image.src = "images/dark_island.jpg";
       break;
 
-    //... more cases ...
+    //... add more cases for additional choices ...
 
     default:
       text.innerHTML = "Your adventure begins in a mysterious forest. Which path will you take?";
