@@ -1,11 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Adventure</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
 <div id="game-container">
     <p id="scene-text">Your adventure begins now...</p>
     
-    <!-- Integrated image map from the tool -->
-    <img src="start.png" usemap="#image-map" id="scene-image">
-
-    <map name="image-map">
-        <area target="" alt="Choice A" title="Choice A" href="javascript:void(0);" coords="8,50,261,195" shape="rect" onclick="makeChoice('choiceA')">
-        <area target="" alt="Choice B" title="Choice B" href="javascript:void(0);" coords="761,52,1019,194" shape="rect" onclick="makeChoice('choiceB')">
-    </map>
+    <img src="start.png" id="scene-image">
+    <button class="invisible-button" id="buttonA" onclick="makeChoice('choiceA')"></button>
+    <button class="invisible-button" id="buttonB" onclick="makeChoice('choiceB')"></button>
 </div>
+
+</body>
+</html>
