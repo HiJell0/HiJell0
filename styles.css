@@ -2,47 +2,39 @@ body, html {
   height: 100%;
   margin: 0;
   font-family: 'Monaco', monospace;
-  background-color: #000; /* Entire background black */
+  background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Removed overflow: hidden; to prevent issues with responsiveness */
 }
 
 #game-container {
-  position: relative; /* Necessary for the absolute positioning of the buttons */
-  /* width: 100%; Removed to allow for the container to adjust based on image size */
-  /* height: 100vh; Removed to allow for natural image height */
-  display: inline-block; /* Helps contain the size to the image, and not the entire viewport */
-  background-color: #000; /* Black background */
+  position: relative;
+  display: inline-block; /* confines the div size to the img size */
+  background-color: #000; /* in case the image doesn't load, this will maintain the background color */
 }
 
 #scene-image {
-  display: block; /* Ensures there's no space below the image */
-  max-width: 100%; /* Ensures image isn't larger than the viewport */
-  height: auto; /* Ensures the image retains its aspect ratio */
-  /* Removed object-fit and position relative as they're not necessary with this setup */
+  display: block; /* removes bottom space from inline-block elements */
+  max-width: 100%; /* makes sure the image doesn't overflow the container */
+  height: auto; /* maintains the aspect ratio */
 }
 
 .invisible-button {
-  position: absolute; /* Positioned based on their containing block */
-  background-color: rgba(128, 0, 128, 0.5); /* Transparent purple for visibility; can be made invisible as needed */
+  position: absolute;
+  background-color: rgba(255, 0, 0, 0.5); /* changed to red for higher visibility */
   border: none;
   cursor: pointer;
-  /* You might want to add some sort of highlight or effect for user interaction feedback */
+  /* add padding or height/width if your buttons don't contain text */
+  padding: 10px; /* or you could use height and width */
 }
 
-/* The button coordinates should ideally be in percentages for responsiveness, calculated based on the image's original dimensions. */
 #buttonA {
-  left: calc(14px / 1024 * 100%);
-  top: calc(57px / 1024 * 100%);
-  width: calc(247px / 1024 * 100%);
-  height: calc(131px / 1024 * 100%);
+  top: 5%; /* adjust as needed */
+  left: 5%; /* adjust as needed */
 }
 
 #buttonB {
-  left: calc(765px / 1024 * 100%);
-  top: calc(55px / 1024 * 100%);
-  width: calc(254px / 1024 * 100%);
-  height: calc(129px / 1024 * 100%);
+  top: 5%; /* adjust as needed */
+  right: 5%; /* adjust as needed */
 }
