@@ -9,9 +9,10 @@ body {
 }
 
 #game-container {
+  width: 70%; /* Set a maximum width for larger screens, you can change this value */
   background-color: gray;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-  padding: 20px;
+  padding: 60px; /* Increased from 20px to 60px */
   border-radius: 5px;
   text-align: center;
 }
@@ -25,11 +26,12 @@ body {
 #choice-buttons button {
   background-color: #4CAF50;
   color: white;
-  padding: 10px 20px;
+  padding: 30px 60px; /* Increased from 10px 20px to 30px 60px */
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: 5px;
+  margin: 15px; /* Increased from 5px to 15px */
+  font-size: larger; /* Optional: increasing the font size to match the new scaling */
 }
 
 #choice-buttons button:hover {
