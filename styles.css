@@ -4,7 +4,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 500vh;
   margin: 0;
   overflow: hidden; /* Optional: in case you don't want any scrollable content */
 }
