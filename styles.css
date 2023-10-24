@@ -1,0 +1,9 @@
+/* This is a comment in CSS */
+body {
+    font-family: Arial, sans-serif; /* Makes the text look nicer */
+    margin: 40px; /* Adds some space around the text */
+}
+
+h1 {
+    color: blue; /* Makes the heading text blue */
+}
