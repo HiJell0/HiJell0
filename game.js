@@ -6,19 +6,19 @@ function makeChoice(choice) {
   switch (choice) {
     case 'choiceA':
       text.innerHTML = "You decided to head to the palace!";
-      image.src = "images/palace.jpg";
+      image.src = "images/a1.jpg";
       break;
 
     case 'choiceB':
       text.innerHTML = "You're heading to the dark island!";
-      image.src = "images/dark_island.jpg";
+      image.src = "images/b1.jpg";
       break;
 
     //... add more cases for additional choices ...
 
     default:
       text.innerHTML = "Your adventure begins in a mysterious forest. Which path will you take?";
-      image.src = "images/test.jpg";
+      image.src = "images/start.jpg";
   }
 
   // Additional game logic...
