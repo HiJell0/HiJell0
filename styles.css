@@ -10,6 +10,7 @@ body {
 
 #game-container {
   width: 90%; /* Set a maximum width for larger screens, you can change this value */
+  height: 90%;
   background-color: #3b3b3b;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
   padding: 60px; /* Increased from 20px to 60px */
