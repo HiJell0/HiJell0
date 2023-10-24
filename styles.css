@@ -9,34 +9,40 @@ body, html {
 }
 
 #game-container {
-  position: relative;
-  display: inline-block; /* confines the div size to the img size */
-  background-color: #000; /* in case the image doesn't load, this will maintain the background color */
+  position: relative; /* This makes it a reference point for absolutely positioned children */
+  width: 1024px; /* This can be adjusted to your preference or set to 100% for full width */
+  height: 1024px; /* Adjust based on the height of your image */
+  display: inline-block;
 }
 
 #scene-image {
-  display: block; /* removes bottom space from inline-block elements */
-  max-width: 100%; /* makes sure the image doesn't overflow the container */
-  height: auto; /* maintains the aspect ratio */
+  width: 100%; /* makes the image fill the container */
+  height: auto; /* maintain aspect ratio */
+  display: block; /* remove extra space at the bottom of the image */
 }
 
 .invisible-button {
-  position: absolute;
-  background-color: rgba(255, 0, 0, 0.5); /* changed to red for higher visibility, can make it fully opaque for testing */
-  border: none;
-  cursor: pointer;
-  width: 100px; /* added 'px', adjust as needed */
-  height: 50px; /* added 'px', adjust as needed */
-  /* Optional: add some content or a border for testing visibility */
-  border: 2px solid white; /* for testing visibility */
+  position: absolute; /* positioned relative to the nearest positioned ancestor (#game-container) */
+  top: 50%; /* for demonstration; positions the top edge of the button halfway down the container */
+  left: 50%; /* for demonstration; positions the left edge of the button at the container's halfway point */
+  transform: translate(-50%, -50%); /* centers the button; 50% of the button's width and height is moved to the left and up, respectively */
+  z-index: 10; /* ensures the button is on top of the image; any positive number works in this context */
+  padding: 10px; /* optional: for better visibility */
+  background-color: rgba(255, 0, 0, 0.5); /* semi-transparent red */
+  color: white; /* text color, if your buttons have text */
+  border: none; /* remove default button styles */
+  cursor: pointer; /* indicate the element is clickable */
+  /* Add width and height or padding as necessary if the buttons don't have text content */
 }
 
+/* Specific positions for each button */
 #buttonA {
-  top: 5%; /* adjust as needed */
-  left: 5%; /* adjust as needed */
+  top: 10%; /* position example */
+  left: 10%;
 }
 
 #buttonB {
-  top: 5%; /* adjust as needed */
-  right: 5%; /* adjust as needed */
+  top: 10%;
+  right: 10%;
 }
+
