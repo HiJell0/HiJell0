@@ -1,5 +1,5 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Monaco", "Monaco", monospace;
   background-color: #3b3b3b; /* This will be the overall background color */
   display: flex;
   justify-content: center;
