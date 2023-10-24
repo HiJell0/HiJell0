@@ -1,37 +1,25 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #e6e6e6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
+function makeChoice(choice) {
+  var image = document.getElementById('scene-image');
+  var text = document.getElementById('scene-text');
 
-#game-container {
-  background-color: white;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-  padding: 20px;
-  border-radius: 5px;
-  text-align: center;
-}
+  // Logic for handling the game choices and outcomes
+  switch (choice) {
+    case 'choiceA':
+      text.innerHTML = "You made choice A!";
+      image.src = "images/image2.jpg"; // Path should be relative to the location of your HTML file
+      break;
 
-#scene-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
-}
+    case 'choiceB':
+      text.innerHTML = "You made choice B!";
+      image.src = "images/image3.jpg";
+      break;
 
-#choice-buttons button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 5px;
-}
+    //... more cases ...
 
-#choice-buttons button:hover {
-  background-color: #45a049;
+    default:
+      text.innerHTML = "Your adventure begins in a mysterious forest. Which path will you take?";
+      image.src = "images/start-image.jpg";
+  }
+
+  // Additional game logic...
 }
