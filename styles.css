@@ -26,8 +26,6 @@ body, html {
   width: 270px;
   background-color: rgba(90, 34, 139, 0.5); /* semi-transparent red */
   border: none; /* remove default button styles */
-  cursor: pointer; /* indicate the element is clickable */
-  /* Add width and height or padding as necessary if the buttons don't have text content */
 }
 
 /* Specific positions for each button */
