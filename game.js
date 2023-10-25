@@ -10,12 +10,5 @@ function makeChoice(choice) {
     case 'choiceB':
       image.src = "images/b1.png";
       break;
-
-    //... add more cases for additional choices ...
-
-    default:
-      image.src = "images/start.png";
   }
-
-  // Additional game logic...
 }
