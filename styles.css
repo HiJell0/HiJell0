@@ -1,7 +1,5 @@
 body, html {
-  height: 100%;
   margin: 0;
-  font-family: 'Monaco', monospace;
   background-color: #000;
   display: flex;
   justify-content: center;
@@ -16,17 +14,17 @@ body, html {
 }
 
 #scene-image {
-  width: 100%; /* makes the image fill the container */
-  height: auto; /* maintain aspect ratio */
+  width: auto; /* makes the image fill the container */
+  height: 100%; /* maintain aspect ratio */
   display: block; /* remove extra space at the bottom of the image */
 }
 
 .invisible-button {
   position: absolute; /* positioned relative to the nearest positioned ancestor (#game-container) */
   z-index: 10; /* ensures the button is on top of the image; any positive number works in this context */
-  height: 100px;
-  width: 200px;
-  background-color: rgba(255, 0, 0, 0.5); /* semi-transparent red */
+  height: 150px;
+  width: 270px;
+  background-color: rgba(90, 34, 139, 0.5); /* semi-transparent red */
   border: none; /* remove default button styles */
   cursor: pointer; /* indicate the element is clickable */
   /* Add width and height or padding as necessary if the buttons don't have text content */
@@ -34,12 +32,11 @@ body, html {
 
 /* Specific positions for each button */
 #buttonA {
-  top: 5%; /* position example */
-  left: 5%;
+  top: 4.5%; /* position example */
+  left: 0%;
 }
 
 #buttonB {
-  top: 5%;
-  right: 5%;
+  top: 4.5%;
+  right: 0%;
 }
-
