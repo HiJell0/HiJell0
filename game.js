@@ -1,5 +1,8 @@
 function makeChoice(choice) {
   var image = document.getElementById('scene-image');
+  var choiceAButton = document.getElementById('choiceA-button');
+  var choiceBButton = document.getElementById('choiceB-button');
+
 
   // Logic for handling the game choices and outcomes
   switch (choice) {
