@@ -1,0 +1,64 @@
+package OT;
+
+import javax.swing.JFrame;
+import java.awt.Color;
+import javax.swing.JButton;
+
+public class OTGameFrame extends JFrame {
+
+    public OTGameFrame() {
+
+        JButton button1 = new JButton();
+        button1.addActionListener(e -> new OTGameFrame());
+        JButton button2 = new JButton();
+        button2.addActionListener(e -> new OTGameFrame());
+
+        this.add(new OTGamePanel());
+        this.setBackground(Color.black);
+        this.setTitle("Snake Game");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.pack();
+        this.add(button1);
+        this.add(button2);
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+    }
+}
+
+-------------
+package OT;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.Random;
+
+public class OTGamePanel extends JPanel implements ActionListener {
+
+    Random random;
+    static final int SCREEN_WIDTH = 1400;
+    static final int SCREEN_HEIGHT = 750;
+    static final int UNIT_SIZE = 50;
+    static String currentImage;
+
+    OTGamePanel() {
+        random = new Random();
+        this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
+        this.setBackground(Color.black);
+        this.setFocusable(true);
+        startGame();
+
+    }
+
+    public void startGame(){
+        
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+    }
+
+}
