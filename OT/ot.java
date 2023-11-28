@@ -8,9 +8,6 @@ import javax.swing.border.LineBorder;
 public class OT extends JPanel implements ActionListener {
     static final Dimension SCREEN_SIZE = new Dimension(1280, 720);
     private Image backgroundImage;
-    JButton buttonA;
-    JButton buttonB;
-    JButton textBox;
     int resources;
     int level;
     int time;
@@ -56,20 +53,28 @@ public class OT extends JPanel implements ActionListener {
 
     private void initializeButtons() {
         // Making the buttons
-        buttonA = createButton(800, 500, 200, 50, Color.white, "Choice A");
-        buttonB = createButton(800, 550, 200, 50, Color.white, "Choice B");
+        buttonA = createButton(800, 550, 200, 50, Color.white, "Choice A");
+        buttonB = createButton(800, 500, 200, 50, Color.white, "Choice B");
+        buttonC = createButton(800, 450, 200, 50, Color.white, "Choice C");
+        buttonD = createButton(800, 400, 200, 50, Color.white, "Choice D");
         textBox = createButton(100, 550, 800, 150, Color.lightGray, "TextBox");
         // Giving them unique ID's
         buttonA.setActionCommand("buttonA");
         buttonB.setActionCommand("buttonB");
+        buttonC.setActionCommand("buttonC");
+        buttonD.setActionCommand("buttonD");
         textBox.setActionCommand("textBox");
         // Add buttons to the panel
         add(buttonA);
         add(buttonB);
+        add(buttonC);
+        add(buttonD);
         add(textBox);
         setComponentZOrder(textBox, 1); // Ensure textBox is at the back
-        setComponentZOrder(buttonB, 0);
         setComponentZOrder(buttonA, 0);
+        setComponentZOrder(buttonB, 0);
+        setComponentZOrder(buttonC, 0);
+        setComponentZOrder(buttonD, 0);
     }
 
     // What happens when a button is pressed
@@ -77,7 +82,7 @@ public class OT extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "textBox":
-                textBox();
+                OTLevel.textBox();
                 break;
             case "buttonA":
                 buttonA();
@@ -85,123 +90,13 @@ public class OT extends JPanel implements ActionListener {
             case "buttonB":
                 buttonB();
                 break;
+            case "buttonC":
+                buttonC();
+                break;
+            case "buttonD":
+                buttonD();
+                break;
         }
-    }
-
-    // What happens when a button is pressed
-    private void textBox() {
-        buttonsToFront();
-        buttonA.setVisible(true);
-        buttonB.setVisible(true);
-    }
-
-    private void buttonA() {
-        switch (level){
-            case 0:
-                level(1);
-                time++;
-                break;
-            case 1:
-                level(2);
-                break;
-            case 2:
-                level(4);
-                break;
-            case 3:
-                level(5);
-                break;
-            case 4:
-                level(5);
-                break;
-            case 5:
-                level(6);
-                time++;
-                break;
-            case 6:
-                level(13);
-                break;
-            case 7:
-                level(8);
-                break;
-            case 8:
-                level(5);
-                break;
-            case 9:
-                level(1);
-                time++;
-                break;
-            case 10:
-                level(2);
-                break;
-            case 11:
-                level(4);
-                break;
-            case 12:
-                level(5);
-                break;
-            
-        }
-        buttonPressed();
-    }
-
-    private void buttonB() {
-        switch (level){
-            case 0:
-                level(1);
-                time++;
-                break;
-            case 1:
-                level(2);
-                break;
-            case 2:
-                level(4);
-                break;
-            case 3:
-                level(3);
-                break;
-            case 4:
-                level(5);
-                break;
-            case 5:
-                level(1);
-                time++;
-                break;
-            case 6:
-                level(2);
-                break;
-            case 7:
-                level(4);
-                break;
-            case 8:
-                level(5);
-                break;
-            case 9:
-                level(1);
-                time++;
-                break;
-            case 10:
-                level(2);
-                break;
-            case 11:
-                level(4);
-                break;
-            case 12:
-                level(5);
-                break;
-            
-        }
-        buttonPressed();
-    }
-
-    private void buttonPressed(){
-        buttonA.setVisible(false);
-        buttonB.setVisible(false);
-    }
-
-    private void buttonsToFront() {
-        buttonA.getParent().setComponentZOrder(buttonA, 0);
-        buttonB.getParent().setComponentZOrder(buttonB, 0);
-        repaint();
     }
 
     @Override
@@ -214,7 +109,7 @@ public class OT extends JPanel implements ActionListener {
         g.setColor(new Color(102, 0, 204));
         g.drawRect(0, 0, 300, 30);
         g.setColor(Color.white);
-        String stats = "Resources: " + resources + "   Men: " + men + "   Days Lost At Sea: " + time;
+        String stats = "Resources: " + resources + "   Men: " + men + "   Days Lost At Sea: " + time + " for testing purposes: " + level;
         g.drawString(stats, 10, 20);
     }
 
@@ -222,9 +117,10 @@ public class OT extends JPanel implements ActionListener {
         backgroundImage = new ImageIcon(imagePath).getImage();
         repaint();
     }
-
+/*
     // Decides what is shown and written
     private void level(int newLevel) {
+        time++;
         level = newLevel;
         String image = null;
         String text = null;
@@ -252,4 +148,5 @@ public class OT extends JPanel implements ActionListener {
         setBackgroundImage(image);
         textBox.setText(text);
     }
+    */
 }
