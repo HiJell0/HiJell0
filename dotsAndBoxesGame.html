@@ -1,0 +1,325 @@
+package DNB;
+
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.util.ArrayList;
+
+public class DNB extends JPanel {
+    final int GRID_SIZE = promptForNumber("How Big Do You Want Your Game To Be?");
+    final int SPACE = (800 / GRID_SIZE);
+    final int BUTTON_SIZE = (SPACE / 3);
+    final int BORDER = BUTTON_SIZE;
+    final int LENGTH = GRID_SIZE * BUTTON_SIZE + (GRID_SIZE - 1) * (SPACE - BUTTON_SIZE) + 2 * BORDER;
+    final Dimension SCREEN_SIZE = new Dimension(LENGTH, LENGTH);
+    final Color buttonColor = new Color(102, 0, 204);
+    final int lineThickness = BUTTON_SIZE / 4;
+    JButton[] buttons = new JButton[GRID_SIZE * GRID_SIZE];
+    ArrayList<Line> lines = new ArrayList<>();
+    JButton[] possibleMoves = new JButton[4];
+    Color playerColor = Color.blue;
+    char currentPlayer = 'B';
+    ArrayList<CompletedBox> completedBoxes = new ArrayList<>();
+    boolean moving;
+    int ogButton;
+
+    private int promptForNumber(String message) {
+        while (true) {
+            String input = JOptionPane.showInputDialog(null, message);
+            if (input == null) {
+                JOptionPane.showMessageDialog(null, "Guess They Didn't Want to Play");
+                return 0;
+            }
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Please Input A Normal Number");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        DNB play = new DNB();
+        JFrame frame = new JFrame("Dots-And-Boxes");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.add(play);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    public DNB() {
+        initializeButtons();
+        setLayout(null);
+        setBackground(Color.black);
+        setPreferredSize(SCREEN_SIZE);
+    }
+
+    class CompletedBox {
+        int x;
+        int y;
+        char player;
+        Color color;
+
+        CompletedBox(int location, char player, Color color) {
+            this.x = buttons[location].getX() + (BUTTON_SIZE / 2);
+            this.y = buttons[location].getY() + (BUTTON_SIZE / 2);
+            this.player = player;
+            this.color = color;
+        }
+    }
+
+    class Line {
+        Point start;
+        Point end;
+
+        Line(Point start, Point end) {
+            this.start = start;
+            this.end = end;
+        }
+    }
+
+    private void initializeButtons() {
+        for (int i = 0; i < buttons.length; i++) {
+            int x = (i % GRID_SIZE) * SPACE + BORDER;
+            int y = (i / GRID_SIZE) * SPACE + BORDER;
+            buttons[i] = createButton(i, x, y);
+            add(buttons[i]);
+        }
+    }
+
+    private JButton createButton(int buttonNumber, int x, int y) {
+        JButton button = new JButton();
+        button.setBounds(x, y, BUTTON_SIZE, BUTTON_SIZE);
+        button.setBorder(new LineBorder(buttonColor, 100));
+        button.addActionListener(e -> buttonPressed(buttonNumber));
+        button.setVisible(true);
+        return button;
+    }
+
+    private void buttonPressed(int bn) {
+        if (!moving) {
+            startMove(bn);
+        } else {
+            completeMove(bn);
+            resetButtonBorders();
+        }
+        checkGameEnd();
+    }
+
+    private void checkGameEnd() {
+        if (completedBoxes.size() == (GRID_SIZE - 1) * (GRID_SIZE - 1))
+            displayWinner();
+    }
+
+    private void displayWinner() {
+        int blueScore = countScore('B');
+        int redScore = countScore('R');
+        String winner = "And The Winner is: ";
+        String scores = "The Ending Scores Are Blue With " + blueScore + " And Red With " + redScore;
+        if (blueScore > redScore) {
+            winner = winner + "Blue";
+        } else if (redScore > blueScore) {
+            winner = winner + "Red";
+        } else {
+            winner = winner + "Nobody, It Was A Tie!";
+        }
+        JOptionPane.showMessageDialog(null, winner + ", " + scores);
+    }
+
+    private int countScore(char player) {
+        int score = 0;
+        for (CompletedBox box : completedBoxes) {
+            if (player == box.player) {
+                score++;
+            }
+        }
+        return score;
+    }
+
+    private void startMove(int bn) {
+        moving = true;
+        ogButton = bn;
+        possibleMoves = possibleMoves(bn);
+        highlightPossibleMoves();
+    }
+
+    private void highlightPossibleMoves() {
+        for (JButton move : possibleMoves) {
+            if (move != null) {
+                move.setBorder(new LineBorder(playerColor, 100));
+            }
+        }
+    }
+
+    private void completeMove(int bn) {
+        for (JButton move : possibleMoves) {
+            if (move != null && buttons[bn] == move) {
+                addLine(ogButton, bn);
+                repaint();
+                if (!checkForCompletedBoxes(ogButton, bn)) {
+                    changeCurrentPlayer();
+                }
+                break;
+            }
+        }
+        moving = false;
+    }
+
+    private void addLine(int startButton, int endButton) {
+        Point start = getCenterLocation(buttons[startButton]);
+        Point end = getCenterLocation(buttons[endButton]);
+        lines.add(new Line(start, end));
+    }
+
+    private Point getCenterLocation(JButton button) {
+        Point location = button.getLocation();
+        location.translate(BUTTON_SIZE / 2, BUTTON_SIZE / 2);
+        return location;
+    }
+
+    private void resetButtonBorders() {
+        for (JButton button : buttons) {
+            button.setBorder(new LineBorder(buttonColor, 100));
+        }
+    }
+
+    private JButton[] possibleMoves(int bn) {
+        JButton[] pm = new JButton[4];
+        int count = 0;
+        if (bn % GRID_SIZE > 0 && !isLineBetweenButtons(bn, bn - 1)) {
+            pm[count++] = buttons[bn - 1];
+        }
+        if (bn % GRID_SIZE < GRID_SIZE - 1 && !isLineBetweenButtons(bn, bn + 1)) {
+            pm[count++] = buttons[bn + 1];
+        }
+        if (bn / GRID_SIZE > 0 && !isLineBetweenButtons(bn, bn - GRID_SIZE)) {
+            pm[count++] = buttons[bn - GRID_SIZE];
+        }
+        if (bn / GRID_SIZE < GRID_SIZE - 1 && !isLineBetweenButtons(bn, bn + GRID_SIZE)) {
+            pm[count++] = buttons[bn + GRID_SIZE];
+        }
+        JButton[] validMoves = new JButton[count];
+        System.arraycopy(pm, 0, validMoves, 0, count);
+        return validMoves;
+    }
+
+    private void changeCurrentPlayer() {
+        switch (currentPlayer) {
+            case 'R':
+                currentPlayer = 'B';
+                playerColor = Color.blue;
+                break;
+            case 'B':
+                currentPlayer = 'R';
+                playerColor = Color.red;
+                break;
+        }
+        repaint();
+    }
+
+    private boolean checkForCompletedBoxes(int startButton, int endButton) {
+        boolean boxCompletedThisTurn = false;
+        for (int i = 0; i < (GRID_SIZE - 1) * (GRID_SIZE - 1); i++) {
+            int buttonLocation = i + (i / (GRID_SIZE - 1));
+            CompletedBox box = findCompletedBox(buttonLocation);
+            if (isBoxComplete(buttonLocation) && box == null) {
+                completedBoxes.add(new CompletedBox(buttonLocation, currentPlayer, playerColor));
+                boxCompletedThisTurn = true;
+            }
+        }
+        return boxCompletedThisTurn;
+    }
+
+    private CompletedBox findCompletedBox(int buttonLocation) {
+        for (CompletedBox box : completedBoxes) {
+            if (box.x == buttons[buttonLocation].getX() + (BUTTON_SIZE / 2) &&
+                    box.y == buttons[buttonLocation].getY() + (BUTTON_SIZE / 2)) {
+                return box;
+            }
+        }
+        return null;
+    }
+
+    private boolean isBoxComplete(int buttonLocation) {
+        // What Buttons To Check
+        int topRight = buttonLocation + 1;
+        int bottomLeft = buttonLocation + GRID_SIZE;
+        int bottomRight = bottomLeft + 1;
+        // Check If Box Is Complete
+        return isLineBetweenButtons(buttonLocation, topRight) &&
+                isLineBetweenButtons(buttonLocation, bottomLeft) &&
+                isLineBetweenButtons(bottomLeft, bottomRight) &&
+                isLineBetweenButtons(topRight, bottomRight);
+    }
+
+    private boolean isLineBetweenButtons(int button1, int button2) {
+        Point button1Center = getButtonCenter(button1);
+        Point button2Center = getButtonCenter(button2);
+        int threshold = 3;
+        for (int i = 0; i < lines.size(); i++) {
+            Point lineStart = lines.get(i).start;
+            Point lineEnd = lines.get(i).end;
+            if ((closeEnough(lineStart, button1Center, threshold) && closeEnough(lineEnd, button2Center, threshold)) ||
+                    (closeEnough(lineStart, button2Center, threshold)
+                            && closeEnough(lineEnd, button1Center, threshold))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean closeEnough(Point p1, Point p2, int threshold) {
+        return Math.abs(p1.x - p2.x) <= threshold && Math.abs(p1.y - p2.y) <= threshold;
+    }
+
+    private Point getButtonCenter(int buttonIndex) {
+        Point location = buttons[buttonIndex].getLocation();
+        location.translate(BUTTON_SIZE / 2, BUTTON_SIZE / 2);
+        return location;
+    }
+
+    /*
+     * Drawing Everything
+     */
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        drawBorder(g);
+        drawBoxes(g);
+        drawThickLines(g);
+    }
+
+    private void drawThickLines(Graphics g) {
+        g.setColor(buttonColor);
+        for (int i = 0; i < lines.size(); i++) {
+            Point start = lines.get(i).start;
+            Point end = lines.get(i).end;
+            int midX = (start.x + end.x) / 2;
+            int midY = (start.y + end.y) / 2;
+            for (int j = 0; j < lineThickness; j++) {
+                if (start.y == end.y) {
+                    g.drawLine(start.x, midY - lineThickness / 2 + j, end.x, midY - lineThickness / 2 + j);
+                } else {
+                    g.drawLine(midX - lineThickness / 2 + j, start.y, midX - lineThickness / 2 + j, end.y);
+                }
+            }
+        }
+    }
+
+    private void drawBorder(Graphics g) {
+        g.setColor(playerColor);
+        g.fillRect(0, 0, (BORDER / 3), getHeight());
+        g.fillRect(0, 0, getWidth(), (BORDER / 3));
+        g.fillRect(getWidth() - (BORDER / 3), 0, (BORDER / 3), getHeight());
+        g.fillRect(0, getHeight() - (BORDER / 3), getWidth(), (BORDER / 3));
+    }
+
+    private void drawBoxes(Graphics g) {
+        for (CompletedBox box : completedBoxes) {
+            g.setColor(box.color);
+            g.fillRect(box.x, box.y, SPACE, SPACE);
+        }
+    }
+}
