@@ -10,7 +10,15 @@
 
 <div class="container">
   <h1>Welcome to My Homepage</h1>
-  <button id="sayHelloButton">Say Hello</button>
+  <button id="printButton">Print to Terminal</button>
+<script>
+  document.getElementById('printButton').addEventListener('click', function() {
+    fetch('http://localhost:3000/print')
+      .then(response => response.text())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+  });
+</script>
 </div>
 
 <!-- Link to the external JavaScript file -->
