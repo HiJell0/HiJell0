@@ -1,8 +1,16 @@
-// JavaScript to handle button click
-document.getElementById('sayHelloButton').onclick = function() {
-    // Update the URL to match your Java server endpoint
-    fetch('http://localhost:8080/sayhello')
-        .then(response => response.text())
-        .then(data => alert(data))
-        .catch(error => console.error('Error:', error));
-};
+document.addEventListener('DOMContentLoaded', (event) => {
+    const ws = new WebSocket('ws://localhost:8887'); // Adjust the URL to match your WebSocket server
+
+    ws.onopen = function() {
+        console.log("Connected to the server.");
+    };
+
+    ws.onerror = function(error) {
+        console.log("WebSocket error: " + error);
+    };
+
+    document.getElementById('sayHelloButton').addEventListener('click', () => {
+        ws.send('hello');
+        console.log("Sent 'hello' message to the server.");
+    });
+});
