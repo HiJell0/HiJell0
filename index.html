@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Save Name and Email</title>
+    <title>Submit Name and Email</title>
 </head>
 <body>
     <h2>Submit your Name and Email</h2>
-    <form action="test.php" method="POST">
+    <form id="myForm">
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" required><br><br>
 
@@ -16,6 +16,19 @@
 
         <input type="submit" value="Submit">
     </form>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycby0Pfsu5VWM9wEEoCZQyZMq7jQaSw1SGv6tUYfVX8isoatlAZvq5mx0VQjVEMW5GH9w/exec';
+        const form = document.getElementById('myForm');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => alert('Form submitted successfully!'))
+                .catch(error => alert('Error submitting form'));
+        });
+    </script>
 </body>
 </html>
-
