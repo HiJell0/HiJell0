@@ -19,7 +19,7 @@
                 email: email
             };
 
-            fetch('https://script.google.com/macros/s/your_script_id/exec', {
+            fetch('AKfycbzBqWVjRCkfiArg3W5aKTY0RDb6ER14vnKyal6lDA0', {
                 method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {
@@ -37,7 +37,7 @@
         }
 
         function loadNames() {
-            fetch('https://script.google.com/macros/s/your_script_id/exec?action=getNames')
+            fetch('AKfycbzBqWVjRCkfiArg3W5aKTY0RDb6ER14vnKyal6lDA0')
                 .then(response => response.json())
                 .then(data => {
                     const nameList = document.getElementById("name-list");
