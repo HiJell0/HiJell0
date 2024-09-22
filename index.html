@@ -19,7 +19,7 @@
                 email: email
             };
 
-            fetch('AKfycbzBqWVjRCkfiArg3W5aKTY0RDb6ER14vnKyal6lDA0', {
+            fetch('https://script.google.com/macros/s/AKfycbyRSkMtti2oWFixvbXoxdrK298lpB1sIFnc_JNtqPumIKNevUcvkzQHoFtsdaPxglxo/exec', {
                 method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {
@@ -37,7 +37,7 @@
         }
 
         function loadNames() {
-            fetch('AKfycbzBqWVjRCkfiArg3W5aKTY0RDb6ER14vnKyal6lDA0')
+            fetch('https://script.google.com/macros/s/AKfycbyRSkMtti2oWFixvbXoxdrK298lpB1sIFnc_JNtqPumIKNevUcvkzQHoFtsdaPxglxo/exec')
                 .then(response => response.json())
                 .then(data => {
                     const nameList = document.getElementById("name-list");
