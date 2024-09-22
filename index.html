@@ -8,9 +8,11 @@
         function submitForm() {
             const name = document.getElementById("name").value;
             const email = document.getElementById("email").value;
+            const messageBox = document.getElementById("message-box");
 
             if (!name || !email) {
-                alert("Please fill in both fields.");
+                messageBox.textContent = "Please fill in both fields.";
+                messageBox.style.color = "red";
                 return;
             }
 
@@ -19,7 +21,8 @@
                 email: email
             };
 
-            fetch('https://script.google.com/macros/s/AKfycbyRSkMtti2oWFixvbXoxdrK298lpB1sIFnc_JNtqPumIKNevUcvkzQHoFtsdaPxglxo/exec', {
+            // Send data to Google Apps Script
+            fetch('https://script.google.com/macros/s/AKfycbxKV487aqX4NrfR4TIa_i1Yt67g6ImoFakEk2DKgT2MiuJz2cO3SkS2YXOqEbcaDB8N/exec', {
                 method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {
@@ -28,16 +31,22 @@
             }).then(response => response.json())
               .then(data => {
                   if (data.status === 'success') {
-                      alert("Submitted successfully!");
-                      loadNames();
+                      messageBox.textContent = "Your info has been submitted!";
+                      messageBox.style.color = "green";
+                      loadNames(); // Load live list after successful submission
                   } else {
-                      alert("Submission failed. Please try again.");
+                      messageBox.textContent = "Submission failed. Please try again.";
+                      messageBox.style.color = "red";
                   }
+              }).catch((error) => {
+                  messageBox.textContent = "An error occurred. Please try again.";
+                  messageBox.style.color = "red";
               });
         }
 
+        // Function to load names from Google Sheets and display them
         function loadNames() {
-            fetch('https://script.google.com/macros/s/AKfycbyRSkMtti2oWFixvbXoxdrK298lpB1sIFnc_JNtqPumIKNevUcvkzQHoFtsdaPxglxo/exec')
+            fetch('https://script.google.com/macros/s/AKfycbxKV487aqX4NrfR4TIa_i1Yt67g6ImoFakEk2DKgT2MiuJz2cO3SkS2YXOqEbcaDB8N/execs')
                 .then(response => response.json())
                 .then(data => {
                     const nameList = document.getElementById("name-list");
@@ -48,16 +57,18 @@
                         listItem.textContent = name;
                         nameList.appendChild(listItem);
                     });
+                }).catch(error => {
+                    console.error("Failed to load names:", error);
                 });
         }
 
         window.onload = function() {
-            loadNames();
+            loadNames(); // Load names when the page is loaded
         }
     </script>
 </head>
 <body>
-    <h1>Enter ur Info</h1>
+    <h1>Enter Your Info</h1>
     <form onsubmit="event.preventDefault(); submitForm();">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
@@ -67,6 +78,8 @@
         <br><br>
         <button type="submit">Submit</button>
     </form>
+
+    <p id="message-box"></p> <!-- This will show the confirmation message -->
 
     <h2>Live List of Names:</h2>
     <ul id="name-list"></ul>
