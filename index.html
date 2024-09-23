@@ -31,6 +31,10 @@
         form.addEventListener('submit', e => {
             e.preventDefault();
             const formData = new FormData(form);
+
+            const toggleValue = document.getElementById('toggle').checked ? 'On' : 'Off';
+formData.set('toggle', toggleValue);
+
             
             fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => alert('Thanks for signing up!'))
