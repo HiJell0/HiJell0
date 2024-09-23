@@ -31,7 +31,7 @@
     </form>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyLNUpaKbyJ-3jy1W6NmPIh0kXkdFC3p0o-EMqloWPDDdjEV07HcRWbp5a8aK9fpRjQ/exec';
+        const scriptURL = 'https://script.google.com/macros/s/YOUR_GOOGLE_APPS_SCRIPT_URL/exec';
         const form = document.getElementById('myForm');
 
         form.addEventListener('submit', e => {
@@ -39,34 +39,23 @@
             
             // Get all form data dynamically
             const formData = new FormData(form);
-            
-            // Create an ordered list of the fields you want to submit (can be updated as you add fields)
-            const fieldOrder = ['name', 'email', 'phone', 'toggle', 'address', 'age'];
+            const orderedData = {};
 
-            // Prepare a new object to store the ordered data
-            let orderedData = {};
-
-            // Iterate over fieldOrder and add the corresponding formData
-            fieldOrder.forEach(field => {
-                if (formData.has(field)) {
-                    if (field === 'toggle') {
-                        // Special handling for checkbox
-                        orderedData[field] = document.getElementById(field).checked ? 'On' : 'Off';
-                    } else {
-                        orderedData[field] = formData.get(field);
-                    }
+            formData.forEach((value, key) => {
+                if (key === 'toggle') {
+                    orderedData[key] = document.getElementById(key).checked ? 'On' : 'Off';
                 } else {
-                    orderedData[field] = ''; // Empty value if field is not present
+                    orderedData[key] = value;
                 }
             });
 
             // Add a timestamp
             orderedData.timestamp = new Date().toISOString();
 
-            // Convert the ordered data to URL-encoded format to send to Google Apps Script
+            // Convert the data to URL-encoded format to send to Google Apps Script
             const urlParams = new URLSearchParams(orderedData).toString();
 
-            // Send the data via Fetch API
+            // Send the data via Fetch API using POST
             fetch(scriptURL + '?' + urlParams, { method: 'POST' })
                 .then(response => alert('Form submitted successfully!'))
                 .catch(error => alert('Error submitting form'));
