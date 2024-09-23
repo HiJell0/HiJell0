@@ -2,83 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Name, Email, and Phone Number</title>
+    <title>Submit Form</title>
 </head>
 <body>
-    <h2>Submit your Name, Email, and Phone Number</h2>
-    
     <form id="myForm">
+        <!-- Your form fields -->
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" required><br><br>
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
-
-        <label for="phone">Phone Number:</label><br>
-        <input type="tel" id="phone" name="phone" required><br><br>
-
-        <label for="toggle">Toggle (On/Off):</label><br>
-        <input type="checkbox" id="toggle" name="toggle"><br><br>
-
-        <label for="address">Address:</label><br>
-        <input type="text" id="address" name="address"><br><br>
-
-        <label for="age">Age:</label><br>
-        <input type="number" id="age" name="age"><br><br>
+        <!-- Include all your other form fields here -->
 
         <input type="submit" value="Submit">
     </form>
 
-   <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbz-qbPJCTT8rLywlj_DvQIULLFIIOyGgKYBkzP2tIZym6E5SKlLBEKL8ixUizUPHxAs/exec'; // Replace with your script URL
-    const form = document.getElementById('myForm');
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwIobi78esMzEuaA48lZt69etMlUpatWUwserPb4W-HUZXlJ6TpCeelrpN4S-9LNn0o/exec'; // Replace with your script URL
+        const form = document.getElementById('myForm');
 
-    form.addEventListener('submit', e => {
-        e.preventDefault();
+        form.addEventListener('submit', e => {
+            e.preventDefault();
 
-        // Create an object to hold the form data
-        const formData = {};
+            // Create an object to hold the form data
+            const formData = {};
 
-        // Get all the form inputs
-        const inputs = form.elements;
+            // Get all the form inputs
+            const inputs = form.elements;
 
-        for (let i = 0; i < inputs.length; i++) {
-            const input = inputs[i];
-            if (input.name) {
-                if (input.type === 'checkbox') {
-                    formData[input.name] = input.checked ? 'On' : 'Off';
-                } else {
-                    formData[input.name] = input.value;
+            for (let i = 0; i < inputs.length; i++) {
+                const input = inputs[i];
+                if (input.name) {
+                    if (input.type === 'checkbox') {
+                        formData[input.name] = input.checked ? 'On' : 'Off';
+                    } else {
+                        formData[input.name] = input.value;
+                    }
                 }
             }
-        }
 
-        // Add timestamp
-        formData.timestamp = new Date().toISOString();
+            // Add timestamp
+            formData.timestamp = new Date().toISOString();
 
-        // Send the data to Google Apps Script
-        fetch(scriptURL, {
-            method: 'POST',
-            body: JSON.stringify(formData),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-        .then(response => response.json())
-        .then(result => {
-            if (result.message) {
-                alert(result.message);
-            } else if (result.error) {
-                alert('Error: ' + result.error);
-            } else {
-                alert('Unknown response from server');
-            }
-        })
-        .catch(error => alert('Error submitting form: ' + error.message));
-    });
-</script>
-
-
+            // Send the data to Google Apps Script
+            fetch(scriptURL, {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.message) {
+                    alert(result.message);
+                } else if (result.error) {
+                    alert('Error: ' + result.error);
+                } else {
+                    alert('Unknown response from server');
+                }
+            })
+            .catch(error => alert('Error submitting form: ' + error.message));
+        });
+    </script>
 </body>
 </html>
