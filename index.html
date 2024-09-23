@@ -30,30 +30,48 @@
         <input type="submit" value="Submit">
     </form>
 
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwYNGGA1cFPCnKXJyqpb7lgRyD-GDNdJ4MTM5oDMBBmjAmtEGYR_Z1G3u79XjsdfMc/exec';
-        const form = document.getElementById('myForm');
+   <script>
+    const scriptURL = 'https://script.google.com/macros/s/your-script-id/exec'; // Replace with your script ID
+    const form = document.getElementById('myForm');
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            
-            // Create a FormData object from the form
-            const formData = new FormData(form);
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        
+        // Create an object to hold the form data
+        const formData = {};
 
-            // Ensure the toggle value is correctly captured
-            formData.set('toggle', document.getElementById('toggle').checked ? 'On' : 'Off');
+        // Get all the form inputs
+        const inputs = form.elements;
 
-            // Add timestamp
-            formData.set('timestamp', new Date().toISOString());
+        for (let i = 0; i < inputs.length; i++) {
+            const input = inputs[i];
+            if (input.name) {
+                if (input.type === 'checkbox') {
+                    formData[input.name] = input.checked ? 'On' : 'Off';
+                } else {
+                    formData[input.name] = input.value;
+                }
+            }
+        }
 
-            // Send the data to Google Apps Script
-            fetch(scriptURL, {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => alert('Form submitted successfully!'))
-            .catch(error => alert('Error submitting form'));
-        });
-    </script>
+        // Add timestamp
+        formData.timestamp = new Date().toISOString();
+
+        // Send the data to Google Apps Script
+        fetch(scriptURL, {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.text())
+        .then(result => {
+            alert(result);
+        })
+        .catch(error => alert('Error submitting form: ' + error.message));
+    });
+</script>
+
 </body>
 </html>
