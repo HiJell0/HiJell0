@@ -31,32 +31,40 @@
     </form>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxJUhCFuAWUAnTPygTokUg4m2rFRHvhLApNbHGfRP0sWMd4uW092vFXxQVQrTz2ACUh/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx_f3Kcu9sm7mmhsKMin-SngDum3BZWbetNepGWl28-u2eXAyDHgobYzDljQXWwthZm/exec';
         const form = document.getElementById('myForm');
 
         form.addEventListener('submit', e => {
             e.preventDefault();
             
-            // Get all form data dynamically
+            // Get all form data in a specific order
             const formData = new FormData(form);
-            const orderedData = {};
+            const orderedData = [];
 
-            formData.forEach((value, key) => {
-                if (key === 'toggle') {
-                    orderedData[key] = document.getElementById(key).checked ? 'On' : 'Off';
+            // Define a fixed order of fields
+            const fieldOrder = ['name', 'email', 'phone', 'toggle', 'address', 'age'];
+
+            // Ensure the toggle value is correctly captured
+            fieldOrder.forEach(field => {
+                if (field === 'toggle') {
+                    orderedData.push(document.getElementById(field).checked ? 'On' : 'Off');
                 } else {
-                    orderedData[key] = value;
+                    orderedData.push(formData.get(field));
                 }
             });
 
-            // Add a timestamp
-            orderedData.timestamp = new Date().toISOString();
+            // Add timestamp
+            orderedData.push(new Date().toISOString());
 
-            // Convert the data to URL-encoded format to send to Google Apps Script
-            const urlParams = new URLSearchParams(orderedData).toString();
+            // Convert the ordered data to URL-encoded format
+            const params = new URLSearchParams();
+            fieldOrder.forEach((field, index) => {
+                params.append(field, orderedData[index]);
+            });
+            params.append('timestamp', orderedData[orderedData.length - 1]);
 
-            // Send the data via Fetch API using POST
-            fetch(scriptURL + '?' + urlParams, { method: 'POST' })
+            // Send the data to Google Apps Script
+            fetch(scriptURL + '?' + params.toString(), { method: 'POST' })
                 .then(response => alert('Form submitted successfully!'))
                 .catch(error => alert('Error submitting form'));
         });
