@@ -31,12 +31,12 @@
     </form>
 
    <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxa83nspaAnPvDFveIg1tns94b5VgaZGCFbEUHu0rkY_SiKR7tw5RdGyi8n9MG8qrBK/exec'; // Replace with your script ID
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz-qbPJCTT8rLywlj_DvQIULLFIIOyGgKYBkzP2tIZym6E5SKlLBEKL8ixUizUPHxAs/exec'; // Replace with your script URL
     const form = document.getElementById('myForm');
 
     form.addEventListener('submit', e => {
         e.preventDefault();
-        
+
         // Create an object to hold the form data
         const formData = {};
 
@@ -65,13 +65,20 @@
                 'Content-Type': 'application/json',
             },
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(result => {
-            alert(result);
+            if (result.message) {
+                alert(result.message);
+            } else if (result.error) {
+                alert('Error: ' + result.error);
+            } else {
+                alert('Unknown response from server');
+            }
         })
         .catch(error => alert('Error submitting form: ' + error.message));
     });
 </script>
+
 
 </body>
 </html>
