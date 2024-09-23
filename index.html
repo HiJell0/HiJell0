@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Name, Email, and Phone Number Please</title>
+    <title>Submit Name, Email, and Phone Number</title>
 </head>
 <body>
-    <h2>Submit your Name, Email, and Phone Number Please</h2>
+    <h2>Submit your Name, Email, and Phone Number</h2>
+    
     <form id="myForm">
-        <!-- This is where you can add new elements like text boxes and toggles -->
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" required><br><br>
 
@@ -16,28 +16,59 @@
         <input type="email" id="email" name="email" required><br><br>
 
         <label for="phone">Phone Number:</label><br>
-        <input type="text" id="phone" name="phone" required><br><br>
+        <input type="tel" id="phone" name="phone" required><br><br>
 
         <label for="toggle">Toggle (On/Off):</label><br>
         <input type="checkbox" id="toggle" name="toggle"><br><br>
+
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address"><br><br>
+
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age"><br><br>
 
         <input type="submit" value="Submit">
     </form>
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwHMUMnd10Yedvx6doVF9NkshBW7Xe1fEkOEtsuQP5sFwI1aln48SWJ8N7yFbsRuO3v/exec';
+        const scriptURL = 'https://script.google.com/macros/s/YOUR_GOOGLE_APPS_SCRIPT_URL_HERE/exec';
         const form = document.getElementById('myForm');
 
         form.addEventListener('submit', e => {
             e.preventDefault();
-            const formData = new FormData(form);
-
-            const toggleValue = document.getElementById('toggle').checked ? 'On' : 'Off';
-formData.set('toggle', toggleValue);
-
             
-            fetch(scriptURL, { method: 'POST', body: formData })
-                .then(response => alert('Thanks for signing up!'))
+            // Get all form data dynamically
+            const formData = new FormData(form);
+            
+            // Create an ordered list of the fields you want to submit (can be updated as you add fields)
+            const fieldOrder = ['name', 'email', 'phone', 'toggle', 'address', 'age'];
+
+            // Prepare a new object to store the ordered data
+            let orderedData = {};
+
+            // Iterate over fieldOrder and add the corresponding formData
+            fieldOrder.forEach(field => {
+                if (formData.has(field)) {
+                    if (field === 'toggle') {
+                        // Special handling for checkbox
+                        orderedData[field] = document.getElementById(field).checked ? 'On' : 'Off';
+                    } else {
+                        orderedData[field] = formData.get(field);
+                    }
+                } else {
+                    orderedData[field] = ''; // Empty value if field is not present
+                }
+            });
+
+            // Add a timestamp
+            orderedData.timestamp = new Date().toISOString();
+
+            // Convert the ordered data to URL-encoded format to send to Google Apps Script
+            const urlParams = new URLSearchParams(orderedData).toString();
+
+            // Send the data via Fetch API
+            fetch(scriptURL + '?' + urlParams, { method: 'POST' })
+                .then(response => alert('Form submitted successfully!'))
                 .catch(error => alert('Error submitting form'));
         });
     </script>
