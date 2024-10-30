@@ -1,1 +1,14 @@
-
+<style>
+  button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 50px 100px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 80px;
+    margin: 50px;
+    cursor: pointer;
+  }
+</style>
