@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heartthrob Player</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: deeppink;
+      --light-pink: #fff0fa;
+      --highlight: #ffd6ec;
+    }
+  
+    html {
+      font-size: 16px;
+    }
+  
+    @media (max-width: 600px) {
+      html {
+        font-size: 18px;
+      }
+    }
+  
+    @media (min-width: 1000px) {
+      html {
+        font-size: 22px;
+      }
+    }
+  
+    body {
+      margin: 0;
+      padding: 2vh 0;
+      background: url('https://i.imgur.com/FXrb0up.png') repeat;
+      font-family: 'Press Start 2P', cursive;
+      color: var(--pink);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100dvh; /* Fixes mobile height bugs */
+      overflow-x: hidden;
+    }
+  
+    .screen {
+      background: rgba(255,255,255,0.95);
+      border: 4px dotted var(--pink);
+      border-radius: 16px;
+      box-shadow: 0 0 20px var(--pink);
+      padding: 2rem;
+      width: 95%;
+      max-width: 750px;
+      text-align: center;
+    }
+  
+    button {
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      font-family: 'Press Start 2P', cursive;
+      background-color: var(--pink);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--pink);
+      transition: transform 0.2s;
+      margin: 0.5rem;
+      width: 100%;
+      max-width: 250px;
+    }
+  
+    button:hover {
+      transform: scale(1.05);
+      background-color: hotpink;
+    }
+  
+    input {
+      padding: 1rem;
+      width: 90%;
+      font-size: 1rem;
+      font-family: 'Press Start 2P', cursive;
+      border: 3px solid var(--pink);
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      color: var(--pink);
+      background-color: var(--light-pink);
+    }
+  
+    .highlight {
+      outline: 3px solid var(--pink);
+      background-color: var(--highlight);
+    }
+  
+    .box {
+      border: 3px dashed hotpink;
+      padding: 1.2rem;
+      margin: 1.5rem 0;
+      border-radius: 10px;
+      background-color: #fff9fc;
+    }
+  
+    .guess-row {
+      margin-bottom: 1.2rem;
+    }
+  
+    .guess-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+  
+    #choice-screen,
+    #waiting-screen,
+    #locked-screen,
+    #end-screen {
+      display: none;
+    }
+  
+    #final-picks {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 1rem;
+    }
+  
+    #final-picks img {
+      width: 24vw;
+      max-width: 100px;
+      border: 3px solid var(--pink);
+      border-radius: 10px;
+    }
+  </style>    
+</head>
+<body>
+  
+  <div class="screen" id="name-screen">
+    <h1>✨ What’s your name, dreamgirl? ✨</h1>
+    <input type="text" id="nameInput" placeholder="Your name here" /><br/>
+    <button onclick="submitName()">Let’s go 💅</button>
+  </div>
+
+  <div class="screen" id="waiting-screen">
+    <h1>✨ Waiting for game to start... ✨</h1>
+  </div>
+
+  <div class="screen" id="choice-screen">
+    <h1>💘 Pick Your Heartthrob 💘</h1>
+    <div class="box">
+      <div class="guess-label">Your Pick:</div>
+      <button onclick="selectMyPick('A')" id="my-A">Boy A</button>
+      <button onclick="selectMyPick('B')" id="my-B">Boy B</button>
+      <button onclick="selectMyPick('C')" id="my-C">Boy C</button>
+    </div>
+    <div class="box" id="others-box"></div>
+    <button onclick="submitGuesses()">Submit Guesses 💌</button>
+  </div>
+
+  <div class="screen" id="locked-screen">
+    <h1>🔒 You’re locked in! Waiting for the next round... 🔒</h1>
+  </div>
+
+  <div class="screen" id="end-screen" style="display: none;">
+    <h1>💖 Thanks for Playing 💖</h1>
+    <p>Here are the ones you picked:</p>
+    <div id="final-picks" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;"></div>
+  </div>
+  
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+    let playerName = '', allPlayers = [], myPick = null, guesses = {};
+    let gameStarted = false, receivedList = false;
+    let myChoices = [];
+    let currentBoyImages = {};
+    let gameHasEnded = false;
+
+
+    function submitName() {
+      const name = document.getElementById('nameInput').value.trim();
+      if (!name) return alert("We need your name to fall in love!");
+      playerName = name;
+      socket.emit('registerName', name);
+      show('waiting-screen');
+    }
+
+    socket.on('gameStarted', (boyImages) => {
+      gameStarted = true;
+      currentBoyImages = {
+        boyA: boyImages[0],
+        boyB: boyImages[1],
+        boyC: boyImages[2],
+      };
+    tryToStartGame();
+    });
+
+    function guessLetterToImage(letter) {
+      if (letter === 'A') return `BF's HT/${currentBoyImages.boyA}`;
+      if (letter === 'B') return `BF's HT/${currentBoyImages.boyB}`;
+      if (letter === 'C') return `BF's HT/${currentBoyImages.boyC}`;
+      return '';
+    }
+
+
+    socket.on('playerList', (list) => {
+      allPlayers = list;
+      receivedList = true;
+      tryToStartGame();
+    });
+
+    function tryToStartGame() {
+      if (gameStarted && receivedList) {
+        show('choice-screen');
+        buildOtherPlayerBox();
+      }
+    }
+
+    function buildOtherPlayerBox() {
+      guesses = {};
+      const box = document.getElementById('others-box');
+      box.innerHTML = '';
+      allPlayers.forEach(name => {
+        if (name === playerName) return;
+        const row = document.createElement('div');
+        row.className = 'guess-row';
+        row.innerHTML = `
+          <span class="guess-label">Guess what ${name} will pick:</span>
+          <button onclick="selectGuess('${name}', 'A')" id="${name}-A">Boy A</button>
+          <button onclick="selectGuess('${name}', 'B')" id="${name}-B">Boy B</button>
+          <button onclick="selectGuess('${name}', 'C')" id="${name}-C">Boy C</button>
+        `;
+        box.appendChild(row);
+      });
+    }
+
+    function selectMyPick(choice) {
+      myPick = choice;
+      ['A', 'B', 'C'].forEach(letter => {
+        document.getElementById(`my-${letter}`).classList.remove('highlight');
+      });
+      document.getElementById(`my-${choice}`).classList.add('highlight');
+    }
+
+    function selectGuess(name, choice) {
+      guesses[name] = choice;
+      ['A', 'B', 'C'].forEach(letter => {
+        const btn = document.getElementById(`${name}-${letter}`);
+        if (btn) btn.classList.remove('highlight');
+      });
+      document.getElementById(`${name}-${choice}`).classList.add('highlight');
+    }
+
+    function submitGuesses() {
+      if (gameHasEnded) return;
+
+      if (!myPick) return alert("Pick your heartthrob first!");
+      const needed = allPlayers.filter(p => p !== playerName).length;
+      if (Object.keys(guesses).length < needed) return alert("Guess for everyone else too!");
+
+      socket.emit('playerChoice', { name: playerName, choice: myPick });
+      socket.emit('playerGuesses', { name: playerName, guesses });
+      myChoices.push(myPick);
+
+      if (myChoices.length === 4) {
+        // 🎉 Immediately end the game for this player
+        gameHasEnded = true;
+        show('end-screen');
+
+        const container = document.getElementById('final-picks');
+        container.innerHTML = '';
+        myChoices.forEach(letter => {
+          const img = document.createElement('img');
+          img.src = guessLetterToImage(letter);
+          img.style.width = '80px';
+          img.style.border = '3px solid deeppink';
+          img.style.borderRadius = '10px';
+          container.appendChild(img);
+        });
+      } else {
+        show('locked-screen');
+      }
+    }
+
+    socket.on('roundAdvanced', (round) => {
+      if (gameHasEnded) return;
+
+      myPick = null;
+      show('choice-screen');
+      ['A','B','C'].forEach(l => {
+        const btn = document.getElementById(`my-${l}`);
+        if (btn) btn.classList.remove('highlight');
+      });
+      buildOtherPlayerBox();
+    });
+
+
+    socket.on('gameOver', () => {
+      console.log('🎉 gameOver event received!');
+
+      const container = document.getElementById('final-picks');
+      container.innerHTML = '';
+      myChoices.forEach(letter => {
+        const img = document.createElement('img');
+        img.src = guessLetterToImage(letter);
+        img.style.width = '80px';
+        img.style.border = '3px solid deeppink';
+        img.style.borderRadius = '10px';
+        container.appendChild(img);
+      });
+    });
+
+    function show(id) {
+      ['name-screen', 'waiting-screen', 'choice-screen', 'locked-screen', 'end-screen'].forEach(s => {
+        document.getElementById(s).style.display = s === id ? 'block' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
