@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-10T02:05:48.553Z",
+  "lastUpdated": "2026-02-10T02:07:37.915Z",
   "days": {
     "thu": {
       "label": "Arrival",
@@ -55,6 +55,11 @@
       "label": "Open Day",
       "activities": [
         {
+          "id": "alta-snowbird",
+          "text": "Alta or Snowbird",
+          "status": "idea"
+        },
+        {
           "id": "homework",
           "text": "Homework session",
           "status": "idea"
@@ -65,9 +70,9 @@
       "label": "Fly Home",
       "activities": [
         {
-          "id": "fly-home",
-          "text": "Fly SLC → LAX. Frontier F9 1267, 9:29am",
-          "status": "booked"
+          "id": "custom-1770689211421-1",
+          "text": "Fly SLC to LAX Frontier 9:30am",
+          "status": "idea"
         },
         {
           "id": "mon-homework",
@@ -78,11 +83,6 @@
     }
   },
   "ideaBank": [
-    {
-      "id": "alta-snowbird",
-      "text": "Alta or Snowbird",
-      "status": "idea"
-    },
     {
       "id": "brunch",
       "text": "Brunch",
