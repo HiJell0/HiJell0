@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-10T02:48:28.469Z",
+  "lastUpdated": "2026-02-10T02:49:50.467Z",
   "days": {
     "thu": {
       "label": "Arrival",
@@ -50,11 +50,6 @@
       "label": "Open Day",
       "activities": [
         {
-          "id": "alta-snowbird",
-          "text": "Alta or Snowbird",
-          "status": "idea"
-        },
-        {
           "id": "homework",
           "text": "Homework session",
           "status": "idea"
@@ -101,6 +96,11 @@
     {
       "id": "kneaders",
       "text": "Kneaders breakfast, 8/8:30am, West Jordan with Sarah",
+      "status": "idea"
+    },
+    {
+      "id": "alta-snowbird",
+      "text": "Alta or Snowbird",
       "status": "idea"
     },
     {
