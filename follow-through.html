@@ -274,6 +274,13 @@
       grid-template-columns: 1fr;
     }
     .bank { position: static; }
+    .header { padding: 52px 20px 36px; }
+    .back-btn {
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .header h1 { font-size: 1.5rem; }
   }
 </style>
 </head>
@@ -438,7 +445,35 @@
   const STATE_KEY = 'followthrough-state';
   let draggedCard = null;
 
-  // ── Drag handlers ──
+  // ── Helpers ──
+  function getAllZones() {
+    return document.querySelectorAll('.drop-zone, .bank-zone');
+  }
+
+  function findInsertPosition(zone, y) {
+    const cards = [...zone.querySelectorAll('.card:not(.dragging)')];
+    const after = cards.reduce((closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) return { offset, el: child };
+      return closest;
+    }, { offset: Number.NEGATIVE_INFINITY });
+    return after.el || null;
+  }
+
+  function getZoneAt(x, y) {
+    let found = null;
+    getAllZones().forEach(zone => {
+      const r = zone.getBoundingClientRect();
+      if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) found = zone;
+    });
+    // Also check trash
+    const tr = trash.getBoundingClientRect();
+    if (x >= tr.left && x <= tr.right && y >= tr.top && y <= tr.bottom) return 'trash';
+    return found;
+  }
+
+  // ══════════ DESKTOP DRAG & DROP ══════════
   document.addEventListener('dragstart', e => {
     const card = e.target.closest('.card');
     if (!card) return;
@@ -454,37 +489,18 @@
     draggedCard = null;
   });
 
-  // ── Drop zones ──
-  document.querySelectorAll('.drop-zone, .bank-zone').forEach(zone => {
+  getAllZones().forEach(zone => {
     zone.addEventListener('dragover', e => {
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
       zone.classList.add('drag-over');
-
-      // Find insert position
-      const cards = [...zone.querySelectorAll('.card:not(.dragging)')];
-      const after = cards.reduce((closest, child) => {
-        const box = child.getBoundingClientRect();
-        const offset = e.clientY - box.top - box.height / 2;
-        if (offset < 0 && offset > closest.offset) {
-          return { offset, el: child };
-        }
-        return closest;
-      }, { offset: Number.NEGATIVE_INFINITY });
-
-      if (after.el) {
-        zone.insertBefore(draggedCard, after.el);
-      } else {
-        zone.appendChild(draggedCard);
-      }
+      const before = findInsertPosition(zone, e.clientY);
+      if (before) zone.insertBefore(draggedCard, before);
+      else zone.appendChild(draggedCard);
     });
-
     zone.addEventListener('dragleave', e => {
-      if (!zone.contains(e.relatedTarget)) {
-        zone.classList.remove('drag-over');
-      }
+      if (!zone.contains(e.relatedTarget)) zone.classList.remove('drag-over');
     });
-
     zone.addEventListener('drop', e => {
       e.preventDefault();
       zone.classList.remove('drag-over');
@@ -493,7 +509,87 @@
     });
   });
 
-  // ── Empty state messages ──
+  // ══════════ TOUCH DRAG & DROP ══════════
+  let touchClone = null;
+  let touchStartY = 0;
+  let touchStartX = 0;
+  let touchMoved = false;
+
+  document.addEventListener('touchstart', e => {
+    const card = e.target.closest('.card');
+    if (!card) return;
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchMoved = false;
+    draggedCard = card;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', e => {
+    if (!draggedCard) return;
+    const t = e.touches[0];
+
+    // Only start drag after 8px movement
+    if (!touchMoved) {
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+      if (Math.sqrt(dx*dx + dy*dy) < 8) return;
+      touchMoved = true;
+      draggedCard.classList.add('dragging');
+      // Create floating clone
+      touchClone = draggedCard.cloneNode(true);
+      touchClone.style.cssText = 'position:fixed;pointer-events:none;z-index:999;opacity:0.85;width:' + draggedCard.offsetWidth + 'px;';
+      document.body.appendChild(touchClone);
+    }
+
+    e.preventDefault();
+
+    // Move clone
+    if (touchClone) {
+      touchClone.style.left = (t.clientX - touchClone.offsetWidth / 2) + 'px';
+      touchClone.style.top = (t.clientY - 20) + 'px';
+    }
+
+    // Highlight zone under finger
+    document.querySelectorAll('.drag-over').forEach(z => z.classList.remove('drag-over'));
+    const target = getZoneAt(t.clientX, t.clientY);
+    if (target === 'trash') {
+      trash.classList.add('drag-over');
+    } else if (target) {
+      target.classList.add('drag-over');
+      const before = findInsertPosition(target, t.clientY);
+      if (before) target.insertBefore(draggedCard, before);
+      else target.appendChild(draggedCard);
+    }
+  }, { passive: false });
+
+  document.addEventListener('touchend', e => {
+    if (!draggedCard) return;
+
+    // Clean up clone
+    if (touchClone) {
+      touchClone.remove();
+      touchClone = null;
+    }
+
+    if (touchMoved) {
+      // Check if dropped on trash
+      const lastTouch = e.changedTouches[0];
+      const target = getZoneAt(lastTouch.clientX, lastTouch.clientY);
+      if (target === 'trash') {
+        draggedCard.remove();
+      }
+      draggedCard.classList.remove('dragging');
+      document.querySelectorAll('.drag-over').forEach(z => z.classList.remove('drag-over'));
+      updateEmptyStates();
+      saveState();
+    }
+
+    draggedCard = null;
+    touchMoved = false;
+  });
+
+  // ══════════ EMPTY STATES ══════════
   function updateEmptyStates() {
     document.querySelectorAll('.drop-zone').forEach(zone => {
       const existing = zone.querySelector('.drop-zone-empty');
@@ -507,7 +603,6 @@
         existing.remove();
       }
     });
-    // Same for bank
     const bankZone = document.querySelector('.bank-zone');
     const bankEmpty = bankZone.querySelector('.bank-hint');
     const bankHasCards = bankZone.querySelector('.card');
@@ -521,7 +616,7 @@
     }
   }
 
-  // ── Save / Load ──
+  // ══════════ SAVE / LOAD ══════════
   const CARDS_KEY = 'followthrough-cards';
 
   function saveState() {
@@ -530,7 +625,6 @@
     document.querySelectorAll('[data-day]').forEach(zone => {
       const day = zone.dataset.day;
       const cards = [...zone.querySelectorAll('.card')].map(c => {
-        // Save custom card text so we can recreate them on load
         if (c.dataset.id.startsWith('custom-')) {
           customCards[c.dataset.id] = c.querySelector('.text').textContent;
         }
@@ -549,7 +643,6 @@
       const state = JSON.parse(raw);
       const customCards = JSON.parse(localStorage.getItem(CARDS_KEY) || '{}');
 
-      // Recreate any custom cards first
       Object.entries(customCards).forEach(([id, text]) => {
         if (document.querySelector(`[data-id="${id}"]`)) return;
         const card = document.createElement('div');
@@ -565,7 +658,6 @@
         allCards[c.dataset.id] = c;
       });
 
-      // Remove cards not in any saved zone (they were trashed)
       const allSavedIds = new Set(Object.values(state).flat());
       Object.keys(allCards).forEach(id => {
         if (!allSavedIds.has(id)) allCards[id].remove();
@@ -583,7 +675,7 @@
     } catch(e) {}
   }
 
-  // ── Trash zone ──
+  // ══════════ TRASH (desktop) ══════════
   const trash = document.getElementById('trashZone');
   trash.addEventListener('dragover', e => {
     e.preventDefault();
@@ -604,7 +696,7 @@
     }
   });
 
-  // ── New activity ──
+  // ══════════ NEW ACTIVITY ══════════
   let newCount = 0;
   document.getElementById('newActivity').addEventListener('click', () => {
     const text = prompt('Activity name:');
