@@ -469,10 +469,124 @@
 <div class="footer">Follow Through, Valentine's Getaway 2026</div>
 
 <script>
-  const STATE_KEY = 'followthrough-state';
+  const API_BASE = 'https://visionary-raindrop-cd221f.netlify.app/.netlify/functions';
+  const LOCAL_KEY = 'followthrough-plan';
   let draggedCard = null;
+  let plan = null;
 
-  // ── Apply booked styling ──
+  // ══════════ DEFAULT PLAN (fallback) ══════════
+  const defaultPlan = {
+    lastUpdated: null,
+    days: {
+      thu: {
+        label: 'Arrival',
+        activities: [
+          { id: 'fly-out', text: 'Fly LAX → SLC. Frontier 4130, 6:06pm', status: 'booked' },
+          { id: 'dinner-sarah-thu', text: 'Maybe dinner with Sarah', status: 'idea' }
+        ]
+      },
+      fri: {
+        label: 'Ski Day',
+        activities: [
+          { id: 'kneaders', text: 'Kneaders breakfast, 8/8:30am, West Jordan with Sarah', status: 'idea' },
+          { id: 'ski-day', text: 'Ski day, pick a resort', status: 'idea' },
+          { id: 'fri-dinner', text: 'Dinner out', status: 'idea' },
+          { id: 'hot-tub', text: 'Sneak into a hot tub', status: 'idea' }
+        ]
+      },
+      sat: {
+        label: "Valentine's Day",
+        activities: [
+          { id: 'chill-home', text: 'Chill time at home', status: 'idea' },
+          { id: 'vday-dinner', text: 'Romantic Valentine\'s dinner', status: 'idea' }
+        ]
+      },
+      sun: {
+        label: 'Open Day',
+        activities: []
+      },
+      mon: {
+        label: 'Fly Home',
+        activities: [
+          { id: 'fly-home', text: 'Fly SLC → LAX. Frontier F9 1267, 9:29am', status: 'booked' },
+          { id: 'mon-homework', text: 'Homework', status: 'idea' }
+        ]
+      }
+    },
+    ideaBank: [
+      { id: 'alta-snowbird', text: 'Alta or Snowbird', status: 'idea' },
+      { id: 'homework', text: 'Homework session', status: 'idea' },
+      { id: 'brunch', text: 'Brunch', status: 'idea' },
+      { id: 'temple-square', text: 'Temple Square', status: 'idea' },
+      { id: 'nat-history', text: 'Natural History Museum', status: 'idea' },
+      { id: 'park-city', text: 'Park City Main Street', status: 'idea' },
+      { id: 'pick-up-skis', text: 'Pick up skis from Sarah', status: 'idea' },
+      { id: 'movie-night', text: 'Movie night in', status: 'idea' },
+      { id: 'sunset-drive', text: 'Scenic drive', status: 'idea' }
+    ]
+  };
+
+  // ══════════ CARD CREATION ══════════
+  function makeCard(activity) {
+    const card = document.createElement('div');
+    card.className = 'card' + (activity.status === 'booked' ? ' locked' : '');
+    card.draggable = true;
+    card.dataset.id = activity.id;
+    let html = `<span class="grip">⠿</span><span class="text">${activity.text}</span>`;
+    if (activity.status === 'booked') html += `<span class="lock-tag">booked</span>`;
+    card.innerHTML = html;
+    return card;
+  }
+
+  // ══════════ RENDER PLAN → DOM ══════════
+  function renderPlan(p) {
+    plan = p;
+    // Clear all zones
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+      zone.querySelectorAll('.card, .drop-zone-empty').forEach(el => el.remove());
+    });
+    document.querySelector('.bank-zone').querySelectorAll('.card, .bank-hint').forEach(el => el.remove());
+
+    // Populate day zones
+    Object.entries(plan.days).forEach(([dayId, day]) => {
+      const zone = document.querySelector(`[data-day="${dayId}"]`);
+      if (!zone) return;
+      day.activities.forEach(act => zone.appendChild(makeCard(act)));
+    });
+
+    // Populate idea bank
+    const bankZone = document.querySelector('.bank-zone');
+    plan.ideaBank.forEach(act => bankZone.appendChild(makeCard(act)));
+
+    applyBookedTags();
+    updateEmptyStates();
+    setupDesktopDrag();
+  }
+
+  // ══════════ DOM → PLAN OBJECT ══════════
+  function buildPlanFromDOM() {
+    const days = {};
+    document.querySelectorAll('.drop-zone[data-day]').forEach(zone => {
+      const dayId = zone.dataset.day;
+      const label = plan.days[dayId] ? plan.days[dayId].label : dayId;
+      const activities = [...zone.querySelectorAll('.card')].map(c => ({
+        id: c.dataset.id,
+        text: c.querySelector('.text').textContent,
+        status: c.classList.contains('locked') ? 'booked' : 'idea'
+      }));
+      days[dayId] = { label, activities };
+    });
+    const ideaBank = [...document.querySelector('.bank-zone').querySelectorAll('.card')].map(c => ({
+      id: c.dataset.id,
+      text: c.querySelector('.text').textContent,
+      status: c.classList.contains('locked') ? 'booked' : 'idea'
+    }));
+    plan.days = days;
+    plan.ideaBank = ideaBank;
+    return plan;
+  }
+
+  // ══════════ APPLY BOOKED TAGS ══════════
   function applyBookedTags() {
     document.querySelectorAll('.card').forEach(card => {
       const textEl = card.querySelector('.text');
@@ -491,7 +605,13 @@
     });
   }
 
-  // ── Helpers ──
+  // ══════════ LOCAL CACHE ══════════
+  function cacheLocally() {
+    buildPlanFromDOM();
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(plan));
+  }
+
+  // ══════════ HELPERS ══════════
   function getAllZones() {
     return document.querySelectorAll('.drop-zone, .bank-zone');
   }
@@ -513,13 +633,34 @@
       const r = zone.getBoundingClientRect();
       if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) found = zone;
     });
-    // Also check trash
     const tr = trash.getBoundingClientRect();
     if (x >= tr.left && x <= tr.right && y >= tr.top && y <= tr.bottom) return 'trash';
     return found;
   }
 
   // ══════════ DESKTOP DRAG & DROP ══════════
+  function setupDesktopDrag() {
+    getAllZones().forEach(zone => {
+      zone.addEventListener('dragover', e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        zone.classList.add('drag-over');
+        const before = findInsertPosition(zone, e.clientY);
+        if (before) zone.insertBefore(draggedCard, before);
+        else zone.appendChild(draggedCard);
+      });
+      zone.addEventListener('dragleave', e => {
+        if (!zone.contains(e.relatedTarget)) zone.classList.remove('drag-over');
+      });
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        zone.classList.remove('drag-over');
+        updateEmptyStates();
+        cacheLocally();
+      });
+    });
+  }
+
   document.addEventListener('dragstart', e => {
     const card = e.target.closest('.card');
     if (!card) return;
@@ -535,26 +676,6 @@
     draggedCard = null;
   });
 
-  getAllZones().forEach(zone => {
-    zone.addEventListener('dragover', e => {
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
-      zone.classList.add('drag-over');
-      const before = findInsertPosition(zone, e.clientY);
-      if (before) zone.insertBefore(draggedCard, before);
-      else zone.appendChild(draggedCard);
-    });
-    zone.addEventListener('dragleave', e => {
-      if (!zone.contains(e.relatedTarget)) zone.classList.remove('drag-over');
-    });
-    zone.addEventListener('drop', e => {
-      e.preventDefault();
-      zone.classList.remove('drag-over');
-      updateEmptyStates();
-      saveState();
-    });
-  });
-
   // ══════════ TOUCH DRAG & DROP ══════════
   let touchClone = null;
   let touchStartY = 0;
@@ -562,7 +683,6 @@
   let touchMoved = false;
 
   document.addEventListener('touchstart', e => {
-    // Let navigation links work normally
     if (e.target.closest('a, button')) return;
     const card = e.target.closest('.card');
     if (!card) return;
@@ -576,29 +696,21 @@
   document.addEventListener('touchmove', e => {
     if (!draggedCard) return;
     const t = e.touches[0];
-
-    // Only start drag after 8px movement
     if (!touchMoved) {
       const dx = t.clientX - touchStartX;
       const dy = t.clientY - touchStartY;
       if (Math.sqrt(dx*dx + dy*dy) < 8) return;
       touchMoved = true;
       draggedCard.classList.add('dragging');
-      // Create floating clone
       touchClone = draggedCard.cloneNode(true);
       touchClone.style.cssText = 'position:fixed;pointer-events:none;z-index:999;opacity:0.85;width:' + draggedCard.offsetWidth + 'px;';
       document.body.appendChild(touchClone);
     }
-
     e.preventDefault();
-
-    // Move clone
     if (touchClone) {
       touchClone.style.left = (t.clientX - touchClone.offsetWidth / 2) + 'px';
       touchClone.style.top = (t.clientY - 20) + 'px';
     }
-
-    // Highlight zone under finger
     document.querySelectorAll('.drag-over').forEach(z => z.classList.remove('drag-over'));
     const target = getZoneAt(t.clientX, t.clientY);
     if (target === 'trash') {
@@ -613,26 +725,16 @@
 
   document.addEventListener('touchend', e => {
     if (!draggedCard) return;
-
-    // Clean up clone
-    if (touchClone) {
-      touchClone.remove();
-      touchClone = null;
-    }
-
+    if (touchClone) { touchClone.remove(); touchClone = null; }
     if (touchMoved) {
-      // Check if dropped on trash
       const lastTouch = e.changedTouches[0];
       const target = getZoneAt(lastTouch.clientX, lastTouch.clientY);
-      if (target === 'trash') {
-        draggedCard.remove();
-      }
+      if (target === 'trash') draggedCard.remove();
       draggedCard.classList.remove('dragging');
       document.querySelectorAll('.drag-over').forEach(z => z.classList.remove('drag-over'));
       updateEmptyStates();
-      saveState();
+      cacheLocally();
     }
-
     draggedCard = null;
     touchMoved = false;
   });
@@ -664,65 +766,6 @@
     }
   }
 
-  // ══════════ SAVE / LOAD ══════════
-  const CARDS_KEY = 'followthrough-cards';
-
-  function saveState() {
-    const state = {};
-    const customCards = {};
-    document.querySelectorAll('[data-day]').forEach(zone => {
-      const day = zone.dataset.day;
-      const cards = [...zone.querySelectorAll('.card')].map(c => {
-        if (c.dataset.id.startsWith('custom-')) {
-          customCards[c.dataset.id] = c.querySelector('.text').textContent;
-        }
-        return c.dataset.id;
-      });
-      state[day] = cards;
-    });
-    localStorage.setItem(STATE_KEY, JSON.stringify(state));
-    localStorage.setItem(CARDS_KEY, JSON.stringify(customCards));
-  }
-
-  function loadState() {
-    const raw = localStorage.getItem(STATE_KEY);
-    if (!raw) return;
-    try {
-      const state = JSON.parse(raw);
-      const customCards = JSON.parse(localStorage.getItem(CARDS_KEY) || '{}');
-
-      Object.entries(customCards).forEach(([id, text]) => {
-        if (document.querySelector(`[data-id="${id}"]`)) return;
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.draggable = true;
-        card.dataset.id = id;
-        card.innerHTML = `<span class="grip">⠿</span><span class="text">${text}</span>`;
-        document.querySelector('.bank-zone').appendChild(card);
-      });
-
-      const allCards = {};
-      document.querySelectorAll('.card').forEach(c => {
-        allCards[c.dataset.id] = c;
-      });
-
-      const allSavedIds = new Set(Object.values(state).flat());
-      Object.keys(allCards).forEach(id => {
-        if (!allSavedIds.has(id)) allCards[id].remove();
-      });
-
-      Object.entries(state).forEach(([day, ids]) => {
-        const zone = document.querySelector(`[data-day="${day}"]`);
-        if (!zone) return;
-        ids.forEach(id => {
-          const card = allCards[id];
-          if (card) zone.appendChild(card);
-        });
-      });
-      updateEmptyStates();
-    } catch(e) {}
-  }
-
   // ══════════ TRASH (desktop) ══════════
   const trash = document.getElementById('trashZone');
   trash.addEventListener('dragover', e => {
@@ -740,7 +783,7 @@
       draggedCard.remove();
       draggedCard = null;
       updateEmptyStates();
-      saveState();
+      cacheLocally();
     }
   });
 
@@ -750,23 +793,42 @@
     const text = prompt('Activity name:');
     if (!text || !text.trim()) return;
     const id = 'custom-' + Date.now() + '-' + (++newCount);
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.draggable = true;
-    card.dataset.id = id;
-    card.innerHTML = `<span class="grip">⠿</span><span class="text">${text.trim()}</span>`;
+    const card = makeCard({ id, text: text.trim(), status: 'idea' });
     document.querySelector('.bank-zone').appendChild(card);
     applyBookedTags();
     updateEmptyStates();
-    saveState();
+    cacheLocally();
   });
 
-  // ══════════ SAVE BUTTON ══════════
-  document.getElementById('saveBtn').addEventListener('click', () => {
-    saveState();
+  // ══════════ SAVE BUTTON (API) ══════════
+  document.getElementById('saveBtn').addEventListener('click', async () => {
     const btn = document.getElementById('saveBtn');
-    btn.textContent = 'Saved ✓';
-    btn.classList.add('saved');
+    btn.textContent = 'Saving...';
+    btn.disabled = true;
+
+    buildPlanFromDOM();
+    plan.lastUpdated = new Date().toISOString();
+
+    try {
+      const res = await fetch(API_BASE + '/save-plan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(plan)
+      });
+      const data = await res.json();
+      if (data.ok) {
+        localStorage.setItem(LOCAL_KEY, JSON.stringify(plan));
+        btn.textContent = 'Saved ✓';
+        btn.classList.add('saved');
+      } else {
+        btn.textContent = 'Save failed';
+      }
+    } catch (err) {
+      console.error('Save error:', err);
+      btn.textContent = 'Save failed';
+    }
+
+    btn.disabled = false;
     setTimeout(() => {
       btn.textContent = 'Save Plan';
       btn.classList.remove('saved');
@@ -779,9 +841,36 @@
     window.location.href = this.getAttribute('href');
   });
 
-  loadState();
-  applyBookedTags();
-  updateEmptyStates();
+  // ══════════ INIT: LOAD FROM API ══════════
+  (async function init() {
+    let loaded = false;
+    try {
+      const res = await fetch(API_BASE + '/load-plan');
+      const data = await res.json();
+      if (data.ok && data.plan && data.plan.days) {
+        renderPlan(data.plan);
+        loaded = true;
+      }
+    } catch (err) {
+      console.warn('API load failed, trying local cache:', err);
+    }
+
+    if (!loaded) {
+      // Try local cache
+      try {
+        const cached = JSON.parse(localStorage.getItem(LOCAL_KEY));
+        if (cached && cached.days) {
+          renderPlan(cached);
+          loaded = true;
+        }
+      } catch(e) {}
+    }
+
+    if (!loaded) {
+      // Fall back to default
+      renderPlan(JSON.parse(JSON.stringify(defaultPlan)));
+    }
+  })();
 </script>
 
 </body>
