@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-10T03:13:02.951Z",
+  "lastUpdated": "2026-02-10T03:24:50.491Z",
   "days": {
     "thu": {
       "label": "Arrival",
@@ -95,6 +95,11 @@
     {
       "id": "custom-1770692253263-5",
       "text": "Another day of skiing",
+      "status": "idea"
+    },
+    {
+      "id": "custom-1770693559674-1",
+      "text": "Visit the Bean museum",
       "status": "idea"
     }
   ]
