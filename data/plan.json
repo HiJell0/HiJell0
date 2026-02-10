@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-10T03:24:50.491Z",
+  "lastUpdated": "2026-02-10T03:40:51.990Z",
   "days": {
     "thu": {
       "label": "Arrival",
@@ -44,11 +44,6 @@
     "sat": {
       "label": "Valentine's Day",
       "activities": [
-        {
-          "id": "chill-home",
-          "text": "Chill time at home",
-          "status": "idea"
-        },
         {
           "id": "vday-dinner",
           "text": "Romantic Valentine's dinner",
@@ -100,6 +95,21 @@
     {
       "id": "custom-1770693559674-1",
       "text": "Visit the Bean museum",
+      "status": "idea"
+    },
+    {
+      "id": "custom-1770694590881-1",
+      "text": "The Crater Hot Spring",
+      "status": "idea"
+    },
+    {
+      "id": "chill-home",
+      "text": "Chill time at home",
+      "status": "idea"
+    },
+    {
+      "id": "custom-1770694599329-2",
+      "text": "Ice Skating",
       "status": "idea"
     }
   ]
