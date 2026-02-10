@@ -1,5 +1,3 @@
-import fetch from "node-fetch";
-
 const owner = process.env.GITHUB_OWNER;
 const repo = process.env.GITHUB_REPO;
 const branch = process.env.GITHUB_BRANCH || "main";
