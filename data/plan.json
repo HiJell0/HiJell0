@@ -1,0 +1,122 @@
+{
+  "lastUpdated": "2026-02-10T02:05:48.553Z",
+  "days": {
+    "thu": {
+      "label": "Arrival",
+      "activities": [
+        {
+          "id": "fly-out",
+          "text": "Fly LAX → SLC. Frontier 4130, 6:06pm",
+          "status": "booked"
+        }
+      ]
+    },
+    "fri": {
+      "label": "Ski Day",
+      "activities": [
+        {
+          "id": "kneaders",
+          "text": "Kneaders breakfast, 8/8:30am, West Jordan with Sarah",
+          "status": "idea"
+        },
+        {
+          "id": "ski-day",
+          "text": "Ski day, pick a resort",
+          "status": "idea"
+        },
+        {
+          "id": "fri-dinner",
+          "text": "Dinner out",
+          "status": "idea"
+        },
+        {
+          "id": "hot-tub",
+          "text": "Sneak into a hot tub",
+          "status": "idea"
+        }
+      ]
+    },
+    "sat": {
+      "label": "Valentine's Day",
+      "activities": [
+        {
+          "id": "chill-home",
+          "text": "Chill time at home",
+          "status": "idea"
+        },
+        {
+          "id": "vday-dinner",
+          "text": "Romantic Valentine's dinner",
+          "status": "idea"
+        }
+      ]
+    },
+    "sun": {
+      "label": "Open Day",
+      "activities": [
+        {
+          "id": "homework",
+          "text": "Homework session",
+          "status": "idea"
+        }
+      ]
+    },
+    "mon": {
+      "label": "Fly Home",
+      "activities": [
+        {
+          "id": "fly-home",
+          "text": "Fly SLC → LAX. Frontier F9 1267, 9:29am",
+          "status": "booked"
+        },
+        {
+          "id": "mon-homework",
+          "text": "Homework",
+          "status": "idea"
+        }
+      ]
+    }
+  },
+  "ideaBank": [
+    {
+      "id": "alta-snowbird",
+      "text": "Alta or Snowbird",
+      "status": "idea"
+    },
+    {
+      "id": "brunch",
+      "text": "Brunch",
+      "status": "idea"
+    },
+    {
+      "id": "temple-square",
+      "text": "Temple Square",
+      "status": "idea"
+    },
+    {
+      "id": "nat-history",
+      "text": "Natural History Museum",
+      "status": "idea"
+    },
+    {
+      "id": "park-city",
+      "text": "Park City Main Street",
+      "status": "idea"
+    },
+    {
+      "id": "pick-up-skis",
+      "text": "Pick up skis from Sarah",
+      "status": "idea"
+    },
+    {
+      "id": "movie-night",
+      "text": "Movie night in",
+      "status": "idea"
+    },
+    {
+      "id": "sunset-drive",
+      "text": "Scenic drive",
+      "status": "idea"
+    }
+  ]
+}
