@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Follow Through, Valentine's Getaway 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #111;
+    color: #d4ccc4;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: linear-gradient(135deg, #0a1210 0%, #0f2a1a 40%, #0a1a14 100%);
+    border-bottom: 1px solid rgba(125,206,160,0.12);
+    padding: 40px 40px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: 700;
+    position: relative;
+  }
+  .header h1 span { color: #7dcea0; }
+  .header .sub {
+    font-size: 0.85rem;
+    color: #7ab893;
+    margin-top: 4px;
+    position: relative;
+  }
+  .header-tag {
+    display: inline-block;
+    background: rgba(125,206,160,0.1);
+    border: 1px solid rgba(125,206,160,0.2);
+    color: #7dcea0;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-top: 10px;
+    position: relative;
+  }
+  .back-btn {
+    position: absolute;
+    top: 50%;
+    left: 24px;
+    transform: translateY(-50%);
+    background: rgba(125,206,160,0.1);
+    border: 1px solid rgba(125,206,160,0.2);
+    color: #7dcea0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.2s;
+    z-index: 1;
+  }
+  .back-btn:hover {
+    background: rgba(125,206,160,0.2);
+    border-color: rgba(125,206,160,0.4);
+  }
+
+  /* ── Layout ── */
+  .layout {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 24px;
+  }
+
+  /* ── Timeline ── */
+  .timeline { display: flex; flex-direction: column; gap: 16px; }
+
+  .day {
+    background: #161616;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .day-label {
+    background: rgba(125,206,160,0.1);
+    border: 1px solid rgba(125,206,160,0.15);
+    color: #7dcea0;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .day-label.valentine {
+    background: rgba(232,101,122,0.12);
+    border-color: rgba(232,101,122,0.2);
+    color: #e8657a;
+  }
+  .day-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #fff;
+  }
+  .drop-zone {
+    min-height: 48px;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: background 0.15s;
+  }
+  .drop-zone.drag-over {
+    background: rgba(125,206,160,0.04);
+  }
+  .drop-zone-empty {
+    color: #2a2222;
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 12px;
+    pointer-events: none;
+  }
+
+  /* ── Cards ── */
+  .card {
+    background: #1e1e1e;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    color: #b8b0a8;
+    cursor: grab;
+    transition: all 0.15s;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card:hover {
+    border-color: rgba(125,206,160,0.15);
+    background: #222;
+  }
+  .card:active { cursor: grabbing; }
+  .card.dragging {
+    opacity: 0.4;
+    transform: scale(0.96);
+  }
+  .card .grip {
+    color: #3a3232;
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+  .card .text { flex: 1; }
+  .card.locked {
+    border-left: 3px solid #7dcea0;
+  }
+  .card.locked .lock-tag {
+    font-size: 0.6rem;
+    color: #7dcea0;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+
+  /* ── Idea Bank ── */
+  .bank {
+    position: sticky;
+    top: 20px;
+    align-self: start;
+  }
+  .bank-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: #7dcea0;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .bank-zone {
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 0;
+    transition: background 0.15s;
+    border-radius: 8px;
+  }
+  .bank-zone.drag-over {
+    background: rgba(125,206,160,0.04);
+  }
+  .bank-hint {
+    font-size: 0.72rem;
+    color: #2a2222;
+    text-align: center;
+    padding: 8px;
+  }
+
+  /* ── Trash zone ── */
+  .trash-zone {
+    border: 1px dashed rgba(255,80,80,0.15);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.72rem;
+    color: #4a3232;
+    margin-top: 16px;
+    transition: all 0.15s;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .trash-zone.drag-over {
+    background: rgba(255,80,80,0.08);
+    border-color: rgba(255,80,80,0.4);
+    color: #e06060;
+  }
+
+  /* ── New activity button ── */
+  .new-btn {
+    width: 100%;
+    background: rgba(125,206,160,0.08);
+    border: 1px dashed rgba(125,206,160,0.2);
+    border-radius: 8px;
+    padding: 10px;
+    color: #7dcea0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 12px;
+  }
+  .new-btn:hover {
+    background: rgba(125,206,160,0.14);
+    border-color: rgba(125,206,160,0.35);
+  }
+
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: #2a2222;
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 700px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+    .bank { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="index.html" class="back-btn">← The Plan</a>
+  <h1>Follow <span>Through</span></h1>
+  <div class="sub">Drag activities onto your timeline</div>
+  <div class="header-tag" style="visibility:hidden;">Feb 12–16</div>
+</div>
+
+<div class="layout">
+
+<div class="timeline">
+
+  <!-- THU FEB 12 -->
+  <div class="day">
+    <div class="day-header">
+      <span class="day-label">Thu Feb 12</span>
+      <span class="day-name">Arrival</span>
+    </div>
+    <div class="drop-zone" data-day="thu">
+      <div class="card locked" draggable="true" data-id="fly-out">
+        <span class="grip">⠿</span>
+        <span class="text">Fly LAX → SLC. Frontier 4130, 6:06pm</span>
+        <span class="lock-tag">booked</span>
+      </div>
+      <div class="card" draggable="true" data-id="dinner-sarah-thu">
+        <span class="grip">⠿</span>
+        <span class="text">Maybe dinner with Sarah</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRI FEB 13 -->
+  <div class="day">
+    <div class="day-header">
+      <span class="day-label">Fri Feb 13</span>
+      <span class="day-name">Ski Day</span>
+    </div>
+    <div class="drop-zone" data-day="fri">
+      <div class="card" draggable="true" data-id="kneaders">
+        <span class="grip">⠿</span>
+        <span class="text">Kneaders breakfast, 8/8:30am, West Jordan with Sarah</span>
+      </div>
+      <div class="card" draggable="true" data-id="ski-day">
+        <span class="grip">⠿</span>
+        <span class="text">Ski day, pick a resort</span>
+      </div>
+      <div class="card" draggable="true" data-id="fri-dinner">
+        <span class="grip">⠿</span>
+        <span class="text">Dinner out</span>
+      </div>
+      <div class="card" draggable="true" data-id="hot-tub">
+        <span class="grip">⠿</span>
+        <span class="text">Sneak into a hot tub</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAT FEB 14 -->
+  <div class="day">
+    <div class="day-header">
+      <span class="day-label valentine">Sat Feb 14</span>
+      <span class="day-name">Valentine's Day</span>
+    </div>
+    <div class="drop-zone" data-day="sat">
+      <div class="card" draggable="true" data-id="chill-home">
+        <span class="grip">⠿</span>
+        <span class="text">Chill time at home</span>
+      </div>
+      <div class="card" draggable="true" data-id="vday-dinner">
+        <span class="grip">⠿</span>
+        <span class="text">Romantic Valentine's dinner</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUN FEB 15 -->
+  <div class="day">
+    <div class="day-header">
+      <span class="day-label">Sun Feb 15</span>
+      <span class="day-name">Open Day</span>
+    </div>
+    <div class="drop-zone" data-day="sun">
+      <div class="drop-zone-empty">Drag activities here</div>
+    </div>
+  </div>
+
+  <!-- MON FEB 16 -->
+  <div class="day">
+    <div class="day-header">
+      <span class="day-label">Mon Feb 16</span>
+      <span class="day-name">Fly Home</span>
+    </div>
+    <div class="drop-zone" data-day="mon">
+      <div class="card locked" draggable="true" data-id="fly-home">
+        <span class="grip">⠿</span>
+        <span class="text">Fly SLC → LAX. Frontier F9 1267, 9:29am</span>
+        <span class="lock-tag">booked</span>
+      </div>
+      <div class="card" draggable="true" data-id="mon-homework">
+        <span class="grip">⠿</span>
+        <span class="text">Homework</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- IDEA BANK -->
+<div class="bank">
+  <div class="bank-title">Idea Bank</div>
+  <div class="bank-zone" data-day="bank">
+    <div class="card" draggable="true" data-id="alta-snowbird">
+      <span class="grip">⠿</span>
+      <span class="text">Alta or Snowbird</span>
+    </div>
+    <div class="card" draggable="true" data-id="homework">
+      <span class="grip">⠿</span>
+      <span class="text">Homework session</span>
+    </div>
+    <div class="card" draggable="true" data-id="brunch">
+      <span class="grip">⠿</span>
+      <span class="text">Brunch</span>
+    </div>
+    <div class="card" draggable="true" data-id="temple-square">
+      <span class="grip">⠿</span>
+      <span class="text">Temple Square</span>
+    </div>
+    <div class="card" draggable="true" data-id="nat-history">
+      <span class="grip">⠿</span>
+      <span class="text">Natural History Museum</span>
+    </div>
+    <div class="card" draggable="true" data-id="park-city">
+      <span class="grip">⠿</span>
+      <span class="text">Park City Main Street</span>
+    </div>
+    <div class="card" draggable="true" data-id="pick-up-skis">
+      <span class="grip">⠿</span>
+      <span class="text">Pick up skis from Sarah</span>
+    </div>
+    <div class="card" draggable="true" data-id="movie-night">
+      <span class="grip">⠿</span>
+      <span class="text">Movie night in</span>
+    </div>
+    <div class="card" draggable="true" data-id="sunset-drive">
+      <span class="grip">⠿</span>
+      <span class="text">Scenic drive</span>
+    </div>
+  </div>
+  <button class="new-btn" id="newActivity">+ New activity</button>
+  <div class="trash-zone" id="trashZone">Drop here to remove</div>
+</div>
+
+</div>
+
+<div class="footer">Follow Through, Valentine's Getaway 2026</div>
+
+<script>
+  const STATE_KEY = 'followthrough-state';
+  let draggedCard = null;
+
+  // ── Drag handlers ──
+  document.addEventListener('dragstart', e => {
+    const card = e.target.closest('.card');
+    if (!card) return;
+    draggedCard = card;
+    card.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+  });
+
+  document.addEventListener('dragend', e => {
+    const card = e.target.closest('.card');
+    if (card) card.classList.remove('dragging');
+    document.querySelectorAll('.drag-over').forEach(z => z.classList.remove('drag-over'));
+    draggedCard = null;
+  });
+
+  // ── Drop zones ──
+  document.querySelectorAll('.drop-zone, .bank-zone').forEach(zone => {
+    zone.addEventListener('dragover', e => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      zone.classList.add('drag-over');
+
+      // Find insert position
+      const cards = [...zone.querySelectorAll('.card:not(.dragging)')];
+      const after = cards.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = e.clientY - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+          return { offset, el: child };
+        }
+        return closest;
+      }, { offset: Number.NEGATIVE_INFINITY });
+
+      if (after.el) {
+        zone.insertBefore(draggedCard, after.el);
+      } else {
+        zone.appendChild(draggedCard);
+      }
+    });
+
+    zone.addEventListener('dragleave', e => {
+      if (!zone.contains(e.relatedTarget)) {
+        zone.classList.remove('drag-over');
+      }
+    });
+
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('drag-over');
+      updateEmptyStates();
+      saveState();
+    });
+  });
+
+  // ── Empty state messages ──
+  function updateEmptyStates() {
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+      const existing = zone.querySelector('.drop-zone-empty');
+      const hasCards = zone.querySelector('.card');
+      if (!hasCards && !existing) {
+        const msg = document.createElement('div');
+        msg.className = 'drop-zone-empty';
+        msg.textContent = 'Drag activities here';
+        zone.appendChild(msg);
+      } else if (hasCards && existing) {
+        existing.remove();
+      }
+    });
+    // Same for bank
+    const bankZone = document.querySelector('.bank-zone');
+    const bankEmpty = bankZone.querySelector('.bank-hint');
+    const bankHasCards = bankZone.querySelector('.card');
+    if (!bankHasCards && !bankEmpty) {
+      const msg = document.createElement('div');
+      msg.className = 'bank-hint';
+      msg.textContent = 'All activities placed!';
+      bankZone.appendChild(msg);
+    } else if (bankHasCards && bankEmpty) {
+      bankEmpty.remove();
+    }
+  }
+
+  // ── Save / Load ──
+  const CARDS_KEY = 'followthrough-cards';
+
+  function saveState() {
+    const state = {};
+    const customCards = {};
+    document.querySelectorAll('[data-day]').forEach(zone => {
+      const day = zone.dataset.day;
+      const cards = [...zone.querySelectorAll('.card')].map(c => {
+        // Save custom card text so we can recreate them on load
+        if (c.dataset.id.startsWith('custom-')) {
+          customCards[c.dataset.id] = c.querySelector('.text').textContent;
+        }
+        return c.dataset.id;
+      });
+      state[day] = cards;
+    });
+    localStorage.setItem(STATE_KEY, JSON.stringify(state));
+    localStorage.setItem(CARDS_KEY, JSON.stringify(customCards));
+  }
+
+  function loadState() {
+    const raw = localStorage.getItem(STATE_KEY);
+    if (!raw) return;
+    try {
+      const state = JSON.parse(raw);
+      const customCards = JSON.parse(localStorage.getItem(CARDS_KEY) || '{}');
+
+      // Recreate any custom cards first
+      Object.entries(customCards).forEach(([id, text]) => {
+        if (document.querySelector(`[data-id="${id}"]`)) return;
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.draggable = true;
+        card.dataset.id = id;
+        card.innerHTML = `<span class="grip">⠿</span><span class="text">${text}</span>`;
+        document.querySelector('.bank-zone').appendChild(card);
+      });
+
+      const allCards = {};
+      document.querySelectorAll('.card').forEach(c => {
+        allCards[c.dataset.id] = c;
+      });
+
+      // Remove cards not in any saved zone (they were trashed)
+      const allSavedIds = new Set(Object.values(state).flat());
+      Object.keys(allCards).forEach(id => {
+        if (!allSavedIds.has(id)) allCards[id].remove();
+      });
+
+      Object.entries(state).forEach(([day, ids]) => {
+        const zone = document.querySelector(`[data-day="${day}"]`);
+        if (!zone) return;
+        ids.forEach(id => {
+          const card = allCards[id];
+          if (card) zone.appendChild(card);
+        });
+      });
+      updateEmptyStates();
+    } catch(e) {}
+  }
+
+  // ── Trash zone ──
+  const trash = document.getElementById('trashZone');
+  trash.addEventListener('dragover', e => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    trash.classList.add('drag-over');
+  });
+  trash.addEventListener('dragleave', e => {
+    if (!trash.contains(e.relatedTarget)) trash.classList.remove('drag-over');
+  });
+  trash.addEventListener('drop', e => {
+    e.preventDefault();
+    trash.classList.remove('drag-over');
+    if (draggedCard) {
+      draggedCard.remove();
+      draggedCard = null;
+      updateEmptyStates();
+      saveState();
+    }
+  });
+
+  // ── New activity ──
+  let newCount = 0;
+  document.getElementById('newActivity').addEventListener('click', () => {
+    const text = prompt('Activity name:');
+    if (!text || !text.trim()) return;
+    const id = 'custom-' + Date.now() + '-' + (++newCount);
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.draggable = true;
+    card.dataset.id = id;
+    card.innerHTML = `<span class="grip">⠿</span><span class="text">${text.trim()}</span>`;
+    document.querySelector('.bank-zone').appendChild(card);
+    updateEmptyStates();
+    saveState();
+  });
+
+  loadState();
+  updateEmptyStates();
+</script>
+
+</body>
+</html>

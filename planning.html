@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Getaway 2026 — Research</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0f0f0f;
+    color: #e8e0d8;
+    line-height: 1.6;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    background: linear-gradient(135deg, #1a0a0a 0%, #2d1020 40%, #1a0a2e 100%);
+    padding: 40px 40px 36px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,100,120,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(200,60,80,0.06) 0%, transparent 60%);
+    animation: pulse 8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .hero h1 span { color: #e8657a; }
+  .hero .subtitle {
+    font-size: 0.85rem;
+    color: #a89090;
+    position: relative;
+  }
+  .stage-badge {
+    display: inline-block;
+    background: rgba(232,101,122,0.15);
+    border: 1px solid rgba(232,101,122,0.3);
+    color: #e8657a;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-top: 10px;
+    position: relative;
+  }
+  .plan-btn {
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%);
+    background: rgba(232,101,122,0.15);
+    border: 1px solid rgba(232,101,122,0.3);
+    color: #e8657a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    z-index: 1;
+    transition: all 0.2s;
+  }
+  .plan-btn:hover {
+    background: rgba(232,101,122,0.25);
+    border-color: rgba(232,101,122,0.5);
+  }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  /* ── Section headers ── */
+  .section-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: #fff;
+    margin: 40px 0 6px;
+  }
+  .section-header:first-child { margin-top: 0; }
+  .section-sub {
+    color: #7a6a6a;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+
+  /* ── Still Need ── */
+  .todo-card {
+    background: linear-gradient(135deg, #151218 0%, #181418 100%);
+    border: 1px dashed rgba(255,100,120,0.15);
+    border-radius: 14px;
+    padding: 24px;
+    margin-top: 32px;
+    margin-bottom: 36px;
+  }
+  .todo-card h3 {
+    font-family: 'Playfair Display', serif;
+    color: #e8657a;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+  }
+  .todo-list {
+    list-style: none;
+    padding: 0;
+    columns: 2;
+    column-gap: 24px;
+  }
+  @media (max-width: 600px) { .todo-list { columns: 1; } }
+  .todo-list li {
+    padding: 7px 0 7px 22px;
+    position: relative;
+    color: #8a7a7a;
+    font-size: 0.85rem;
+    break-inside: avoid;
+  }
+  .todo-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 12px;
+    width: 10px; height: 10px;
+    border: 1.5px solid #5a4a4a;
+    border-radius: 3px;
+  }
+
+  /* ── Top-level plan dropdowns ── */
+  .plan-section {
+    margin-top: 20px;
+    margin-bottom: 36px;
+  }
+
+  /* ── Reference / Dropdown ── */
+  .ref-section {
+    margin-top: 48px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    padding-top: 32px;
+  }
+  .ref-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #5a4a4a;
+    margin-bottom: 6px;
+  }
+  .ref-section .section-sub { margin-bottom: 20px; }
+
+  details {
+    background: linear-gradient(135deg, #131012 0%, #141214 100%);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  details[open] { border-color: rgba(255,100,120,0.12); }
+  summary {
+    padding: 16px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #a89898;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+    transition: color 0.2s;
+  }
+  summary:hover { color: #e8e0d8; }
+  summary::-webkit-details-marker { display: none; }
+  summary::before {
+    content: '▸';
+    font-size: 0.8rem;
+    color: #e8657a;
+    transition: transform 0.2s;
+  }
+  details[open] summary::before { transform: rotate(90deg); }
+  .ref-content { padding: 0 20px 20px; }
+  .ref-content p {
+    color: #8a7a7a;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+  .ref-content h4 {
+    color: #a89898;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 14px 0 8px;
+  }
+  .ref-content h4:first-child { margin-top: 0; }
+  .ref-content ul { list-style: none; padding: 0; }
+  .ref-content li {
+    padding: 4px 0 4px 16px;
+    position: relative;
+    color: #8a7a7a;
+    font-size: 0.82rem;
+  }
+  .ref-content li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    color: #5a4a4a;
+    font-weight: 700;
+  }
+
+  /* ── Plan-level details (bigger headers) ── */
+  details.plan-dropdown {
+    background: linear-gradient(135deg, #161218 0%, #181420 100%);
+    border: 1px solid rgba(255,100,120,0.08);
+    border-radius: 14px;
+    margin-bottom: 16px;
+  }
+  details.plan-dropdown > summary {
+    padding: 20px 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: #e8e0d8;
+  }
+  details.plan-dropdown > summary::before {
+    font-size: 0.9rem;
+  }
+  details.plan-dropdown .plan-content {
+    padding: 0 24px 24px;
+  }
+
+  /* Nested details inside plan dropdowns */
+  details.plan-dropdown details {
+    background: linear-gradient(135deg, #131012 0%, #141214 100%);
+    border: 1px solid rgba(255,255,255,0.05);
+    margin-bottom: 10px;
+  }
+
+  /* ── Map ── */
+  .map-section {
+    background: linear-gradient(135deg, #141015 0%, #161218 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .map-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .map-section .section-sub { margin-bottom: 20px; }
+  .map-section svg { max-width: 100%; height: auto; }
+
+  /* ── Itinerary Calendar ── */
+  .cal-section { margin-bottom: 20px; }
+  .itin-option {
+    background: linear-gradient(135deg, #1a1215 0%, #181418 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    transition: border-color 0.3s;
+  }
+  .itin-option:hover { border-color: rgba(255,100,120,0.2); }
+  .itin-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .itin-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: #fff;
+  }
+  .itin-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .itin-badge.recommended {
+    background: rgba(232,101,122,0.15);
+    border: 1px solid rgba(232,101,122,0.3);
+    color: #e8657a;
+  }
+  .itin-badge.adventure {
+    background: rgba(100,180,255,0.12);
+    color: #6ab4ff;
+  }
+  .itin-badge.winter {
+    background: rgba(180,220,255,0.12);
+    border: 1px solid rgba(180,220,255,0.2);
+    color: #b4daff;
+  }
+  .day-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    align-items: start;
+  }
+  .day-row:first-of-type { border-top: none; }
+  .day-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #e8657a;
+    font-weight: 600;
+    padding-top: 2px;
+  }
+  .day-label .day-name {
+    display: block;
+    font-size: 0.85rem;
+    color: #c8b8b8;
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: 500;
+    margin-top: 1px;
+  }
+  .day-detail {
+    font-size: 0.85rem;
+    color: #a89898;
+    line-height: 1.6;
+  }
+  .day-detail strong { color: #e8e0d8; font-weight: 600; }
+  .day-detail .note {
+    font-size: 0.75rem;
+    color: #6a5a5a;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ── Destination Guides ── */
+  .dest-guide {
+    background: linear-gradient(135deg, #1a1215 0%, #181418 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+  }
+  .dest-guide:hover { border-color: rgba(255,100,120,0.15); }
+  .dest-guide-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .dest-guide-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: #fff;
+  }
+  .dest-guide-header .emoji { font-size: 1.5rem; }
+  .dest-guide .tagline {
+    color: #7a6a6a;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+  .dest-guide .stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .dest-guide .quick-stat {
+    display: inline-block;
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    color: #c8b8b8;
+  }
+  .dest-guide .quick-stat strong {
+    color: #7dcea0;
+    font-size: 0.95rem;
+  }
+  .guide-subsection { margin-bottom: 14px; }
+  .guide-subsection h4 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #e8657a;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .guide-subsection p {
+    color: #a89898;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin-bottom: 6px;
+  }
+  .guide-list { list-style: none; padding: 0; }
+  .guide-list li {
+    padding: 5px 0 5px 18px;
+    position: relative;
+    color: #a89898;
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+  .guide-list li::before {
+    content: '';
+    position: absolute;
+    left: 2px; top: 12px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(232,101,122,0.35);
+  }
+  .guide-list li strong { color: #e8e0d8; font-weight: 600; }
+
+  /* ── Data tables (in reference) ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    margin-top: 10px;
+  }
+  .data-table th {
+    text-align: left;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6a5a5a;
+    padding: 5px 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .data-table td {
+    padding: 6px 6px;
+    color: #b8a8a8;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .price { font-weight: 700; color: #7dcea0; }
+  .price.high { color: #e8a87a; }
+  .price.very-high { color: #e87a7a; }
+  .best-price { background: rgba(125,206,160,0.06); border-radius: 4px; }
+  .best-deal {
+    font-size: 0.6rem;
+    background: #7dcea0;
+    color: #0f0f0f;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-weight: 700;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .unavail { color: #5a4a4a; font-style: italic; }
+
+  /* ── Know card (in reference) ── */
+  .know-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .know-item {
+    background: rgba(255,255,255,0.03);
+    border-radius: 10px;
+    padding: 14px;
+    border-left: 3px solid #e8657a;
+  }
+  .know-item .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #7a6a6a;
+    margin-bottom: 3px;
+  }
+  .know-item .value {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #f0e6e6;
+  }
+
+  /* ── Explore chips (in reference) ── */
+  .explore-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+  .explore-chip {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+  }
+  .explore-chip .city { font-weight: 600; font-size: 0.85rem; color: #e8e0d8; }
+  .explore-chip .flight-info { font-size: 0.7rem; color: #6a5a5a; margin-top: 2px; }
+  .explore-chip .chip-price { font-size: 1rem; font-weight: 700; color: #7dcea0; margin-top: 4px; }
+
+  /* ── Research cards (in reference) ── */
+  .research-card {
+    background: linear-gradient(135deg, #1a1215 0%, #181418 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .research-card-header {
+    padding: 20px 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .research-card-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: #fff;
+  }
+  .research-card-header .emoji { font-size: 1.4rem; }
+  .card-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin: 0 20px 10px;
+  }
+  .card-tag.drive { background: rgba(100,180,255,0.12); color: #6ab4ff; }
+  .card-tag.fly { background: rgba(255,180,100,0.12); color: #e8a87a; }
+  .card-tag.mixed { background: rgba(180,140,255,0.12); color: #b48cff; }
+  .research-card-body { padding: 0 20px 20px; }
+  .research-card-body p { color: #a89898; font-size: 0.85rem; margin-bottom: 10px; }
+  .quick-stat {
+    display: inline-block;
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 4px 4px 4px 0;
+    font-size: 0.8rem;
+    color: #c8b8b8;
+  }
+  .quick-stat strong { color: #7dcea0; font-size: 0.95rem; }
+  .quick-stat strong.warn { color: #e8a87a; }
+  .quick-stat strong.hot { color: #e87a7a; }
+
+  .footer {
+    text-align: center;
+    padding: 36px;
+    color: #3a2a2a;
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 600px) {
+    .day-row { grid-template-columns: 1fr; gap: 4px; }
+    .dest-guide .stat-row { flex-direction: column; }
+    .compare-grid { grid-template-columns: 1fr !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <a href="index.html" class="plan-btn">The Plan →</a>
+  <h1>Valentine's <span>Getaway</span> 2026</h1>
+  <div class="subtitle">Two plans, two vibes &mdash; pick one and book</div>
+  <div class="stage-badge">Comparing Options</div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════ STILL NEED ═══════════ -->
+<div class="todo-card" style="margin-top:0;">
+  <h3>Still Need to Figure Out</h3>
+  <ul class="todo-list">
+    <li>Pick Plan A or Plan B</li>
+    <li>Book Valentine's dinner (top picks were sold out — check second tier)</li>
+    <li>Book hotel(s) — Ojai + Palm Springs or use free SLC housing</li>
+    <li>Book flights if going with Plan A (SLC)</li>
+  </ul>
+</div>
+
+<!-- ═══════════ QUICK COMPARE ═══════════ -->
+<div class="compare-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:32px;">
+  <div style="background:linear-gradient(135deg,#121828 0%,#141830 100%); border:1px solid rgba(180,220,255,0.12); border-radius:14px; padding:22px;">
+    <div style="font-family:'Playfair Display',serif; font-size:1.1rem; color:#b4daff; margin-bottom:10px;">Plan A — Winter Wonderland</div>
+    <div style="font-size:0.84rem; color:#a89898; line-height:1.8;">
+      <div><strong style="color:#e8e0d8;">Budget:</strong> <strong style="color:#b4daff;">~$1,723</strong></div>
+      <div><strong style="color:#e8e0d8;">Weather:</strong> 25–35°F, snowy</div>
+      <div><strong style="color:#e8e0d8;">Transport:</strong> Fly (LAX → SLC)</div>
+      <div><strong style="color:#e8e0d8;">Vibe:</strong> Adventurous, cozy, active</div>
+      <div><strong style="color:#e8e0d8;">Highlight:</strong> Sundance skiing + hot springs</div>
+    </div>
+  </div>
+  <div style="background:linear-gradient(135deg,#1a1215 0%,#181418 100%); border:1px solid rgba(125,206,160,0.12); border-radius:14px; padding:22px;">
+    <div style="font-family:'Playfair Display',serif; font-size:1.1rem; color:#7dcea0; margin-bottom:10px;">Plan B — Sunny</div>
+    <div style="font-size:0.84rem; color:#a89898; line-height:1.8;">
+      <div><strong style="color:#e8e0d8;">Budget:</strong> <strong style="color:#7dcea0;">~$2,475</strong></div>
+      <div><strong style="color:#e8e0d8;">Weather:</strong> 64–70°F, sunny</div>
+      <div><strong style="color:#e8e0d8;">Transport:</strong> Drive (all road trip)</div>
+      <div><strong style="color:#e8e0d8;">Vibe:</strong> Relaxed, warm, romantic</div>
+      <div><strong style="color:#e8e0d8;">Highlight:</strong> Spa day + desert poolside</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PLAN A (WINTER WONDERLAND) ═══════════ -->
+<div class="plan-section">
+<details class="plan-dropdown" open>
+  <summary>Plan A — Winter Wonderland (Salt Lake City) · ~$1,723</summary>
+  <div class="plan-content">
+
+    <!-- Itinerary -->
+    <div class="cal-section">
+      <div class="itin-option">
+        <div class="itin-header">
+          <span class="itin-label">SLC Snow Trip</span>
+          <span class="itin-badge winter">Thu Feb 12 → Mon Feb 16</span>
+        </div>
+        <div class="day-row">
+          <div class="day-label">Feb 12 <span class="day-name">Thursday</span></div>
+          <div class="day-detail"><strong>Drive to LAX, fly to SLC</strong> — Leave SB after class ~4pm. Drive 2h to LAX, park at economy lot <strong style="color:#7dcea0;">($80 for 4 days)</strong>. Frontier 6:06pm → 9:04pm. Flights <strong style="color:#7dcea0;">($400 for 2)</strong>. Uber to hotel (free). Late-night ramen or burgers downtown <strong style="color:#7dcea0;">($50)</strong>.<span class="note">SB → LAX: ~2h. Gas included in trip total.</span></div>
+        </div>
+        <div class="day-row">
+          <div class="day-label">Feb 13 <span class="day-name">Friday</span></div>
+          <div class="day-detail"><strong>Sundance ski day</strong> — Drive to Sundance Resort (~45 min). Full-day lift tickets <strong style="color:#7dcea0;">($260 for 2)</strong>. Ski/board rental <strong style="color:#7dcea0;">($120 for 2)</strong>. Lunch on the mountain <strong style="color:#7dcea0;">($45)</strong>. Après-ski drinks at the Owl Bar <strong style="color:#7dcea0;">($35)</strong>. Dinner at Foundry Grill at Sundance <strong style="color:#7dcea0;">($90)</strong>.<span class="note">Sundance is Redford's resort — beautiful setting</span></div>
+        </div>
+        <div class="day-row">
+          <div class="day-label">Feb 14 <span class="day-name">Saturday</span></div>
+          <div class="day-detail"><strong>Valentine's Day — Park City</strong> — Sleep in, recover from ski day. Drive to Park City Main Street — browse boutiques and galleries. Homestead Crater hot spring <strong style="color:#7dcea0;">($25 for 2)</strong>. Valentine's dinner at a cozy lodge restaurant <strong style="color:#7dcea0;">($200)</strong>.<span class="note">Romantic winter Valentine's — snow, hot springs, fancy dinner</span></div>
+        </div>
+        <div class="day-row">
+          <div class="day-label">Feb 15 <span class="day-name">Sunday</span></div>
+          <div class="day-detail"><strong>Chill day in SLC</strong> — Easy morning, brunch <strong style="color:#7dcea0;">($50)</strong>. Explore Temple Square, Natural History Museum <strong style="color:#7dcea0;">($40 for 2)</strong>. Casual dinner, early night <strong style="color:#7dcea0;">($70)</strong>.<span class="note">Low-key day — midterm buffer</span></div>
+        </div>
+        <div class="day-row">
+          <div class="day-label">Feb 16 <span class="day-name">Monday</span></div>
+          <div class="day-detail"><strong>Fly home early</strong> — Uber to airport. Frontier 9:29am → 10:45am. Return flights <strong style="color:#7dcea0;">($198 for 2)</strong>. Drive LAX → SB (~2h). Home by 1pm.<span class="note">Holiday — no class. Whole afternoon to rest</span></div>
+        </div>
+      </div>
+
+      <!-- Budget summary -->
+      <div style="background:rgba(180,220,255,0.06); border:1px solid rgba(180,220,255,0.15); border-radius:12px; padding:18px 22px; margin-top:14px;">
+        <h4 style="font-family:'Playfair Display',serif; font-size:1rem; color:#b4daff; margin-bottom:12px;">Estimated Budget</h4>
+        <div style="display:grid; grid-template-columns:1fr auto; gap:6px 20px; font-size:0.85rem; color:#a89898;">
+          <span>Flights — outbound (2 × $200)</span><span style="color:#e8e0d8; text-align:right;">$400</span>
+          <span>Flights — return (2 × $99)</span><span style="color:#e8e0d8; text-align:right;">$198</span>
+          <span>Hotels (4 nights)</span><span style="color:#7dcea0; text-align:right;">FREE</span>
+          <span>Sundance lift tickets (2)</span><span style="color:#e8e0d8; text-align:right;">$260</span>
+          <span>Ski/board rental (2)</span><span style="color:#e8e0d8; text-align:right;">$120</span>
+          <span>Valentine's dinner</span><span style="color:#e8e0d8; text-align:right;">$200</span>
+          <span>Other dining (3 dinners + 2 lunches + brunch)</span><span style="color:#e8e0d8; text-align:right;">$305</span>
+          <span>Après-ski drinks</span><span style="color:#e8e0d8; text-align:right;">$35</span>
+          <span>Homestead Crater hot spring (2)</span><span style="color:#e8e0d8; text-align:right;">$25</span>
+          <span>Natural History Museum (2)</span><span style="color:#e8e0d8; text-align:right;">$40</span>
+          <span>LAX parking (4 days)</span><span style="color:#e8e0d8; text-align:right;">$80</span>
+          <span>Gas (SB → LAX round trip)</span><span style="color:#e8e0d8; text-align:right;">$60</span>
+          <div style="grid-column:1/-1; border-top:1px solid rgba(255,255,255,0.08); margin:8px 0;"></div>
+          <span style="font-weight:700; color:#e8e0d8;">Total</span><span style="font-weight:700; color:#b4daff; text-align:right; font-size:1.05rem;">~$1,723</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Information dropdown -->
+    <details>
+      <summary>Information — SLC Guide & Considerations</summary>
+      <div class="ref-content" style="padding-top:10px;">
+        <h4>Things to Do</h4>
+        <ul>
+          <li><strong>Skiing/snowboarding</strong> — Sundance, Park City, Brighton, Snowbird, Alta all within 45 min</li>
+          <li><strong>Tubing</strong> — Soldier Hollow or Woodward Park City if she doesn't ski</li>
+          <li><strong>Park City Main Street</strong> — charming mountain town, shops, galleries, restaurants</li>
+          <li><strong>Hot springs</strong> — Homestead Crater (swim inside a volcanic rock crater), Fifth Water Hot Springs</li>
+          <li><strong>Sleigh ride dinners</strong> — horse-drawn sleigh to a backcountry yurt dinner</li>
+          <li>Temple Square lights, Natural History Museum, Bonneville Salt Flats</li>
+        </ul>
+        <h4>Considerations</h4>
+        <ul>
+          <li><strong>Pro:</strong> Completely different from SB — feels like a real getaway</li>
+          <li><strong>Pro:</strong> Hotels are free — saves ~$1,300 vs Palm Springs</li>
+          <li><strong>Pro:</strong> Home by 1pm Monday — lots of buffer for midterm</li>
+          <li><strong>Con:</strong> Need to drive 2h to LAX first (adds logistics stress)</li>
+          <li><strong>Con:</strong> Cold weather — she said she likes warmth</li>
+          <li><strong>Con:</strong> Ski gear rental adds cost if you don't own</li>
+          <li><strong>Con:</strong> More physically demanding — could be tiring before midterm</li>
+        </ul>
+        <h4>Flight Details</h4>
+        <ul>
+          <li><strong>Outbound:</strong> LAX → SLC, Thu Feb 12, Frontier, 6:06pm → 9:04pm, 1h 58m nonstop, $200/pp basic ($269 economy bundle)</li>
+          <li><strong>Return:</strong> SLC → LAX, Mon Feb 16, Frontier, 9:29am → 10:45am, 2h 16m nonstop, $99/pp</li>
+        </ul>
+      </div>
+    </details>
+
+  </div>
+</details>
+
+<!-- ═══════════ PLAN B (SUNNY) ═══════════ -->
+<details class="plan-dropdown">
+  <summary>Plan B — Sunny (Ojai → Palm Springs) · ~$2,475</summary>
+  <div class="plan-content">
+
+    <!-- Itinerary -->
+    <div class="cal-section">
+      <div class="itin-option">
+        <div class="itin-header">
+          <span class="itin-label">Ojai → Palm Springs</span>
+          <span class="itin-badge recommended">Thu Feb 12 → Mon Feb 16</span>
+        </div>
+        <div class="day-row">
+          <div class="day-label">Feb 12 <span class="day-name">Thursday</span></div>
+          <div class="day-detail"><strong>Drive to Ojai after class</strong> — Leave at 4pm, arrive by 5:30. Check into hotel <strong style="color:#7dcea0;">($330)</strong>. Catch the Pink Moment sunset at Meditation Mount (free). Dinner at Nocciola <strong style="color:#7dcea0;">($90)</strong>.<span class="note">Gas for the day included in trip total</span></div>
+        </div>
+        <div class="day-row">
+          <div class="day-label">Feb 13 <span class="day-name">Friday</span></div>
+          <div class="day-detail"><strong>Couples spa morning, then drive to Palm Springs</strong> — Spa Ojai couples treatment <strong style="color:#7dcea0;">($300)</strong>. Grab lunch at Farmer and the Cook <strong style="color:#7dcea0;">($35)</strong>. 3h scenic drive to PS. Check into hotel <strong style="color:#7dcea0;">($330)</strong>. Sunset cocktails at High Bar rooftop <strong style="color:#7dcea0;">($40)</strong>. Casual dinner downtown <strong style="color:#7dcea0;">($80)</strong>.<span class="note">Ojai → Palm Springs: ~3h drive</span></div>
+        </div>
+        <div class="day-row">
+          <div class="day-label">Feb 14 <span class="day-name">Saturday</span></div>
+          <div class="day-detail"><strong>Valentine's Day in Palm Springs</strong> — Sleep in, poolside morning. Aerial Tramway <strong style="color:#7dcea0;">($65 for 2)</strong>. Afternoon at the hotel pool. Valentine's dinner <strong style="color:#7dcea0;">($250)</strong>. Hotel <strong style="color:#7dcea0;">($330)</strong>.<span class="note">The main event — warm, sunny, 70°F</span></div>
+        </div>
+        <div class="day-row">
+          <div class="day-label">Feb 15 <span class="day-name">Sunday</span></div>
+          <div class="day-detail"><strong>Joshua Tree day trip</strong> — Drive 1h to Joshua Tree. Hidden Valley trail, Cholla Cactus Garden, Keys View. Park entry <strong style="color:#7dcea0;">($30)</strong>. Lunch on the way back <strong style="color:#7dcea0;">($40)</strong>. Chill evening, dinner at Johnny Costa's <strong style="color:#7dcea0;">($75)</strong>. Hotel <strong style="color:#7dcea0;">($330)</strong>.<span class="note">Flexible day — could swap for lazy pool day</span></div>
+        </div>
+        <div class="day-row">
+          <div class="day-label">Feb 16 <span class="day-name">Monday</span></div>
+          <div class="day-detail"><strong>Drive home</strong> — Easy morning, brunch at Elmer's <strong style="color:#7dcea0;">($50)</strong>. 3.5h drive back to SB. Home by early afternoon.<span class="note">Holiday — no class. Plenty of rest before her midterm Wed</span></div>
+        </div>
+      </div>
+
+      <!-- Budget summary -->
+      <div style="background:rgba(125,206,160,0.06); border:1px solid rgba(125,206,160,0.15); border-radius:12px; padding:18px 22px; margin-top:14px;">
+        <h4 style="font-family:'Playfair Display',serif; font-size:1rem; color:#7dcea0; margin-bottom:12px;">Estimated Budget</h4>
+        <div style="display:grid; grid-template-columns:1fr auto; gap:6px 20px; font-size:0.85rem; color:#a89898;">
+          <span>Hotels (4 nights × $330)</span><span style="color:#e8e0d8; text-align:right;">$1,320</span>
+          <span>Couples spa (Ojai)</span><span style="color:#e8e0d8; text-align:right;">$300</span>
+          <span>Valentine's dinner</span><span style="color:#e8e0d8; text-align:right;">$250</span>
+          <span>Other dining (4 meals + 2 lunches + brunch)</span><span style="color:#e8e0d8; text-align:right;">$370</span>
+          <span>Cocktails (High Bar)</span><span style="color:#e8e0d8; text-align:right;">$40</span>
+          <span>Aerial Tramway (2 tickets)</span><span style="color:#e8e0d8; text-align:right;">$65</span>
+          <span>Joshua Tree entry</span><span style="color:#e8e0d8; text-align:right;">$30</span>
+          <span>Gas (round trip + JT day trip)</span><span style="color:#e8e0d8; text-align:right;">$100</span>
+          <div style="grid-column:1/-1; border-top:1px solid rgba(255,255,255,0.08); margin:8px 0;"></div>
+          <span style="font-weight:700; color:#e8e0d8;">Total</span><span style="font-weight:700; color:#7dcea0; text-align:right; font-size:1.05rem;">~$2,475</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Information dropdown -->
+    <details>
+      <summary>Information — Route Map, Guides & Alt Route</summary>
+      <div class="ref-content" style="padding-top:10px;">
+
+        <!-- Route Map -->
+        <details style="margin-bottom:12px;">
+          <summary>Route Map — Southern California</summary>
+          <div class="ref-content">
+            <div class="map-section" style="margin-bottom:0;">
+              <svg viewBox="0 0 680 460" xmlns="http://www.w3.org/2000/svg">
+                <rect width="680" height="460" fill="#131012" rx="10"/>
+                <path d="M0 100 Q40 110 70 140 Q100 175 110 210 Q120 250 110 290 Q100 330 80 360 Q60 390 40 420 Q20 440 0 460 Z" fill="#121420" opacity="0.6"/>
+                <path d="M0 100 Q60 100 90 140 Q120 175 125 220 Q130 270 115 310 Q100 350 80 380 Q55 410 30 440 Q10 455 0 460 Z" fill="#141624" opacity="0.3"/>
+                <path d="M105 105 Q115 130 118 160 Q122 195 118 230 Q110 275 100 310 Q90 345 75 375 Q60 400 45 430" stroke="rgba(232,101,122,0.18)" stroke-width="1.5" fill="none"/>
+                <path d="M130 100 Q200 85 280 95 Q360 105 430 90 Q500 80 560 100" stroke="rgba(255,255,255,0.04)" stroke-width="1" fill="none"/>
+                <path d="M140 180 Q200 165 260 180 Q320 195 380 175 Q440 160 500 185" stroke="rgba(255,255,255,0.03)" stroke-width="1" fill="none"/>
+                <path d="M185 175 Q210 195 235 215" stroke="rgba(232,101,122,0.3)" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+                <path d="M235 215 Q320 240 390 265 Q440 280 490 280" stroke="rgba(232,101,122,0.3)" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+                <path d="M235 215 Q220 260 200 300 Q185 325 175 340" stroke="rgba(100,180,255,0.2)" stroke-width="1.5" stroke-dasharray="5 4" fill="none"/>
+                <path d="M175 340 Q150 370 130 390" stroke="rgba(100,180,255,0.15)" stroke-width="1.5" stroke-dasharray="4 5" fill="none"/>
+                <circle cx="95" cy="30" r="2.5" fill="rgba(255,255,255,0.12)"/>
+                <text x="105" y="34" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(255,255,255,0.15)">San Francisco</text>
+                <circle cx="310" cy="130" r="2" fill="rgba(255,255,255,0.1)"/>
+                <text x="320" y="134" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.12)">Bakersfield</text>
+                <circle cx="135" cy="128" r="2.5" fill="rgba(255,255,255,0.15)"/>
+                <text x="145" y="126" font-family="DM Sans, sans-serif" font-size="8.5" fill="rgba(255,255,255,0.2)">SLO</text>
+                <circle cx="165" cy="210" r="2" fill="rgba(255,255,255,0.12)"/>
+                <text x="140" y="225" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(255,255,255,0.15)">Ventura</text>
+                <circle cx="175" cy="290" r="3" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                <text x="185" y="288" font-family="DM Sans, sans-serif" font-size="10" fill="rgba(255,255,255,0.25)">Los Angeles</text>
+                <circle cx="175" cy="340" r="3" fill="rgba(180,140,255,0.35)" stroke="rgba(180,140,255,0.15)" stroke-width="1"/>
+                <text x="185" y="338" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(180,140,255,0.35)">Long Beach</text>
+                <text x="185" y="350" font-family="DM Sans, sans-serif" font-size="7.5" fill="rgba(180,140,255,0.2)">Ferry terminal</text>
+                <circle cx="155" cy="420" r="2.5" fill="rgba(255,255,255,0.14)"/>
+                <text x="165" y="424" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(255,255,255,0.18)">San Diego</text>
+                <circle cx="185" cy="175" r="6" fill="#e8657a" stroke="rgba(232,101,122,0.4)" stroke-width="2"/>
+                <circle cx="185" cy="175" r="10" fill="none" stroke="rgba(232,101,122,0.15)" stroke-width="1">
+                  <animate attributeName="r" values="10;14;10" dur="3s" repeatCount="indefinite"/>
+                  <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
+                </circle>
+                <text x="197" y="172" font-family="DM Sans, sans-serif" font-size="12" font-weight="600" fill="#e8657a">Santa Barbara</text>
+                <text x="197" y="184" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(232,101,122,0.5)">HOME · Classes end 4pm Thu</text>
+                <circle cx="235" cy="215" r="5" fill="#7dcea0" stroke="rgba(125,206,160,0.3)" stroke-width="1.5"/>
+                <text x="247" y="212" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600" fill="#7dcea0">Ojai</text>
+                <text x="247" y="224" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(125,206,160,0.45)">1.5h · 64°F · Thu night stop</text>
+                <circle cx="490" cy="280" r="5.5" fill="#7dcea0" stroke="rgba(125,206,160,0.3)" stroke-width="1.5"/>
+                <text x="504" y="277" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600" fill="#7dcea0">Palm Springs</text>
+                <text x="504" y="289" font-family="DM Sans, sans-serif" font-size="8" fill="rgba(125,206,160,0.45)">3h from Ojai · 70°F · V-Day</text>
+                <circle cx="560" cy="245" r="3" fill="rgba(125,206,160,0.25)" stroke="rgba(125,206,160,0.12)" stroke-width="1"/>
+                <text x="572" y="243" font-family="DM Sans, sans-serif" font-size="9" fill="rgba(125,206,160,0.3)">Joshua Tree</text>
+                <text x="572" y="254" font-family="DM Sans, sans-serif" font-size="7.5" fill="rgba(125,206,160,0.18)">1h from PS</text>
+                <circle cx="130" cy="390" r="4.5" fill="rgba(100,180,255,0.35)" stroke="rgba(100,180,255,0.2)" stroke-width="1.5"/>
+                <text x="82" y="410" font-family="DM Sans, sans-serif" font-size="10.5" fill="rgba(100,180,255,0.4)">Catalina</text>
+                <text x="88" y="421" font-family="DM Sans, sans-serif" font-size="7.5" fill="rgba(100,180,255,0.22)">1h ferry from LB</text>
+                <text x="15" y="330" font-family="Playfair Display, serif" font-size="14" fill="rgba(255,255,255,0.05)" letter-spacing="5" transform="rotate(-65 15 330)">PACIFIC OCEAN</text>
+                <rect x="500" y="400" width="50" height="1" fill="rgba(255,255,255,0.1)"/>
+                <text x="500" y="418" font-family="DM Sans, sans-serif" font-size="7" fill="rgba(255,255,255,0.1)">~1 hr drive</text>
+              </svg>
+            </div>
+          </div>
+        </details>
+
+        <!-- Alt Route: Ojai → Catalina -->
+        <details style="margin-bottom:12px;">
+          <summary>Alternate Route — Ojai → Catalina (Land + Sea)</summary>
+          <div class="ref-content">
+            <div class="itin-option" style="margin:0;">
+              <div class="day-row" style="border-top:none;">
+                <div class="day-label">Feb 12 <span class="day-name">Thursday</span></div>
+                <div class="day-detail"><strong>Drive to Ojai after class</strong> — 1.5h, arrive by 5:30. Pink Moment sunset, romantic dinner.<span class="note">Leave SB at 4pm → Ojai by 5:30pm</span></div>
+              </div>
+              <div class="day-row">
+                <div class="day-label">Feb 13 <span class="day-name">Friday</span></div>
+                <div class="day-detail"><strong>Ojai morning, drive to Long Beach</strong> — Spa or hike in the morning, then 2h drive south. Catch afternoon ferry to Catalina. Settle into Avalon.<span class="note">Ojai → Long Beach: ~2h, then 1h ferry</span></div>
+              </div>
+              <div class="day-row">
+                <div class="day-label">Feb 14 <span class="day-name">Saturday</span></div>
+                <div class="day-detail"><strong>Valentine's Day on Catalina</strong> — Full island day. Kayaking, exploring, golf cart around the island. Romantic dinner in Avalon.<span class="note">Valentine's on a car-free island — very special</span></div>
+              </div>
+              <div class="day-row">
+                <div class="day-label">Feb 15 <span class="day-name">Sunday</span></div>
+                <div class="day-detail"><strong>Ferry back, drive home</strong> — Morning on island, afternoon ferry, 3h drive to SB.<span class="note">Home by evening</span></div>
+              </div>
+              <div class="day-row">
+                <div class="day-label">Feb 16 <span class="day-name">Monday</span></div>
+                <div class="day-detail"><strong>Rest day at home</strong> — Holiday, no class. Recover, let her study for midterm Wed.<span class="note">Buffer day — important given the midterm</span></div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Ojai Guide -->
+        <details style="margin-bottom:12px;">
+          <summary>Ojai — Full Destination Guide</summary>
+          <div class="ref-content">
+            <p><em>Mountain valley town — wellness, art, and the Pink Moment sunset. From SB: 1.5 hrs · Feb highs: 64°F</em></p>
+            <h4>The Draw</h4>
+            <p>Small valley tucked between the Topatopa Mountains, 1.5h south of SB. Built around wellness, art, and slowing down. Orange groves, mountain views, boutique shops, galleries, year-round spa culture. Famous for the "Pink Moment" — a sunset phenomenon where the mountains glow pink and lavender.</p>
+            <h4>Things to Do</h4>
+            <ul>
+              <li><strong>Pink Moment sunset</strong> at Meditation Mount — panoramic gardens, free, the must-see</li>
+              <li><strong>Couples spa</strong> at Spa Ojai — Forbes Five-Star, 31,000 sq ft, two pools</li>
+              <li><strong>Shelf Road Trail</strong> — easy scenic hike with valley overlooks</li>
+              <li><strong>Wine tasting</strong> at Ojai Vineyard (since 1983) and olive oil at Ojai Olive Oil Co.</li>
+              <li><strong>Bart's Books</strong> — famous outdoor bookstore since 1964</li>
+            </ul>
+            <h4>Where to Eat</h4>
+            <ul>
+              <li><strong>Olivella</strong> at the Ojai Valley Inn — most romantic spot in town, fine dining</li>
+              <li><strong>Nocciola</strong> — excellent Italian, indoor and patio</li>
+              <li><strong>The Rochers</strong> at the Ranch House — wood-fired, outdoor setting</li>
+              <li><strong>Rory's Place</strong> — cozy fine dining, seafood, crafted cocktails</li>
+            </ul>
+            <h4>Where to Stay</h4>
+            <ul>
+              <li><strong>Ojai Valley Inn & Spa</strong> — AAA Five Diamond, 220 acres, fireplaces, 4 pools (9.6 rating)</li>
+              <li><strong>The Hummingbird Inn</strong> — designed for couples, charming and intimate (9.6 rating)</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Palm Springs Guide -->
+        <details style="margin-bottom:12px;">
+          <summary>Palm Springs — Full Destination Guide</summary>
+          <div class="ref-content">
+            <p><em>Desert glamour — mid-century modern, pool culture, 70s and sunny. From Ojai: 3 hrs · Feb highs: 70–75°F</em></p>
+            <h4>The Draw</h4>
+            <p>Retro Rat Pack glamour meets year-round sunshine. Mid-century modern architecture, walkable downtown, San Jacinto Mountains as backdrop. Pool culture, stylish restaurants, a slower pace that's both glamorous and laid-back. Completely different from Santa Barbara.</p>
+            <h4>Things to Do</h4>
+            <ul>
+              <li><strong>Aerial Tramway</strong> — rotating tram, 2+ miles up, 360° views</li>
+              <li><strong>Séc-he hot springs spa</strong> — sacred Agua Caliente springs, couples massages, private mineral tubs</li>
+              <li><strong>Hot-air balloon</strong> with Fantasy Balloon Flights — sunrise flight + champagne toast</li>
+              <li><strong>Joshua Tree day trip</strong> (1h) — Hidden Valley trail, Cholla Cactus Garden, Keys View</li>
+              <li><strong>Mid-century Mod tours</strong> — guided architecture tours</li>
+              <li><strong>Rooftop cocktails</strong> at High Bar (Kimpton Rowan) — panoramic sunset views</li>
+            </ul>
+            <h4>Where to Eat</h4>
+            <ul>
+              <li><strong>Copley's on Palm Canyon</strong> — OpenTable "100 Most Romantic," Cary Grant estate</li>
+              <li><strong>Le Vallauris</strong> — elegant French, garden dining, candlelit</li>
+              <li><strong>Mister Parker's</strong> — Palm Springs' most romantic restaurant</li>
+              <li><strong>Johnny Costa's</strong> — ten-time best Italian, Sinatra's regular spot</li>
+              <li><strong>Lavender Bistro</strong> — three-course romantic dinner</li>
+              <li><strong>4 Saints</strong> at Kimpton Rowan — Valentine's menu ~$149/couple</li>
+            </ul>
+            <h4>Where to Stay</h4>
+            <ul>
+              <li><strong>Korakia Pensione</strong> — boutique, two pools, hot tub</li>
+              <li><strong>L'Horizon</strong> — restored 1950s, infinity pool, onsite spa</li>
+              <li><strong>Avalon Hotel & Bungalows</strong> — Spanish-style, three pools, gardens</li>
+              <li><strong>The Muse Hotel</strong> — adults-only boutique, private patios</li>
+              <li><strong>Kimpton Rowan</strong> — rooftop bar, great downtown location</li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- Catalina Guide -->
+        <details>
+          <summary>Catalina Island — Full Destination Guide</summary>
+          <div class="ref-content">
+            <p><em>Car-free island — small-town Avalon, ocean views, total escape. Ferry: ~1 hr from Long Beach · Feb highs: 63°F</em></p>
+            <h4>The Draw</h4>
+            <p>A genuine island getaway 22 miles off the coast. No cars in Avalon — you walk, golf cart, or bike everywhere. Charming waterfront, ocean views from every angle. Feb is off-season so it's quiet and uncrowded.</p>
+            <h4>Things to Do</h4>
+            <ul>
+              <li><strong>Kayaking & snorkeling</strong> — Lover's Cove Marine Preserve</li>
+              <li><strong>Glass-bottom boat</strong> — ocean floor and kelp forests</li>
+              <li><strong>Golf cart tour</strong> — hills, bison, ocean views</li>
+              <li><strong>Zip line Eco Tour</strong> — five zip lines through Descanso Canyon</li>
+            </ul>
+            <h4>Where to Stay</h4>
+            <ul>
+              <li><strong>Catalina Island Seacrest Inn</strong> — 9.0 rating, $175/night</li>
+              <li><strong>Hotel Catalina</strong> — 7.4, $200/night</li>
+              <li><strong>Hermosa Hotel</strong> — 7.0, $140/night</li>
+            </ul>
+            <h4>Logistics</h4>
+            <ul>
+              <li>Catalina Express ferry from Long Beach — ~1h each way</li>
+              <li>No car on island — everything walkable in Avalon</li>
+              <li>Park at Long Beach terminal ($20-30/day)</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </details>
+
+  </div>
+</details>
+
+</div>
+
+<!-- ═══════════ BACKGROUND INFO ═══════════ -->
+<div class="ref-section">
+  <details class="plan-dropdown">
+    <summary>Background Info — Research & Data</summary>
+    <div class="plan-content">
+
+      <!-- ── Trip Context ── -->
+      <details>
+        <summary>Trip Context — What I Know So Far</summary>
+        <div class="ref-content">
+          <div class="know-grid">
+            <div class="know-item"><div class="label">Starting From</div><div class="value">Santa Barbara, CA</div></div>
+            <div class="know-item"><div class="label">Have a Car</div><div class="value">Yes</div></div>
+            <div class="know-item"><div class="label">Classes End</div><div class="value">Thu Feb 12 @ 4 PM</div></div>
+            <div class="know-item"><div class="label">Valentine's Day</div><div class="value">Sat Feb 14</div></div>
+            <div class="know-item"><div class="label">Mon Feb 16</div><div class="value">Holiday — no class</div></div>
+            <div class="know-item"><div class="label">Constraint</div><div class="value">Her midterm Wed Feb 18</div></div>
+            <div class="know-item"><div class="label">Vibe</div><div class="value">Special but not too hectic</div></div>
+            <div class="know-item"><div class="label">She Wants</div><div class="value">Warmth, feeling taken care of, somewhere new</div></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- ── Why This Route ── -->
+      <details>
+        <summary>My Thinking — Why Drivable & Warm</summary>
+        <div class="ref-content">
+          <p>Flights add too much stress for this trip — driving to LAX, security, timing — all of that kills the "taken care of" vibe I'm going for. We have a car and we're in one of the best road trip corridors in California, so it makes way more sense to drive.</p>
+          <p>She wants warmth and to feel like she's going somewhere new. Ojai → Palm Springs gives her two completely different places, both warm, zero airport anxiety, and the whole thing feels thoughtful instead of hectic.</p>
+          <p><strong>Why I'm skipping the other options:</strong> SLC is cold and skiing before her midterm is risky energy-wise. PVR is amazing but getting there from SB is genuinely stressful — half a day just reaching a departure airport. Madonna Inn is one night in one place and SLO isn't especially warm. Catalina is charming but the ferry adds rigidity and the island gets small after a day.</p>
+          <p>Total driving across the whole trip is only ~8 hours spread over 4 days, no single leg over 3.5h. No flights, no ferries, no airports, no logistics stress.</p>
+        </div>
+      </details>
+
+      <!-- ── Old Destination Cards ── -->
+      <details>
+        <summary>Previous Destination Options — Summary Cards</summary>
+        <div class="ref-content">
+          <div class="research-card">
+            <div class="research-card-header"><h3>Puerto Vallarta</h3><span class="emoji">🌴</span></div>
+            <span class="card-tag fly">Fly</span>
+            <div class="research-card-body">
+              <p>Beach + sun. ~3h nonstop from LAX, or cheaper via Tijuana/San Diego.</p>
+              <span class="quick-stat">Cheapest: <strong>$193</strong>/pp (TIJ, Feb 14)</span>
+              <span class="quick-stat">From LAX: <strong class="warn">$314</strong>/pp</span>
+            </div>
+          </div>
+          <div class="research-card">
+            <div class="research-card-header"><h3>Salt Lake City</h3><span class="emoji">🏔️</span></div>
+            <span class="card-tag fly">Fly — 2 hrs</span>
+            <div class="research-card-body">
+              <p>Snow, skiing, mountain cozy. Nonstop from LAX (~2h). Need to drive to LAX first (~2h).</p>
+              <span class="quick-stat">Cheapest: <strong>$166</strong>/pp (Feb 14)</span>
+              <span class="quick-stat">Frontier nonstop: <strong>$200</strong>/pp</span>
+            </div>
+          </div>
+          <div class="research-card">
+            <div class="research-card-header"><h3>Madonna Inn, SLO</h3><span class="emoji">🏰</span></div>
+            <span class="card-tag drive">Drive — 1.5 hrs</span>
+            <div class="research-card-body">
+              <p>Quirky themed rooms, pink champagne cake, close to home.</p>
+              <span class="quick-stat">Thu night: <strong>$179</strong></span>
+              <span class="quick-stat">Fri night: <strong class="hot">$419</strong></span>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- ── PVR Flights ── -->
+      <details>
+        <summary>Puerto Vallarta — Full Flight Breakdown</summary>
+        <div class="ref-content">
+          <h4>Saturday, Feb 14 (best prices)</h4>
+          <table class="data-table">
+            <tr><th>Route</th><th>Airline</th><th>Time</th><th>Price</th></tr>
+            <tr class="best-price"><td>TIJ → PVR</td><td>Viva</td><td>10:45a–3:30p, 2h 45m nonstop</td><td><span class="price">$193</span><span class="best-deal">CHEAPEST</span></td></tr>
+            <tr><td>SAN → PVR</td><td>Alaska/Hawaiian</td><td>12:49p–5:49p, 3h nonstop</td><td><span class="price">$294</span></td></tr>
+            <tr><td>LAX → PVR</td><td>United</td><td>10:15a–3:20p, 3h 5m nonstop</td><td><span class="price">$314</span></td></tr>
+            <tr><td>LAX → PVR</td><td>American</td><td>9:03a–2:10p, 3h 7m nonstop</td><td><span class="price high">$364</span></td></tr>
+            <tr><td>LAX → PVR</td><td>Alaska</td><td>7:00a–12:07p, 3h 7m nonstop</td><td><span class="price high">$387</span></td></tr>
+            <tr><td>LAX → PVR</td><td>Delta/Aeromexico</td><td>10:57a–4:03p, 3h 6m nonstop</td><td><span class="price high">$393</span></td></tr>
+          </table>
+          <h4>Friday, Feb 13 (much more expensive)</h4>
+          <table class="data-table">
+            <tr><th>Route</th><th>Airline</th><th>Time</th><th>Price</th></tr>
+            <tr><td>LAX → PVR</td><td>United</td><td>10:15a–3:20p, 3h 5m nonstop</td><td><span class="price high">$450</span></td></tr>
+            <tr><td>LAX → PVR</td><td>American</td><td>9:03a–2:10p, 3h 7m nonstop</td><td><span class="price very-high">$564</span></td></tr>
+            <tr><td>LAX → PVR</td><td>Delta/Aeromexico</td><td>10:57a–4:03p, 3h 6m nonstop</td><td><span class="price very-high">$815</span></td></tr>
+          </table>
+          <p>All prices per person, one-way, nonstop. TIJ requires CBX border crossing (~$16). Drive to TIJ/SAN from SB is ~5h, to LAX is ~2h.</p>
+        </div>
+      </details>
+
+      <!-- ── SLC Flights ── -->
+      <details>
+        <summary>Salt Lake City — Full Flight Breakdown</summary>
+        <div class="ref-content">
+          <h4>All dates from LAX (nonstop)</h4>
+          <table class="data-table">
+            <tr><th>Date</th><th>Airline</th><th>Time</th><th>Price</th></tr>
+            <tr><td>Thu Feb 12</td><td>Frontier</td><td>12:05p–3:04p, 1h 59m</td><td><span class="price">$200</span></td></tr>
+            <tr><td>Thu Feb 12</td><td>Frontier</td><td>6:06p–9:04p, 1h 58m</td><td><span class="price">$200</span></td></tr>
+            <tr><td>Thu Feb 12</td><td>Delta</td><td>11:35a–2:30p, 1h 55m</td><td><span class="price high">$401</span></td></tr>
+            <tr><td>Fri Feb 13</td><td>Frontier</td><td>11:45a–2:44p, 1h 59m</td><td><span class="price">$225</span></td></tr>
+            <tr><td>Fri Feb 13</td><td>Frontier</td><td>2:36p–12:14a+1, 8h 38m (1 stop DEN)</td><td><span class="price">$186</span></td></tr>
+            <tr><td>Fri Feb 13</td><td>Delta</td><td>11:35a–2:30p, 1h 55m</td><td><span class="price high">$401</span></td></tr>
+            <tr class="best-price"><td>Sat Feb 14</td><td>Frontier</td><td>6:28p–9:26p, 1h 58m</td><td><span class="price">$200</span> (from $166)</td></tr>
+            <tr><td>Sat Feb 14</td><td>Delta</td><td>11:35a–2:30p, 1h 55m</td><td><span class="price high">$319</span></td></tr>
+            <tr><td>Sat Feb 14</td><td>Southwest</td><td>4:00p–6:50p, 1h 50m</td><td><span class="price high">$324</span></td></tr>
+            <tr><td>Sat Feb 14</td><td>United (SkyWest)</td><td>1:05p–4:05p, 2h</td><td><span class="price high">$350</span></td></tr>
+          </table>
+
+          <h4>Return Flight Found (Mon Feb 16)</h4>
+          <table class="data-table">
+            <tr><th>Route</th><th>Airline</th><th>Time</th><th>Price</th></tr>
+            <tr class="best-price"><td>SLC → LAX</td><td>Frontier</td><td>9:29a–10:45a, 2h 16m nonstop</td><td><span class="price">$99</span><span class="best-deal">CHEAPEST</span></td></tr>
+          </table>
+          <p>All prices per person, one-way. Need to drive to LAX (~2h from SB) first.</p>
+        </div>
+      </details>
+
+      <!-- ── Madonna Inn Rooms ── -->
+      <details>
+        <summary>Madonna Inn — Full Room Details</summary>
+        <div class="ref-content">
+          <h4>Thursday, Feb 12 (1 night, sleeps 2)</h4>
+          <table class="data-table">
+            <tr><th>Room</th><th>Price</th></tr>
+            <tr><td>Highway Suite</td><td><span class="price high">$249</span></td></tr>
+            <tr><td>Dot &amp; Daisy</td><td><span class="price">$179</span></td></tr>
+            <tr><td>Old Fashioned</td><td><span class="price">$179</span></td></tr>
+            <tr><td>Round</td><td><span class="price">$179</span></td></tr>
+          </table>
+          <h4>Friday, Feb 13 (1 night, sleeps 2)</h4>
+          <table class="data-table">
+            <tr><th>Room</th><th>Price</th></tr>
+            <tr><td>California Poppy</td><td><span class="price very-high">$419</span></td></tr>
+            <tr><td>Barrel of Fun</td><td class="unavail">Unavailable</td></tr>
+          </table>
+          <p>Feb 13 (Valentine's eve) pricing jumps massively and is almost sold out. 2 adults, 0 children.</p>
+        </div>
+      </details>
+
+      <!-- ── Google Flights Explore ── -->
+      <details>
+        <summary>Google Flights Explore — All Destinations Under $300</summary>
+        <div class="ref-content">
+          <h4>Thursday, Feb 12 (from LA)</h4>
+          <div class="explore-grid" style="margin-bottom:16px;">
+            <div class="explore-chip"><div class="city">Las Vegas</div><div class="flight-info">1h 10m nonstop</div><div class="chip-price">$99</div></div>
+            <div class="explore-chip"><div class="city">San Francisco</div><div class="flight-info">1h 34m nonstop</div><div class="chip-price">$133</div></div>
+            <div class="explore-chip"><div class="city">San Jose</div><div class="flight-info">1h 22m nonstop</div><div class="chip-price">$155</div></div>
+            <div class="explore-chip"><div class="city">Dallas</div><div class="flight-info">3h 2m nonstop</div><div class="chip-price">$168</div></div>
+            <div class="explore-chip"><div class="city">Phoenix</div><div class="flight-info">1h 22m nonstop</div><div class="chip-price">$178</div></div>
+            <div class="explore-chip"><div class="city">Miami</div><div class="flight-info">4h 45m nonstop</div><div class="chip-price">$235</div></div>
+            <div class="explore-chip"><div class="city">Ft. Lauderdale</div><div class="flight-info">4h 45m nonstop</div><div class="chip-price">$235</div></div>
+            <div class="explore-chip"><div class="city">Houston</div><div class="flight-info">3h 33m nonstop</div><div class="chip-price">$280</div></div>
+          </div>
+          <h4>Friday, Feb 13 (from LA)</h4>
+          <div class="explore-grid">
+            <div class="explore-chip"><div class="city">San Francisco</div><div class="flight-info">1h 34m nonstop</div><div class="chip-price">$104</div></div>
+            <div class="explore-chip"><div class="city">Las Vegas</div><div class="flight-info">1h 10m nonstop</div><div class="chip-price">$109</div></div>
+            <div class="explore-chip"><div class="city">Dallas</div><div class="flight-info">3h 15m nonstop</div><div class="chip-price">$168</div></div>
+            <div class="explore-chip"><div class="city">Denver</div><div class="flight-info">2h 29m nonstop</div><div class="chip-price">$170</div></div>
+            <div class="explore-chip"><div class="city">Detroit</div><div class="flight-info">4h 25m nonstop</div><div class="chip-price">$171</div></div>
+            <div class="explore-chip"><div class="city">Phoenix</div><div class="flight-info">1h 30m nonstop</div><div class="chip-price">$195</div></div>
+            <div class="explore-chip"><div class="city">Houston</div><div class="flight-info">3h 25m nonstop</div><div class="chip-price">$219</div></div>
+            <div class="explore-chip"><div class="city">St. Louis</div><div class="flight-info">3h 20m nonstop</div><div class="chip-price">$219</div></div>
+            <div class="explore-chip"><div class="city">SLC</div><div class="flight-info">1h 58m nonstop</div><div class="chip-price">$225</div></div>
+            <div class="explore-chip"><div class="city">Boston</div><div class="flight-info">5h 31m nonstop</div><div class="chip-price">$229</div></div>
+            <div class="explore-chip"><div class="city">New York</div><div class="flight-info">5h 15m nonstop</div><div class="chip-price">$246</div></div>
+            <div class="explore-chip"><div class="city">New Orleans</div><div class="flight-info">3h 35m nonstop</div><div class="chip-price">$259</div></div>
+            <div class="explore-chip"><div class="city">Miami</div><div class="flight-info">4h 45m nonstop</div><div class="chip-price">$270</div></div>
+            <div class="explore-chip"><div class="city">Ft. Lauderdale</div><div class="flight-info">4h 45m nonstop</div><div class="chip-price">$270</div></div>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </details>
+</div>
+
+</div>
+
+<div class="footer">Valentine's Getaway 2026 &middot; Comparing Options &middot; Prices pulled Feb 8–9, 2026</div>
+
+</body>
+</html>
