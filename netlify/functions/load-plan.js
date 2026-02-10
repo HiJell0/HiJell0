@@ -4,10 +4,22 @@ const branch = process.env.GITHUB_BRANCH || "main";
 const planPath = process.env.PLAN_PATH || "data/plan.json";
 const token = process.env.GITHUB_TOKEN;
 
+const cors = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+};
+
 export async function handler(event) {
+  // Handle CORS preflight
+  if (event.httpMethod === "OPTIONS") {
+    return { statusCode: 204, headers: cors, body: "" };
+  }
+
   if (event.httpMethod !== "GET") {
     return {
       statusCode: 405,
+      headers: cors,
       body: JSON.stringify({ ok: false, error: "Method not allowed" }),
     };
   }
@@ -15,6 +27,7 @@ export async function handler(event) {
   if (!token || !owner || !repo) {
     return {
       statusCode: 200,
+      headers: cors,
       body: JSON.stringify({
         ok: true,
         plan: defaultPlan(),
@@ -39,6 +52,7 @@ export async function handler(event) {
     if (res.status === 404) {
       return {
         statusCode: 200,
+        headers: cors,
         body: JSON.stringify({
           ok: true,
           plan: defaultPlan(),
@@ -51,6 +65,7 @@ export async function handler(event) {
       const text = await res.text();
       return {
         statusCode: 500,
+        headers: cors,
         body: JSON.stringify({ ok: false, error: "GitHub fetch failed", detail: text }),
       };
     }
@@ -66,11 +81,13 @@ export async function handler(event) {
 
     return {
       statusCode: 200,
+      headers: cors,
       body: JSON.stringify({ ok: true, plan, source: "github" }),
     };
   } catch {
     return {
       statusCode: 500,
+      headers: cors,
       body: JSON.stringify({ ok: false, error: "Unexpected error" }),
     };
   }

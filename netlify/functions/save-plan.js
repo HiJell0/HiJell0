@@ -4,10 +4,22 @@ const branch = process.env.GITHUB_BRANCH || "main";
 const planPath = process.env.PLAN_PATH || "data/plan.json";
 const token = process.env.GITHUB_TOKEN;
 
+const cors = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
+
 export async function handler(event) {
+  // Handle CORS preflight
+  if (event.httpMethod === "OPTIONS") {
+    return { statusCode: 204, headers: cors, body: "" };
+  }
+
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
+      headers: cors,
       body: JSON.stringify({ ok: false, error: "Method not allowed" }),
     };
   }
@@ -15,6 +27,7 @@ export async function handler(event) {
   if (!token || !owner || !repo) {
     return {
       statusCode: 500,
+      headers: cors,
       body: JSON.stringify({ ok: false, error: "Server not configured" }),
     };
   }
@@ -25,6 +38,7 @@ export async function handler(event) {
   } catch {
     return {
       statusCode: 400,
+      headers: cors,
       body: JSON.stringify({ ok: false, error: "Invalid JSON" }),
     };
   }
@@ -74,6 +88,7 @@ export async function handler(event) {
       const text = await putRes.text();
       return {
         statusCode: 500,
+        headers: cors,
         body: JSON.stringify({ ok: false, error: "GitHub save failed", detail: text }),
       };
     }
@@ -81,11 +96,13 @@ export async function handler(event) {
     const savedAt = new Date().toISOString();
     return {
       statusCode: 200,
+      headers: cors,
       body: JSON.stringify({ ok: true, savedAt }),
     };
   } catch {
     return {
       statusCode: 500,
+      headers: cors,
       body: JSON.stringify({ ok: false, error: "Unexpected error" }),
     };
   }
