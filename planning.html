@@ -32,6 +32,8 @@
     width: 200%; height: 200%;
     background: radial-gradient(circle at 50% 50%, rgba(200,60,80,0.06) 0%, transparent 60%);
     animation: pulse 8s ease-in-out infinite;
+    z-index: 0;
+    pointer-events: none;
   }
   @keyframes pulse {
     0%, 100% { transform: scale(1); opacity: 0.5; }
@@ -81,8 +83,9 @@
     padding: 6px 16px;
     border-radius: 20px;
     text-decoration: none;
-    z-index: 1;
+    z-index: 2;
     transition: all 0.2s;
+    touch-action: manipulation;
   }
   .plan-btn:hover {
     background: rgba(232,101,122,0.25);
