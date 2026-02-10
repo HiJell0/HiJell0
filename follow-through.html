@@ -472,6 +472,25 @@
   const STATE_KEY = 'followthrough-state';
   let draggedCard = null;
 
+  // ── Apply booked styling ──
+  function applyBookedTags() {
+    document.querySelectorAll('.card').forEach(card => {
+      const textEl = card.querySelector('.text');
+      if (!textEl) return;
+      const match = textEl.textContent.match(/\s*\(booked\)\s*$/i);
+      if (match) {
+        textEl.textContent = textEl.textContent.replace(/\s*\(booked\)\s*$/i, '').trim();
+        if (!card.classList.contains('locked')) {
+          card.classList.add('locked');
+          const tag = document.createElement('span');
+          tag.className = 'lock-tag';
+          tag.textContent = 'booked';
+          card.appendChild(tag);
+        }
+      }
+    });
+  }
+
   // ── Helpers ──
   function getAllZones() {
     return document.querySelectorAll('.drop-zone, .bank-zone');
@@ -737,6 +756,7 @@
     card.dataset.id = id;
     card.innerHTML = `<span class="grip">⠿</span><span class="text">${text.trim()}</span>`;
     document.querySelector('.bank-zone').appendChild(card);
+    applyBookedTags();
     updateEmptyStates();
     saveState();
   });
@@ -760,6 +780,7 @@
   });
 
   loadState();
+  applyBookedTags();
   updateEmptyStates();
 </script>
 
