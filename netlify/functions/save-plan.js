@@ -27,7 +27,11 @@ exports.handler = async function (event) {
     return {
       statusCode: 500,
       headers: cors,
-      body: JSON.stringify({ ok: false, error: "Server not configured" }),
+      body: JSON.stringify({
+        ok: false,
+        error: "Server not configured",
+        debug: { owner: owner || "(missing)", repo: repo || "(missing)", hasToken: !!token }
+      }),
     };
   }
 
@@ -89,7 +93,12 @@ exports.handler = async function (event) {
       return {
         statusCode: 500,
         headers: cors,
-        body: JSON.stringify({ ok: false, error: "GitHub save failed", detail: text }),
+        body: JSON.stringify({
+          ok: false,
+          error: "GitHub save failed",
+          detail: text,
+          debug: { target: owner + "/" + repo, path: planPath, branch: branch, tokenPrefix: token.substring(0, 8) + "..." }
+        }),
       };
     }
 

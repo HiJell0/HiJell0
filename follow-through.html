@@ -824,7 +824,8 @@
         console.error('Save response:', data);
         btn.textContent = 'Failed: ' + (data.error || res.status);
         if (data.detail) console.error('Detail:', data.detail);
-        alert('Save failed:\n' + (data.error || '') + '\n' + (data.detail || ''));
+        var debugInfo = data.debug ? '\n\nDebug: ' + JSON.stringify(data.debug) : '';
+        alert('Save failed:\n' + (data.error || '') + '\n' + (data.detail || '') + debugInfo);
       }
     } catch (err) {
       console.error('Save error:', err);
