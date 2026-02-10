@@ -823,17 +823,20 @@
       } else {
         console.error('Save response:', data);
         btn.textContent = 'Failed: ' + (data.error || res.status);
+        if (data.detail) console.error('Detail:', data.detail);
+        alert('Save failed:\n' + (data.error || '') + '\n' + (data.detail || ''));
       }
     } catch (err) {
       console.error('Save error:', err);
       btn.textContent = 'Error: ' + err.message;
+      alert('Save error:\n' + err.message);
     }
 
     btn.disabled = false;
     setTimeout(() => {
       btn.textContent = 'Save Plan';
       btn.classList.remove('saved');
-    }, 2000);
+    }, 3000);
   });
 
   // ══════════ NAV BUTTON FALLBACK ══════════
