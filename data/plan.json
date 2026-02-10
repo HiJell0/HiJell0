@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "2026-02-10T02:49:50.467Z",
+  "lastUpdated": "2026-02-10T03:04:30.893Z",
   "days": {
     "thu": {
       "label": "Arrival",
       "activities": [
         {
-          "id": "fly-out",
-          "text": "Fly LAX → SLC. Frontier 4130, 6:06pm",
+          "id": "custom-1770691970752-2",
+          "text": "Fly LAX to SLC at 6pm - arrive early - Frontier",
           "status": "booked"
         }
       ]
@@ -14,6 +14,11 @@
     "fri": {
       "label": "Ski Day",
       "activities": [
+        {
+          "id": "custom-1770692165664-3",
+          "text": "Kneaders for breakfast with Sarah at 8 or 8:30 in West Jordan",
+          "status": "booked"
+        },
         {
           "id": "ski-day",
           "text": "Ski day, pick a resort",
@@ -48,13 +53,7 @@
     },
     "sun": {
       "label": "Open Day",
-      "activities": [
-        {
-          "id": "homework",
-          "text": "Homework session",
-          "status": "idea"
-        }
-      ]
+      "activities": []
     },
     "mon": {
       "label": "Fly Home",
@@ -65,8 +64,8 @@
           "status": "idea"
         },
         {
-          "id": "mon-homework",
-          "text": "Homework",
+          "id": "custom-1770692206947-4",
+          "text": "Study for Midterm",
           "status": "idea"
         }
       ]
@@ -74,33 +73,8 @@
   },
   "ideaBank": [
     {
-      "id": "brunch",
-      "text": "Brunch",
-      "status": "idea"
-    },
-    {
-      "id": "nat-history",
-      "text": "Natural History Museum",
-      "status": "idea"
-    },
-    {
       "id": "park-city",
       "text": "Park City Main Street",
-      "status": "idea"
-    },
-    {
-      "id": "temple-square",
-      "text": "Temple Square",
-      "status": "idea"
-    },
-    {
-      "id": "kneaders",
-      "text": "Kneaders breakfast, 8/8:30am, West Jordan with Sarah",
-      "status": "idea"
-    },
-    {
-      "id": "alta-snowbird",
-      "text": "Alta or Snowbird",
       "status": "idea"
     },
     {
@@ -111,6 +85,11 @@
     {
       "id": "sunset-drive",
       "text": "Scenic drive",
+      "status": "idea"
+    },
+    {
+      "id": "custom-1770692253263-5",
+      "text": "Another day of skiing",
       "status": "idea"
     }
   ]
