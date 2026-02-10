@@ -1,17 +1,10 @@
-const owner = process.env.GITHUB_OWNER;
-const repo = process.env.GITHUB_REPO;
-const branch = process.env.GITHUB_BRANCH || "main";
-const planPath = process.env.PLAN_PATH || "data/plan.json";
-const token = process.env.GITHUB_TOKEN;
-
 const cors = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "Content-Type",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
-export async function handler(event) {
-  // Handle CORS preflight
+exports.handler = async function (event) {
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 204, headers: cors, body: "" };
   }
@@ -24,6 +17,12 @@ export async function handler(event) {
     };
   }
 
+  const owner = process.env.GITHUB_OWNER;
+  const repo = process.env.GITHUB_REPO;
+  const branch = process.env.GITHUB_BRANCH || "main";
+  const planPath = process.env.PLAN_PATH || "data/plan.json";
+  const token = process.env.GITHUB_TOKEN;
+
   if (!token || !owner || !repo) {
     return {
       statusCode: 500,
@@ -32,10 +31,10 @@ export async function handler(event) {
     };
   }
 
-  let plan;
+  var plan;
   try {
     plan = JSON.parse(event.body || "{}");
-  } catch {
+  } catch (e) {
     return {
       statusCode: 400,
       headers: cors,
@@ -43,49 +42,50 @@ export async function handler(event) {
     };
   }
 
-  const content = Buffer.from(JSON.stringify(plan, null, 2)).toString("base64");
+  var content = Buffer.from(JSON.stringify(plan, null, 2)).toString("base64");
 
-  const apiBase = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(
-    planPath
-  )}`;
+  var apiBase =
+    "https://api.github.com/repos/" +
+    owner + "/" + repo +
+    "/contents/" + encodeURIComponent(planPath);
 
-  let sha;
+  var sha;
   try {
-    const getRes = await fetch(`${apiBase}?ref=${branch}`, {
+    var getRes = await fetch(apiBase + "?ref=" + branch, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: "Bearer " + token,
         "User-Agent": "netlify-save-plan",
         Accept: "application/vnd.github+json",
       },
     });
     if (getRes.ok) {
-      const data = await getRes.json();
-      sha = data.sha;
+      var getData = await getRes.json();
+      sha = getData.sha;
     }
-  } catch {
+  } catch (e) {
     // file may not exist yet
   }
 
-  const body = {
+  var putBody = {
     message: "Update plan.json from Netlify function",
-    content,
-    branch,
+    content: content,
+    branch: branch,
   };
-  if (sha) body.sha = sha;
+  if (sha) putBody.sha = sha;
 
   try {
-    const putRes = await fetch(apiBase, {
+    var putRes = await fetch(apiBase, {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: "Bearer " + token,
         "User-Agent": "netlify-save-plan",
         Accept: "application/vnd.github+json",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(putBody),
     });
 
     if (!putRes.ok) {
-      const text = await putRes.text();
+      var text = await putRes.text();
       return {
         statusCode: 500,
         headers: cors,
@@ -93,17 +93,17 @@ export async function handler(event) {
       };
     }
 
-    const savedAt = new Date().toISOString();
+    var savedAt = new Date().toISOString();
     return {
       statusCode: 200,
       headers: cors,
-      body: JSON.stringify({ ok: true, savedAt }),
+      body: JSON.stringify({ ok: true, savedAt: savedAt }),
     };
-  } catch {
+  } catch (err) {
     return {
       statusCode: 500,
       headers: cors,
-      body: JSON.stringify({ ok: false, error: "Unexpected error" }),
+      body: JSON.stringify({ ok: false, error: "Unexpected error", detail: String(err) }),
     };
   }
-}
+};

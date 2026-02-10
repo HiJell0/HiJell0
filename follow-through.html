@@ -821,11 +821,12 @@
         btn.textContent = 'Saved ✓';
         btn.classList.add('saved');
       } else {
-        btn.textContent = 'Save failed';
+        console.error('Save response:', data);
+        btn.textContent = 'Failed: ' + (data.error || res.status);
       }
     } catch (err) {
       console.error('Save error:', err);
-      btn.textContent = 'Save failed';
+      btn.textContent = 'Error: ' + err.message;
     }
 
     btn.disabled = false;
