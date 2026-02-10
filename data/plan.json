@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-10T02:07:37.915Z",
+  "lastUpdated": "2026-02-10T02:08:32.700Z",
   "days": {
     "thu": {
       "label": "Arrival",
@@ -89,11 +89,6 @@
       "status": "idea"
     },
     {
-      "id": "temple-square",
-      "text": "Temple Square",
-      "status": "idea"
-    },
-    {
       "id": "nat-history",
       "text": "Natural History Museum",
       "status": "idea"
@@ -104,8 +99,8 @@
       "status": "idea"
     },
     {
-      "id": "pick-up-skis",
-      "text": "Pick up skis from Sarah",
+      "id": "temple-square",
+      "text": "Temple Square",
       "status": "idea"
     },
     {
