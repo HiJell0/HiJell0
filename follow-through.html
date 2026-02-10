@@ -263,6 +263,32 @@
     border-color: rgba(125,206,160,0.35);
   }
 
+  /* ── Save button ── */
+  .save-btn {
+    width: 100%;
+    background: rgba(125,206,160,0.12);
+    border: 1px solid rgba(125,206,160,0.25);
+    border-radius: 8px;
+    padding: 11px;
+    color: #7dcea0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 16px;
+  }
+  .save-btn:hover {
+    background: rgba(125,206,160,0.22);
+    border-color: rgba(125,206,160,0.45);
+  }
+  .save-btn.saved {
+    border-color: rgba(125,206,160,0.5);
+    color: #a8e6c3;
+  }
+
   .footer {
     text-align: center;
     padding: 24px;
@@ -436,6 +462,7 @@
   </div>
   <button class="new-btn" id="newActivity">+ New activity</button>
   <div class="trash-zone" id="trashZone">Drop here to remove</div>
+  <button class="save-btn" id="saveBtn">Save Plan</button>
 </div>
 
 </div>
@@ -713,6 +740,18 @@
     document.querySelector('.bank-zone').appendChild(card);
     updateEmptyStates();
     saveState();
+  });
+
+  // ══════════ SAVE BUTTON ══════════
+  document.getElementById('saveBtn').addEventListener('click', () => {
+    saveState();
+    const btn = document.getElementById('saveBtn');
+    btn.textContent = 'Saved ✓';
+    btn.classList.add('saved');
+    setTimeout(() => {
+      btn.textContent = 'Save Plan';
+      btn.classList.remove('saved');
+    }, 2000);
   });
 
   // ══════════ NAV BUTTON FALLBACK ══════════
