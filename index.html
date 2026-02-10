@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trip Book, Valentine's Getaway 2026</title>
+<title>Follow Through, Valentine's Getaway 2026</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
@@ -14,59 +14,49 @@
     background: #111;
     color: #d4ccc4;
     line-height: 1.6;
+    min-height: 100vh;
   }
 
   /* ── Header ── */
   .header {
-    background: linear-gradient(135deg, #1a0a0a 0%, #241018 40%, #0f1428 100%);
-    border-bottom: 1px solid rgba(232,101,122,0.15);
+    background: linear-gradient(135deg, #0a1210 0%, #0f2a1a 40%, #0a1a14 100%);
+    border-bottom: 1px solid rgba(125,206,160,0.12);
     padding: 40px 40px 36px;
     text-align: center;
     position: relative;
-    overflow: hidden;
   }
-  .header::before {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle at 50% 50%, rgba(200,60,80,0.04) 0%, transparent 60%);
-    animation: pulse 12s ease-in-out infinite;
-    z-index: 0;
-    pointer-events: none;
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: 700;
+    position: relative;
   }
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.4; }
-    50% { transform: scale(1.05); opacity: 0.8; }
+  .header h1 span { color: #7dcea0; }
+  .header .sub {
+    font-size: 0.85rem;
+    color: #7ab893;
+    margin-top: 4px;
+    position: relative;
+  }
+  .header-tag {
+    display: inline-block;
+    background: rgba(125,206,160,0.1);
+    border: 1px solid rgba(125,206,160,0.2);
+    color: #7dcea0;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-top: 10px;
+    position: relative;
   }
   .back-btn {
     position: absolute;
     top: 50%;
     left: 24px;
-    transform: translateY(-50%);
-    background: rgba(232,101,122,0.15);
-    border: 1px solid rgba(232,101,122,0.3);
-    color: #e8657a;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 6px 16px;
-    border-radius: 20px;
-    text-decoration: none;
-    transition: all 0.2s;
-    z-index: 2;
-    touch-action: manipulation;
-  }
-  .back-btn:hover {
-    background: rgba(232,101,122,0.25);
-    border-color: rgba(232,101,122,0.5);
-  }
-  .fwd-btn {
-    position: absolute;
-    top: 50%;
-    right: 24px;
     transform: translateY(-50%);
     background: rgba(125,206,160,0.1);
     border: 1px solid rgba(125,206,160,0.2);
@@ -83,196 +73,41 @@
     z-index: 2;
     touch-action: manipulation;
   }
-  .fwd-btn:hover {
+  .back-btn:hover {
     background: rgba(125,206,160,0.2);
     border-color: rgba(125,206,160,0.4);
   }
-  .header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: #fff;
-    font-weight: 700;
-    position: relative;
-  }
-  .header h1 span { color: #e8657a; }
-  .header .sub {
-    font-size: 0.85rem;
-    color: #a89090;
-    margin-top: 4px;
-    position: relative;
-  }
-  .header .trip-tag {
-    display: inline-block;
-    background: rgba(180,220,255,0.1);
-    border: 1px solid rgba(180,220,255,0.2);
-    color: #b4daff;
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    padding: 4px 12px;
-    border-radius: 20px;
-    margin-top: 10px;
-    position: relative;
-  }
 
   /* ── Layout ── */
-  .container {
-    max-width: 800px;
+  .layout {
+    max-width: 900px;
     margin: 0 auto;
     padding: 32px 20px 60px;
-  }
-
-  /* ── Section ── */
-  .section {
-    margin-bottom: 36px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    color: #e8657a;
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-
-  /* ── Todo checklist ── */
-  .todo-box {
-    background: #161616;
-    border: 1px dashed rgba(232,101,122,0.12);
-    border-radius: 10px;
-    padding: 16px 20px;
-    margin-bottom: 28px;
-  }
-  .todo-box .todo-heading {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #e8657a;
-    margin-bottom: 10px;
-  }
-  .todo-list {
-    list-style: none;
-    padding: 0;
-  }
-  .todo-list li {
-    padding: 5px 0 5px 22px;
-    position: relative;
-    color: #8a7a7a;
-    font-size: 0.8rem;
-    line-height: 1.5;
-  }
-  .todo-list li::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 10px;
-    width: 10px; height: 10px;
-    border: 1.5px solid #3a3232;
-    border-radius: 3px;
-    transition: all 0.15s;
-  }
-  .todo-list li:hover::before { border-color: #e8657a; }
-  .todo-list li.done {
-    text-decoration: line-through;
-    color: #3a3232;
-  }
-  .todo-list li.done::before {
-    background: #3a3232;
-    border-color: #3a3232;
-  }
-
-  /* ── Booking / Receipt card ── */
-  .booking {
-    background: #181818;
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 12px;
-  }
-  .booking:hover { border-color: rgba(255,255,255,0.1); }
-  .booking-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  .booking-name {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #fff;
-  }
-  .booking-status {
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    padding: 3px 10px;
-    border-radius: 20px;
-  }
-  .status-confirmed {
-    background: rgba(125,206,160,0.12);
-    color: #7dcea0;
-    border: 1px solid rgba(125,206,160,0.2);
-  }
-  .status-pending {
-    background: rgba(232,168,122,0.12);
-    color: #e8a87a;
-    border: 1px solid rgba(232,168,122,0.2);
-  }
-  .status-researching {
-    background: rgba(180,140,255,0.1);
-    color: #b48cff;
-    border: 1px solid rgba(180,140,255,0.15);
-  }
-  .status-not-booked {
-    background: rgba(255,255,255,0.04);
-    color: #5a5050;
-    border: 1px solid rgba(255,255,255,0.06);
-  }
-  .booking-rows {
     display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 4px 14px;
-    font-size: 0.82rem;
-  }
-  .booking-label {
-    color: #6a6060;
-    font-weight: 500;
-  }
-  .booking-value {
-    color: #b8b0a8;
-  }
-  .booking-value strong { color: #e8e0d8; font-weight: 600; }
-  .booking-value .price { color: #7dcea0; font-weight: 700; }
-  .booking-note {
-    margin-top: 10px;
-    padding-top: 8px;
-    border-top: 1px solid rgba(255,255,255,0.04);
-    font-size: 0.78rem;
-    color: #5a5050;
-    font-style: italic;
+    grid-template-columns: 1fr 240px;
+    gap: 24px;
   }
 
-  /* ── Day-by-day ── */
-  .day-card {
-    background: #181818;
+  /* ── Timeline ── */
+  .timeline { display: flex; flex-direction: column; gap: 16px; }
+
+  .day {
+    background: #161616;
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 10px;
+    overflow: hidden;
   }
-  .day-card:hover { border-color: rgba(180,220,255,0.12); }
-  .day-card-header {
+  .day-header {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 8px;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
   }
-  .day-badge {
-    background: rgba(180,220,255,0.1);
-    border: 1px solid rgba(180,220,255,0.15);
-    color: #b4daff;
+  .day-label {
+    background: rgba(125,206,160,0.1);
+    border: 1px solid rgba(125,206,160,0.15);
+    color: #7dcea0;
     font-size: 0.65rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -281,69 +116,177 @@
     border-radius: 20px;
     white-space: nowrap;
   }
-  .day-badge.valentine {
+  .day-label.valentine {
     background: rgba(232,101,122,0.12);
     border-color: rgba(232,101,122,0.2);
     color: #e8657a;
   }
-  .day-title {
+  .day-name {
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #fff;
   }
-  .day-detail {
-    font-size: 0.84rem;
-    color: #a89898;
-    line-height: 1.7;
+  .drop-zone {
+    min-height: 48px;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: background 0.15s;
   }
-  .day-detail strong { color: #e8e0d8; font-weight: 600; }
+  .drop-zone.drag-over {
+    background: rgba(125,206,160,0.04);
+  }
+  .drop-zone-empty {
+    color: #2a2222;
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 12px;
+    pointer-events: none;
+  }
 
-  /* ── Notes ── */
-  .note-card {
-    background: #181818;
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 10px;
-    padding: 18px 20px;
-    margin-bottom: 10px;
+  /* ── Cards ── */
+  .card {
+    background: #1e1e1e;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.82rem;
+    color: #b8b0a8;
+    cursor: grab;
+    transition: all 0.15s;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
-  .note-card .note-date {
+  .card:hover {
+    border-color: rgba(125,206,160,0.15);
+    background: #222;
+  }
+  .card:active { cursor: grabbing; }
+  .card.dragging {
+    opacity: 0.4;
+    transform: scale(0.96);
+  }
+  .card .grip {
+    color: #3a3232;
     font-size: 0.7rem;
-    color: #4a4242;
+    flex-shrink: 0;
+  }
+  .card .text { flex: 1; }
+  .card.locked {
+    border-left: 3px solid #7dcea0;
+  }
+  .card.locked .lock-tag {
+    font-size: 0.6rem;
+    color: #7dcea0;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 6px;
-  }
-  .note-card p {
-    font-size: 0.84rem;
-    color: #a89898;
-    line-height: 1.7;
-  }
-  .note-card p strong { color: #e8e0d8; }
-
-  /* ── Empty state ── */
-  .empty {
-    border: 1px dashed rgba(255,255,255,0.08);
-    border-radius: 10px;
-    padding: 24px;
-    text-align: center;
-    color: #3a3232;
-    font-size: 0.82rem;
+    flex-shrink: 0;
   }
 
-  /* ── Totals bar ── */
-  .totals-bar {
-    background: rgba(180,220,255,0.06);
-    border: 1px solid rgba(180,220,255,0.12);
-    border-radius: 10px;
-    padding: 14px 20px;
+  /* ── Idea Bank ── */
+  .bank {
+    position: sticky;
+    top: 20px;
+    align-self: start;
+  }
+  .bank-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: #7dcea0;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .bank-zone {
+    min-height: 60px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 16px;
-    font-size: 0.85rem;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px 0;
+    transition: background 0.15s;
+    border-radius: 8px;
   }
-  .totals-bar .label { color: #a89898; }
-  .totals-bar .amount { color: #b4daff; font-weight: 700; font-size: 1.05rem; }
+  .bank-zone.drag-over {
+    background: rgba(125,206,160,0.04);
+  }
+  .bank-hint {
+    font-size: 0.72rem;
+    color: #2a2222;
+    text-align: center;
+    padding: 8px;
+  }
+
+  /* ── Trash zone ── */
+  .trash-zone {
+    border: 1px dashed rgba(255,80,80,0.15);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.72rem;
+    color: #4a3232;
+    margin-top: 16px;
+    transition: all 0.15s;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .trash-zone.drag-over {
+    background: rgba(255,80,80,0.08);
+    border-color: rgba(255,80,80,0.4);
+    color: #e06060;
+  }
+
+  /* ── New activity button ── */
+  .new-btn {
+    width: 100%;
+    background: rgba(125,206,160,0.08);
+    border: 1px dashed rgba(125,206,160,0.2);
+    border-radius: 8px;
+    padding: 10px;
+    color: #7dcea0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 12px;
+  }
+  .new-btn:hover {
+    background: rgba(125,206,160,0.14);
+    border-color: rgba(125,206,160,0.35);
+  }
+
+  /* ── Save button ── */
+  .save-btn {
+    width: 100%;
+    background: rgba(125,206,160,0.12);
+    border: 1px solid rgba(125,206,160,0.25);
+    border-radius: 8px;
+    padding: 11px;
+    color: #7dcea0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 16px;
+  }
+  .save-btn:hover {
+    background: rgba(125,206,160,0.22);
+    border-color: rgba(125,206,160,0.45);
+  }
+  .save-btn.saved {
+    border-color: rgba(125,206,160,0.5);
+    color: #a8e6c3;
+  }
 
   .footer {
     text-align: center;
@@ -352,19 +295,16 @@
     font-size: 0.7rem;
   }
 
-  @media (max-width: 600px) {
-    .booking-rows { grid-template-columns: 1fr; gap: 2px; }
-    .booking-label { color: #5a5050; font-size: 0.7rem; }
+  @media (max-width: 700px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+    .bank { position: static; }
     .header { padding: 52px 20px 36px; }
-    .back-btn, .fwd-btn {
-      position: relative;
-      top: auto;
-      left: auto;
-      right: auto;
-      transform: none;
-      display: inline-block;
-      margin: 0 4px 10px;
-      z-index: 2;
+    .back-btn {
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
     }
     .header h1 { font-size: 1.5rem; }
   }
@@ -373,151 +313,606 @@
 <body>
 
 <div class="header">
-  <a href="planning.html" class="back-btn">← Planning</a>
-  <a href="follow-through.html" class="fwd-btn">Follow Through →</a>
-  <h1>Sam <span>+</span> Makena</h1>
-  <div class="sub">Valentine's Getaway 2026. Winter Wonderland (SLC)</div>
-  <div class="trip-tag">Plan A, Feb 12–16</div>
+  <a href="trip-book.html" class="back-btn">← The Plan</a>
+  <h1>Follow <span>Through</span></h1>
+  <div class="sub">Drag activities onto your timeline</div>
+  <div class="header-tag" style="visibility:hidden;">Feb 12–16</div>
 </div>
 
-<div class="container">
+<div class="layout">
 
-<!-- ═══════════ 1. TO DO LIST ═══════════ -->
-<div class="todo-box">
-  <div class="todo-heading">To Do List</div>
-  <ul class="todo-list">
-    <li class="done">Pick a plan. Chose Plan A, Winter Wonderland (SLC)</li>
-    <li class="done">Book outbound flight. Frontier 4130, LAX → SLC, Thu Feb 12</li>
-    <li class="done">Buy disruption assistance. Hopper coverage, $48</li>
-    <li>Book return flight. SLC → LAX, Mon Feb 16, Frontier F9 1267, 9:29am</li>
-    <li>Book hotel/Airbnb. SLC area, 4 nights (Feb 12–16)</li>
-    <li>Valentine's dinner reservation. Sat Feb 14, Park City or SLC area</li>
-    <li>Buy lift tickets. Fri Feb 13, 2 passes @ $20 each, pick a resort</li>
-    <li>Call David about the skis</li>
-    <li>Reserve LAX parking. Hilton Los Angeles Airport · <a href="https://airportparkinglax.net/" style="color:#b4daff;">Book here</a></li>
-    <li>Check in for outbound flight. Opens Wed Feb 11 @ 6:06pm</li>
-    <li>Pack bags. Carry-on only, no checked bags</li>
-    <li>Download boarding passes. Frontier app</li>
-    <li>Pick up skis from Sarah</li>
-  </ul>
-</div>
+<div class="timeline">
 
-<!-- ═══════════ 2. DAY-BY-DAY PLAN ═══════════ -->
-<div class="section">
-  <div class="section-title">Day-by-Day Plan</div>
-
-  <div class="day-card">
-    <div class="day-card-header">
-      <span class="day-badge">Thu Feb 12</span>
-      <span class="day-title">Drive to LAX, fly to SLC</span>
+  <!-- THU FEB 12 -->
+  <div class="day">
+    <div class="day-header">
+      <span class="day-label">Thu Feb 12</span>
+      <span class="day-name">Arrival</span>
     </div>
-    <div class="day-detail">
-      Leave SB ~4pm. Drive to LAX, park at Hilton, shuttle to terminal. <strong>Frontier 4130</strong> departs 6:06pm, arrives 9:04pm. Maybe dinner with Sarah.
+    <div class="drop-zone" data-day="thu">
+      <div class="card locked" draggable="true" data-id="fly-out">
+        <span class="grip">⠿</span>
+        <span class="text">Fly LAX → SLC. Frontier 4130, 6:06pm</span>
+        <span class="lock-tag">booked</span>
+      </div>
+      <div class="card" draggable="true" data-id="dinner-sarah-thu">
+        <span class="grip">⠿</span>
+        <span class="text">Maybe dinner with Sarah</span>
+      </div>
     </div>
   </div>
 
-  <div class="day-card">
-    <div class="day-card-header">
-      <span class="day-badge">Fri Feb 13</span>
-      <span class="day-title">Ski day</span>
+  <!-- FRI FEB 13 -->
+  <div class="day">
+    <div class="day-header">
+      <span class="day-label">Fri Feb 13</span>
+      <span class="day-name">Ski Day</span>
     </div>
-    <div class="day-detail">
-      <strong>Kneaders</strong> breakfast at 8 or 8:30am in West Jordan with Sarah. Hit one of the five open resorts for a full day on the slopes. Lunch on the mountain. Dinner out, then sneak into a hot tub to end the night.
-    </div>
-  </div>
-
-  <div class="day-card">
-    <div class="day-card-header">
-      <span class="day-badge valentine">Sat Feb 14</span>
-      <span class="day-title">Valentine's Day</span>
-    </div>
-    <div class="day-detail">
-      Sleep in, recover from ski day. Chill time at home. Romantic Valentine's dinner.
-    </div>
-  </div>
-
-  <div class="day-card">
-    <div class="day-card-header">
-      <span class="day-badge">Sun Feb 15</span>
-      <span class="day-title">Open day; rest, ski, or study</span>
-    </div>
-    <div class="day-detail">
-      Sleep in. Homework, <strong>Alta or Snowbird</strong> for another ski day, or just a chill restful day before flying out.
+    <div class="drop-zone" data-day="fri">
+      <div class="card" draggable="true" data-id="kneaders">
+        <span class="grip">⠿</span>
+        <span class="text">Kneaders breakfast, 8/8:30am, West Jordan with Sarah</span>
+      </div>
+      <div class="card" draggable="true" data-id="ski-day">
+        <span class="grip">⠿</span>
+        <span class="text">Ski day, pick a resort</span>
+      </div>
+      <div class="card" draggable="true" data-id="fri-dinner">
+        <span class="grip">⠿</span>
+        <span class="text">Dinner out</span>
+      </div>
+      <div class="card" draggable="true" data-id="hot-tub">
+        <span class="grip">⠿</span>
+        <span class="text">Sneak into a hot tub</span>
+      </div>
     </div>
   </div>
 
-  <div class="day-card">
-    <div class="day-card-header">
-      <span class="day-badge">Mon Feb 16</span>
-      <span class="day-title">Fly home</span>
+  <!-- SAT FEB 14 -->
+  <div class="day">
+    <div class="day-header">
+      <span class="day-label valentine">Sat Feb 14</span>
+      <span class="day-name">Valentine's Day</span>
     </div>
-    <div class="day-detail">
-      Uber to SLC airport. <strong>Frontier F9 1267</strong> departs 9:29am, arrives 10:45am. Shuttle to Hilton parking, drive home. Back by ~1pm. Holiday, no class. Homework.
+    <div class="drop-zone" data-day="sat">
+      <div class="card" draggable="true" data-id="chill-home">
+        <span class="grip">⠿</span>
+        <span class="text">Chill time at home</span>
+      </div>
+      <div class="card" draggable="true" data-id="vday-dinner">
+        <span class="grip">⠿</span>
+        <span class="text">Romantic Valentine's dinner</span>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- ═══════════ 3. RECEIPTS & CONFIRMATIONS ═══════════ -->
-<div class="section">
-  <div class="section-title">Receipts & Confirmations</div>
-
-  <div class="booking">
-    <div class="booking-header">
-      <span class="booking-name">Outbound Flight, LAX → SLC</span>
-      <span class="booking-status status-confirmed">Confirmed</span>
+  <!-- SUN FEB 15 -->
+  <div class="day">
+    <div class="day-header">
+      <span class="day-label">Sun Feb 15</span>
+      <span class="day-name">Open Day</span>
     </div>
-    <div class="booking-rows">
-      <span class="booking-label">Bags</span>
-      <span class="booking-value">2 carry-ons included (Economy Bundle). No checked bags. Personal item max 8"×18"×14".</span>
-      <span class="booking-label">Confirm #</span>
-      <span class="booking-value"><strong>NHBCNG</strong></span>
-      <span class="booking-label">Flight</span>
-      <span class="booking-value"><strong>Frontier 4130</strong> · Thu Feb 12 · 6:06pm → 9:04pm · 1h 58m nonstop</span>
-      <span class="booking-label">Passengers</span>
-      <span class="booking-value">Samuel Gustafson (seat 27C) · Makena Eggiman (seat 27A)</span>
-      <span class="booking-label">Bundle</span>
-      <span class="booking-value">Economy Bundle; carry-on, seat selection, no change fee, flight flexibility</span>
-      <span class="booking-label">Disruption</span>
-      <span class="booking-value">Hopper coverage included. If delayed 2+ hrs or cancelled, rebook up to $1,000/traveler. HTS ref: IGQSHWOF1YANSHG6</span>
-      <span class="booking-label">Miles #</span>
-      <span class="booking-value">Samuel, Frontier Miles #90102681667</span>
+    <div class="drop-zone" data-day="sun">
+      <div class="drop-zone-empty">Drag activities here</div>
     </div>
-    <div class="booking-note">Check-in opens 24h before departure (Wed Feb 11 @ 6:06pm). Arrive LAX 2h early.</div>
   </div>
-</div>
+
+  <!-- MON FEB 16 -->
+  <div class="day">
+    <div class="day-header">
+      <span class="day-label">Mon Feb 16</span>
+      <span class="day-name">Fly Home</span>
+    </div>
+    <div class="drop-zone" data-day="mon">
+      <div class="card locked" draggable="true" data-id="fly-home">
+        <span class="grip">⠿</span>
+        <span class="text">Fly SLC → LAX. Frontier F9 1267, 9:29am</span>
+        <span class="lock-tag">booked</span>
+      </div>
+      <div class="card" draggable="true" data-id="mon-homework">
+        <span class="grip">⠿</span>
+        <span class="text">Homework</span>
+      </div>
+    </div>
+  </div>
 
 </div>
 
-<div class="footer">Trip Book. Valentine's Getaway 2026. Winter Wonderland (SLC)</div>
+<!-- IDEA BANK -->
+<div class="bank">
+  <div class="bank-title">Idea Bank</div>
+  <div class="bank-zone" data-day="bank">
+    <div class="card" draggable="true" data-id="alta-snowbird">
+      <span class="grip">⠿</span>
+      <span class="text">Alta or Snowbird</span>
+    </div>
+    <div class="card" draggable="true" data-id="homework">
+      <span class="grip">⠿</span>
+      <span class="text">Homework session</span>
+    </div>
+    <div class="card" draggable="true" data-id="brunch">
+      <span class="grip">⠿</span>
+      <span class="text">Brunch</span>
+    </div>
+    <div class="card" draggable="true" data-id="temple-square">
+      <span class="grip">⠿</span>
+      <span class="text">Temple Square</span>
+    </div>
+    <div class="card" draggable="true" data-id="nat-history">
+      <span class="grip">⠿</span>
+      <span class="text">Natural History Museum</span>
+    </div>
+    <div class="card" draggable="true" data-id="park-city">
+      <span class="grip">⠿</span>
+      <span class="text">Park City Main Street</span>
+    </div>
+    <div class="card" draggable="true" data-id="pick-up-skis">
+      <span class="grip">⠿</span>
+      <span class="text">Pick up skis from Sarah</span>
+    </div>
+    <div class="card" draggable="true" data-id="movie-night">
+      <span class="grip">⠿</span>
+      <span class="text">Movie night in</span>
+    </div>
+    <div class="card" draggable="true" data-id="sunset-drive">
+      <span class="grip">⠿</span>
+      <span class="text">Scenic drive</span>
+    </div>
+  </div>
+  <button class="new-btn" id="newActivity">+ New activity</button>
+  <div class="trash-zone" id="trashZone">Drop here to remove</div>
+  <button class="save-btn" id="saveBtn">Save Plan</button>
+</div>
+
+</div>
+
+<div class="footer">Follow Through, Valentine's Getaway 2026</div>
 
 <script>
-  // ── Checkboxes: toggle on click, save state ──
-  const CHECKS_KEY = 'tripbook-checks-v2';
-  const items = document.querySelectorAll('.todo-list li');
-  let checkState = JSON.parse(localStorage.getItem(CHECKS_KEY) || '{}');
+  // ══════════ GITHUB DIRECT API ══════════
+  const GH_OWNER = 'HiJell0';
+  const GH_REPO = 'HiJell0';
+  const GH_BRANCH = 'main';
+  const GH_PATH = 'data/plan.json';
+  const GH_API = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + GH_PATH;
+  const GH_TOKEN_KEY = 'gh-plan-token';
 
-  items.forEach((li, i) => {
-    li.style.cursor = 'pointer';
-    // Initialize from HTML class or saved state
-    const isDone = li.classList.contains('done') || checkState[i];
-    if (isDone) {
-      li.classList.add('done');
-      li.dataset.done = '1';
-      checkState[i] = true;
+  function getToken() {
+    var t = localStorage.getItem(GH_TOKEN_KEY);
+    if (!t) {
+      t = prompt('Enter your GitHub token (one-time setup):');
+      if (t) localStorage.setItem(GH_TOKEN_KEY, t.trim());
     }
-    li.addEventListener('click', () => {
-      if (li.dataset.done === '1') {
-        li.classList.remove('done');
-        li.dataset.done = '0';
-        checkState[i] = false;
-      } else {
-        li.classList.add('done');
-        li.dataset.done = '1';
-        checkState[i] = true;
+    return t;
+  }
+
+  const LOCAL_KEY = 'followthrough-plan';
+  let draggedCard = null;
+  let plan = null;
+
+  // ══════════ DEFAULT PLAN (fallback) ══════════
+  const defaultPlan = {
+    lastUpdated: null,
+    days: {
+      thu: {
+        label: 'Arrival',
+        activities: [
+          { id: 'fly-out', text: 'Fly LAX → SLC. Frontier 4130, 6:06pm', status: 'booked' },
+          { id: 'dinner-sarah-thu', text: 'Maybe dinner with Sarah', status: 'idea' }
+        ]
+      },
+      fri: {
+        label: 'Ski Day',
+        activities: [
+          { id: 'kneaders', text: 'Kneaders breakfast, 8/8:30am, West Jordan with Sarah', status: 'idea' },
+          { id: 'ski-day', text: 'Ski day, pick a resort', status: 'idea' },
+          { id: 'fri-dinner', text: 'Dinner out', status: 'idea' },
+          { id: 'hot-tub', text: 'Sneak into a hot tub', status: 'idea' }
+        ]
+      },
+      sat: {
+        label: "Valentine's Day",
+        activities: [
+          { id: 'chill-home', text: 'Chill time at home', status: 'idea' },
+          { id: 'vday-dinner', text: 'Romantic Valentine\'s dinner', status: 'idea' }
+        ]
+      },
+      sun: {
+        label: 'Open Day',
+        activities: []
+      },
+      mon: {
+        label: 'Fly Home',
+        activities: [
+          { id: 'fly-home', text: 'Fly SLC → LAX. Frontier F9 1267, 9:29am', status: 'booked' },
+          { id: 'mon-homework', text: 'Homework', status: 'idea' }
+        ]
       }
-      localStorage.setItem(CHECKS_KEY, JSON.stringify(checkState));
+    },
+    ideaBank: [
+      { id: 'alta-snowbird', text: 'Alta or Snowbird', status: 'idea' },
+      { id: 'homework', text: 'Homework session', status: 'idea' },
+      { id: 'brunch', text: 'Brunch', status: 'idea' },
+      { id: 'temple-square', text: 'Temple Square', status: 'idea' },
+      { id: 'nat-history', text: 'Natural History Museum', status: 'idea' },
+      { id: 'park-city', text: 'Park City Main Street', status: 'idea' },
+      { id: 'pick-up-skis', text: 'Pick up skis from Sarah', status: 'idea' },
+      { id: 'movie-night', text: 'Movie night in', status: 'idea' },
+      { id: 'sunset-drive', text: 'Scenic drive', status: 'idea' }
+    ]
+  };
+
+  // ══════════ CARD CREATION ══════════
+  function makeCard(activity) {
+    const card = document.createElement('div');
+    card.className = 'card' + (activity.status === 'booked' ? ' locked' : '');
+    card.draggable = true;
+    card.dataset.id = activity.id;
+    let html = `<span class="grip">⠿</span><span class="text">${activity.text}</span>`;
+    if (activity.status === 'booked') html += `<span class="lock-tag">booked</span>`;
+    card.innerHTML = html;
+    return card;
+  }
+
+  // ══════════ RENDER PLAN → DOM ══════════
+  function renderPlan(p) {
+    plan = p;
+    // Clear all zones
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+      zone.querySelectorAll('.card, .drop-zone-empty').forEach(el => el.remove());
     });
+    document.querySelector('.bank-zone').querySelectorAll('.card, .bank-hint').forEach(el => el.remove());
+
+    // Populate day zones
+    Object.entries(plan.days).forEach(([dayId, day]) => {
+      const zone = document.querySelector(`[data-day="${dayId}"]`);
+      if (!zone) return;
+      day.activities.forEach(act => zone.appendChild(makeCard(act)));
+    });
+
+    // Populate idea bank
+    const bankZone = document.querySelector('.bank-zone');
+    plan.ideaBank.forEach(act => bankZone.appendChild(makeCard(act)));
+
+    applyBookedTags();
+    updateEmptyStates();
+    setupDesktopDrag();
+  }
+
+  // ══════════ DOM → PLAN OBJECT ══════════
+  function buildPlanFromDOM() {
+    const days = {};
+    document.querySelectorAll('.drop-zone[data-day]').forEach(zone => {
+      const dayId = zone.dataset.day;
+      const label = plan.days[dayId] ? plan.days[dayId].label : dayId;
+      const activities = [...zone.querySelectorAll('.card')].map(c => ({
+        id: c.dataset.id,
+        text: c.querySelector('.text').textContent,
+        status: c.classList.contains('locked') ? 'booked' : 'idea'
+      }));
+      days[dayId] = { label, activities };
+    });
+    const ideaBank = [...document.querySelector('.bank-zone').querySelectorAll('.card')].map(c => ({
+      id: c.dataset.id,
+      text: c.querySelector('.text').textContent,
+      status: c.classList.contains('locked') ? 'booked' : 'idea'
+    }));
+    plan.days = days;
+    plan.ideaBank = ideaBank;
+    return plan;
+  }
+
+  // ══════════ APPLY BOOKED TAGS ══════════
+  function applyBookedTags() {
+    document.querySelectorAll('.card').forEach(card => {
+      const textEl = card.querySelector('.text');
+      if (!textEl) return;
+      const match = textEl.textContent.match(/\s*\(booked\)\s*$/i);
+      if (match) {
+        textEl.textContent = textEl.textContent.replace(/\s*\(booked\)\s*$/i, '').trim();
+        if (!card.classList.contains('locked')) {
+          card.classList.add('locked');
+          const tag = document.createElement('span');
+          tag.className = 'lock-tag';
+          tag.textContent = 'booked';
+          card.appendChild(tag);
+        }
+      }
+    });
+  }
+
+  // ══════════ LOCAL CACHE ══════════
+  function cacheLocally() {
+    buildPlanFromDOM();
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(plan));
+  }
+
+  // ══════════ HELPERS ══════════
+  function getAllZones() {
+    return document.querySelectorAll('.drop-zone, .bank-zone');
+  }
+
+  function findInsertPosition(zone, y) {
+    const cards = [...zone.querySelectorAll('.card:not(.dragging)')];
+    const after = cards.reduce((closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) return { offset, el: child };
+      return closest;
+    }, { offset: Number.NEGATIVE_INFINITY });
+    return after.el || null;
+  }
+
+  function getZoneAt(x, y) {
+    let found = null;
+    getAllZones().forEach(zone => {
+      const r = zone.getBoundingClientRect();
+      if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) found = zone;
+    });
+    const tr = trash.getBoundingClientRect();
+    if (x >= tr.left && x <= tr.right && y >= tr.top && y <= tr.bottom) return 'trash';
+    return found;
+  }
+
+  // ══════════ DESKTOP DRAG & DROP ══════════
+  function setupDesktopDrag() {
+    getAllZones().forEach(zone => {
+      zone.addEventListener('dragover', e => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        zone.classList.add('drag-over');
+        const before = findInsertPosition(zone, e.clientY);
+        if (before) zone.insertBefore(draggedCard, before);
+        else zone.appendChild(draggedCard);
+      });
+      zone.addEventListener('dragleave', e => {
+        if (!zone.contains(e.relatedTarget)) zone.classList.remove('drag-over');
+      });
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        zone.classList.remove('drag-over');
+        updateEmptyStates();
+        cacheLocally();
+      });
+    });
+  }
+
+  document.addEventListener('dragstart', e => {
+    const card = e.target.closest('.card');
+    if (!card) return;
+    draggedCard = card;
+    card.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
   });
+
+  document.addEventListener('dragend', e => {
+    const card = e.target.closest('.card');
+    if (card) card.classList.remove('dragging');
+    document.querySelectorAll('.drag-over').forEach(z => z.classList.remove('drag-over'));
+    draggedCard = null;
+  });
+
+  // ══════════ TOUCH DRAG & DROP ══════════
+  let touchClone = null;
+  let touchStartY = 0;
+  let touchStartX = 0;
+  let touchMoved = false;
+
+  document.addEventListener('touchstart', e => {
+    if (e.target.closest('a, button')) return;
+    const card = e.target.closest('.card');
+    if (!card) return;
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchMoved = false;
+    draggedCard = card;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', e => {
+    if (!draggedCard) return;
+    const t = e.touches[0];
+    if (!touchMoved) {
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+      if (Math.sqrt(dx*dx + dy*dy) < 8) return;
+      touchMoved = true;
+      draggedCard.classList.add('dragging');
+      touchClone = draggedCard.cloneNode(true);
+      touchClone.style.cssText = 'position:fixed;pointer-events:none;z-index:999;opacity:0.85;width:' + draggedCard.offsetWidth + 'px;';
+      document.body.appendChild(touchClone);
+    }
+    e.preventDefault();
+    if (touchClone) {
+      touchClone.style.left = (t.clientX - touchClone.offsetWidth / 2) + 'px';
+      touchClone.style.top = (t.clientY - 20) + 'px';
+    }
+    document.querySelectorAll('.drag-over').forEach(z => z.classList.remove('drag-over'));
+    const target = getZoneAt(t.clientX, t.clientY);
+    if (target === 'trash') {
+      trash.classList.add('drag-over');
+    } else if (target) {
+      target.classList.add('drag-over');
+      const before = findInsertPosition(target, t.clientY);
+      if (before) target.insertBefore(draggedCard, before);
+      else target.appendChild(draggedCard);
+    }
+  }, { passive: false });
+
+  document.addEventListener('touchend', e => {
+    if (!draggedCard) return;
+    if (touchClone) { touchClone.remove(); touchClone = null; }
+    if (touchMoved) {
+      const lastTouch = e.changedTouches[0];
+      const target = getZoneAt(lastTouch.clientX, lastTouch.clientY);
+      if (target === 'trash') draggedCard.remove();
+      draggedCard.classList.remove('dragging');
+      document.querySelectorAll('.drag-over').forEach(z => z.classList.remove('drag-over'));
+      updateEmptyStates();
+      cacheLocally();
+    }
+    draggedCard = null;
+    touchMoved = false;
+  });
+
+  // ══════════ EMPTY STATES ══════════
+  function updateEmptyStates() {
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+      const existing = zone.querySelector('.drop-zone-empty');
+      const hasCards = zone.querySelector('.card');
+      if (!hasCards && !existing) {
+        const msg = document.createElement('div');
+        msg.className = 'drop-zone-empty';
+        msg.textContent = 'Drag activities here';
+        zone.appendChild(msg);
+      } else if (hasCards && existing) {
+        existing.remove();
+      }
+    });
+    const bankZone = document.querySelector('.bank-zone');
+    const bankEmpty = bankZone.querySelector('.bank-hint');
+    const bankHasCards = bankZone.querySelector('.card');
+    if (!bankHasCards && !bankEmpty) {
+      const msg = document.createElement('div');
+      msg.className = 'bank-hint';
+      msg.textContent = 'All activities placed!';
+      bankZone.appendChild(msg);
+    } else if (bankHasCards && bankEmpty) {
+      bankEmpty.remove();
+    }
+  }
+
+  // ══════════ TRASH (desktop) ══════════
+  const trash = document.getElementById('trashZone');
+  trash.addEventListener('dragover', e => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    trash.classList.add('drag-over');
+  });
+  trash.addEventListener('dragleave', e => {
+    if (!trash.contains(e.relatedTarget)) trash.classList.remove('drag-over');
+  });
+  trash.addEventListener('drop', e => {
+    e.preventDefault();
+    trash.classList.remove('drag-over');
+    if (draggedCard) {
+      draggedCard.remove();
+      draggedCard = null;
+      updateEmptyStates();
+      cacheLocally();
+    }
+  });
+
+  // ══════════ NEW ACTIVITY ══════════
+  let newCount = 0;
+  document.getElementById('newActivity').addEventListener('click', () => {
+    const text = prompt('Activity name:');
+    if (!text || !text.trim()) return;
+    const id = 'custom-' + Date.now() + '-' + (++newCount);
+    const card = makeCard({ id, text: text.trim(), status: 'idea' });
+    document.querySelector('.bank-zone').appendChild(card);
+    applyBookedTags();
+    updateEmptyStates();
+    cacheLocally();
+  });
+
+  // ══════════ SAVE BUTTON (GitHub Direct) ══════════
+  document.getElementById('saveBtn').addEventListener('click', async () => {
+    const btn = document.getElementById('saveBtn');
+    btn.textContent = 'Saving...';
+    btn.disabled = true;
+
+    buildPlanFromDOM();
+    plan.lastUpdated = new Date().toISOString();
+    var content = btoa(unescape(encodeURIComponent(JSON.stringify(plan, null, 2))));
+
+    try {
+      // Get current file SHA (needed for updates)
+      var sha;
+      var getRes = await fetch(GH_API + '?ref=' + GH_BRANCH, {
+        headers: { Authorization: 'Bearer ' + getToken(), Accept: 'application/vnd.github+json' }
+      });
+      if (getRes.ok) {
+        var getData = await getRes.json();
+        sha = getData.sha;
+      }
+
+      // Save file
+      var putBody = { message: 'Update plan', content: content, branch: GH_BRANCH };
+      if (sha) putBody.sha = sha;
+
+      var putRes = await fetch(GH_API, {
+        method: 'PUT',
+        headers: {
+          Authorization: 'Bearer ' + getToken(),
+          Accept: 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(putBody)
+      });
+
+      if (putRes.ok) {
+        localStorage.setItem(LOCAL_KEY, JSON.stringify(plan));
+        btn.textContent = 'Saved ✓';
+        btn.classList.add('saved');
+      } else {
+        var errData = await putRes.text();
+        console.error('GitHub save failed:', errData);
+        btn.textContent = 'Save failed';
+      }
+    } catch (err) {
+      console.error('Save error:', err);
+      btn.textContent = 'Error: ' + err.message;
+    }
+
+    btn.disabled = false;
+    setTimeout(() => {
+      btn.textContent = 'Save Plan';
+      btn.classList.remove('saved');
+    }, 3000);
+  });
+
+  // ══════════ NAV BUTTON FALLBACK ══════════
+  document.querySelector('.back-btn').addEventListener('touchend', function(e) {
+    e.stopPropagation();
+    window.location.href = this.getAttribute('href');
+  });
+
+  // ══════════ INIT: LOAD FROM GITHUB ══════════
+  (async function init() {
+    let loaded = false;
+    try {
+      const res = await fetch(GH_API + '?ref=' + GH_BRANCH, {
+        headers: { Authorization: 'Bearer ' + getToken(), Accept: 'application/vnd.github+json' }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+        const p = JSON.parse(decoded);
+        if (p && p.days) {
+          renderPlan(p);
+          localStorage.setItem(LOCAL_KEY, JSON.stringify(p));
+          loaded = true;
+        }
+      }
+    } catch (err) {
+      console.warn('GitHub load failed, trying local cache:', err);
+    }
+
+    if (!loaded) {
+      try {
+        const cached = JSON.parse(localStorage.getItem(LOCAL_KEY));
+        if (cached && cached.days) {
+          renderPlan(cached);
+          loaded = true;
+        }
+      } catch(e) {}
+    }
+
+    if (!loaded) {
+      renderPlan(JSON.parse(JSON.stringify(defaultPlan)));
+    }
+  })();
 </script>
 
 </body>
