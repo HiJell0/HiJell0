@@ -469,7 +469,23 @@
 <div class="footer">Follow Through, Valentine's Getaway 2026</div>
 
 <script>
-  const API_BASE = 'https://visionary-raindrop-cd221f.netlify.app/.netlify/functions';
+  // ══════════ GITHUB DIRECT API ══════════
+  const GH_OWNER = 'HiJell0';
+  const GH_REPO = 'HiJell0';
+  const GH_BRANCH = 'main';
+  const GH_PATH = 'data/plan.json';
+  const GH_API = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + GH_PATH;
+  const GH_TOKEN_KEY = 'gh-plan-token';
+
+  function getToken() {
+    var t = localStorage.getItem(GH_TOKEN_KEY);
+    if (!t) {
+      t = prompt('Enter your GitHub token (one-time setup):');
+      if (t) localStorage.setItem(GH_TOKEN_KEY, t.trim());
+    }
+    return t;
+  }
+
   const LOCAL_KEY = 'followthrough-plan';
   let draggedCard = null;
   let plan = null;
@@ -800,7 +816,7 @@
     cacheLocally();
   });
 
-  // ══════════ SAVE BUTTON (API) ══════════
+  // ══════════ SAVE BUTTON (GitHub Direct) ══════════
   document.getElementById('saveBtn').addEventListener('click', async () => {
     const btn = document.getElementById('saveBtn');
     btn.textContent = 'Saving...';
@@ -808,29 +824,45 @@
 
     buildPlanFromDOM();
     plan.lastUpdated = new Date().toISOString();
+    var content = btoa(unescape(encodeURIComponent(JSON.stringify(plan, null, 2))));
 
     try {
-      const res = await fetch(API_BASE + '/save-plan', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(plan)
+      // Get current file SHA (needed for updates)
+      var sha;
+      var getRes = await fetch(GH_API + '?ref=' + GH_BRANCH, {
+        headers: { Authorization: 'Bearer ' + getToken(), Accept: 'application/vnd.github+json' }
       });
-      const data = await res.json();
-      if (data.ok) {
+      if (getRes.ok) {
+        var getData = await getRes.json();
+        sha = getData.sha;
+      }
+
+      // Save file
+      var putBody = { message: 'Update plan', content: content, branch: GH_BRANCH };
+      if (sha) putBody.sha = sha;
+
+      var putRes = await fetch(GH_API, {
+        method: 'PUT',
+        headers: {
+          Authorization: 'Bearer ' + getToken(),
+          Accept: 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(putBody)
+      });
+
+      if (putRes.ok) {
         localStorage.setItem(LOCAL_KEY, JSON.stringify(plan));
         btn.textContent = 'Saved ✓';
         btn.classList.add('saved');
       } else {
-        console.error('Save response:', data);
-        btn.textContent = 'Failed: ' + (data.error || res.status);
-        if (data.detail) console.error('Detail:', data.detail);
-        var debugInfo = data.debug ? '\n\nDebug: ' + JSON.stringify(data.debug) : '';
-        alert('Save failed:\n' + (data.error || '') + '\n' + (data.detail || '') + debugInfo);
+        var errData = await putRes.text();
+        console.error('GitHub save failed:', errData);
+        btn.textContent = 'Save failed';
       }
     } catch (err) {
       console.error('Save error:', err);
       btn.textContent = 'Error: ' + err.message;
-      alert('Save error:\n' + err.message);
     }
 
     btn.disabled = false;
@@ -846,22 +878,28 @@
     window.location.href = this.getAttribute('href');
   });
 
-  // ══════════ INIT: LOAD FROM API ══════════
+  // ══════════ INIT: LOAD FROM GITHUB ══════════
   (async function init() {
     let loaded = false;
     try {
-      const res = await fetch(API_BASE + '/load-plan');
-      const data = await res.json();
-      if (data.ok && data.plan && data.plan.days) {
-        renderPlan(data.plan);
-        loaded = true;
+      const res = await fetch(GH_API + '?ref=' + GH_BRANCH, {
+        headers: { Authorization: 'Bearer ' + getToken(), Accept: 'application/vnd.github+json' }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+        const p = JSON.parse(decoded);
+        if (p && p.days) {
+          renderPlan(p);
+          localStorage.setItem(LOCAL_KEY, JSON.stringify(p));
+          loaded = true;
+        }
       }
     } catch (err) {
-      console.warn('API load failed, trying local cache:', err);
+      console.warn('GitHub load failed, trying local cache:', err);
     }
 
     if (!loaded) {
-      // Try local cache
       try {
         const cached = JSON.parse(localStorage.getItem(LOCAL_KEY));
         if (cached && cached.days) {
@@ -872,7 +910,6 @@
     }
 
     if (!loaded) {
-      // Fall back to default
       renderPlan(JSON.parse(JSON.stringify(defaultPlan)));
     }
   })();
