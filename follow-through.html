@@ -77,6 +77,7 @@
     background: rgba(125,206,160,0.2);
     border-color: rgba(125,206,160,0.4);
   }
+  .back-btn { touch-action: manipulation; -webkit-tap-highlight-color: rgba(125,206,160,0.2); }
 
   /* ── Layout ── */
   .layout {
@@ -516,6 +517,8 @@
   let touchMoved = false;
 
   document.addEventListener('touchstart', e => {
+    // Let navigation links work normally
+    if (e.target.closest('a, button')) return;
     const card = e.target.closest('.card');
     if (!card) return;
     const t = e.touches[0];
@@ -710,6 +713,12 @@
     document.querySelector('.bank-zone').appendChild(card);
     updateEmptyStates();
     saveState();
+  });
+
+  // ══════════ NAV BUTTON FALLBACK ══════════
+  document.querySelector('.back-btn').addEventListener('touchend', function(e) {
+    e.stopPropagation();
+    window.location.href = this.getAttribute('href');
   });
 
   loadState();
