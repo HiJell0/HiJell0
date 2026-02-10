@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-10T03:40:51.990Z",
+  "lastUpdated": "2026-02-10T04:04:49.316Z",
   "days": {
     "thu": {
       "label": "Arrival",
@@ -78,16 +78,6 @@
       "status": "idea"
     },
     {
-      "id": "movie-night",
-      "text": "Movie night in",
-      "status": "idea"
-    },
-    {
-      "id": "sunset-drive",
-      "text": "Scenic drive",
-      "status": "idea"
-    },
-    {
       "id": "custom-1770692253263-5",
       "text": "Another day of skiing",
       "status": "idea"
@@ -110,6 +100,26 @@
     {
       "id": "custom-1770694599329-2",
       "text": "Ice Skating",
+      "status": "idea"
+    },
+    {
+      "id": "custom-1770694904841-4",
+      "text": "Utah Symphony - Disney Pixar’s Up in Concert",
+      "status": "idea"
+    },
+    {
+      "id": "custom-1770694937207-5",
+      "text": "Sledding at the bowl",
+      "status": "idea"
+    },
+    {
+      "id": "custom-1770694959424-6",
+      "text": "Meet my childhood friends",
+      "status": "idea"
+    },
+    {
+      "id": "custom-1770694974191-7",
+      "text": "Go to Mormon church",
       "status": "idea"
     }
   ]
