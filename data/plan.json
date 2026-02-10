@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-10T03:11:16.132Z",
+  "lastUpdated": "2026-02-10T03:13:02.951Z",
   "days": {
     "thu": {
       "label": "Arrival",
@@ -18,6 +18,11 @@
           "id": "custom-1770692165664-3",
           "text": "Kneaders for breakfast with Sarah at 8 or 8:30 in West Jordan",
           "status": "booked"
+        },
+        {
+          "id": "custom-1770693180468-6",
+          "text": "Pick up ski gear from Sarah",
+          "status": "idea"
         },
         {
           "id": "ski-day",
