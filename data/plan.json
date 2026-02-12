@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-12T19:20:09.320Z",
+  "lastUpdated": "2026-02-12T19:41:19.661Z",
   "days": {
     "thu": {
       "label": "Arrival",
@@ -20,13 +20,13 @@
           "status": "booked"
         },
         {
-          "id": "ski-day",
-          "text": "Ski day, pick a resort",
+          "id": "custom-1770693180468-6",
+          "text": "Pick up ski gear from Sarah",
           "status": "idea"
         },
         {
-          "id": "custom-1770693180468-6",
-          "text": "Pick up ski gear from Sarah",
+          "id": "ski-day",
+          "text": "Ski day, pick a resort",
           "status": "idea"
         },
         {
@@ -130,6 +130,11 @@
     {
       "id": "custom-1770924006412-1",
       "text": "sex",
+      "status": "idea"
+    },
+    {
+      "id": "custom-1770925253756-1",
+      "text": "raw sex",
       "status": "idea"
     }
   ]
