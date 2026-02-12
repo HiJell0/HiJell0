@@ -478,12 +478,7 @@
   const GH_TOKEN_KEY = 'gh-plan-token';
 
   function getToken() {
-    var t = localStorage.getItem(GH_TOKEN_KEY);
-    if (!t) {
-      t = prompt('Enter your GitHub token (one-time setup):');
-      if (t) localStorage.setItem(GH_TOKEN_KEY, t.trim());
-    }
-    return t;
+    return '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';
   }
 
   const LOCAL_KEY = 'followthrough-plan';
