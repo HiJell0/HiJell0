@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-02-10T04:14:56.236Z",
+  "lastUpdated": "2026-02-12T19:18:05.856Z",
   "days": {
     "thu": {
       "label": "Arrival",
@@ -44,6 +44,11 @@
     "sat": {
       "label": "Valentine's Day",
       "activities": [
+        {
+          "id": "custom-1770923879291-1",
+          "text": "Home-made breakfast burritos",
+          "status": "idea"
+        },
         {
           "id": "vday-dinner",
           "text": "Romantic Valentine's dinner",
@@ -93,11 +98,6 @@
       "status": "idea"
     },
     {
-      "id": "chill-home",
-      "text": "Chill time at home",
-      "status": "idea"
-    },
-    {
       "id": "custom-1770694599329-2",
       "text": "Ice Skating",
       "status": "idea"
@@ -110,6 +110,11 @@
     {
       "id": "custom-1770694937207-5",
       "text": "Sledding at the bowl",
+      "status": "idea"
+    },
+    {
+      "id": "chill-home",
+      "text": "Chill time at home",
       "status": "idea"
     },
     {
